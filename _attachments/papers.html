@@ -67,7 +67,11 @@
             		dojo.create("h2", { innerHTML: data.title }, displayPaper);
                     if (data.source) {
                 		dojo.create("h3", { innerHTML: "Source" }, displayPaper);
-                		dojo.create("p", { innerHTML: data.source }, displayPaper);
+                        var source = data.source;
+                        if (source.substring(0,7) == "http://") {
+                            source = "<a href='" + source + "'>" + source + "</a>";
+                        }
+                		dojo.create("p", { innerHTML: source }, displayPaper);
                     }
                     if (data.abstract) {
                 		dojo.create("h3", { innerHTML: "Abstract" }, displayPaper);
