@@ -81,10 +81,21 @@
             	});
             }       
         }
+
+        function addPaperFormSubmit(e) {
+            e.preventDefault();
+            console.log("Submitting");
+            var addPaperForm = dijit.byId("addPaperForm");
+            var args = dojo.toJson(addPaperForm.attr('value'),true)
+            args.source = "42";
+            console.log(args);
+        }
         
         dojo.addOnLoad(function(){
             var nameForm = dojo.byId("paperByNameForm");   
             dojo.connect(nameForm,"submit","paperByNameFormSubmit");    
+            var addPaperForm = dojo.byId("addPaperForm");
+            dojo.connect(addPaperForm,"submit", "addPaperFormSubmit");
         })
 	</script>
     
@@ -102,6 +113,8 @@
         
         <div dojoType="dijit.Dialog" id="addPaperDialog" title="Add New Paper">
             <form dojoType="dijit.form.Form" id='addPaperForm'>
+                <input type='hidden' value='[ID]' name='_id' id='addPaperFormID' dojoType="dijit.form.TextBox"/>
+                <input type='hidden' value='[TITLE]' name='title' id='addPaperFormTitle' dojoType='dijit.form.TextBox'/>
                 <table class='entryDialog'>
                     <tr>
                         <td width='80'>
@@ -118,7 +131,7 @@
                             <label for='addPaperDialogSource'>Source</label>
                         </td>
                         <td>
-                            <input dojoType="dijit.form.TextBox"
+                            <input dojoType="dijit.form.TextBox" name='source'
                                     trim="true" required="true"></input>
                         </td>
                     </tr>
