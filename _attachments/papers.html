@@ -56,6 +56,32 @@
         dojo.require("dojo.date.locale");
         dojo.require("dojo.date.stamp");
         dojo.require("dojo.string");
+
+        function loadPaper(title) {
+        	dojo.xhrGet({
+        	    url: DB_NAME + encodeURI(title),
+        	    handleAs: "json",
+                load: function(data, ioargs) {
+            		console.log("Document found", data);
+        	    },
+                error: function(error, ioargs) {
+                    if (ioargs.xhr.status == HTTP_NOT_FOUND) {
+                        dojo.byId('addPaperDialogPaperName').firstChild.nodeValue=title;
+                        dijit.byId('addPaperDialogPaperName').attr('value',title);
+
+                        var dateToday = dojo.date.locale.format(new Date(), {selector: 'date', fullYear: true, formatLength: 'medium'});
+                        dojo.byId('addPaperDialogPaperEntered').firstChild.nodeValue=dateToday;
+                        dijit.byId('addPaperDialogPaperEntered').attr('value',dateToday);
+
+                    	var addPaperDialog = dijit.byId('addPaperDialog');
+                    	addPaperDialog.reset();
+                    	addPaperDialog.show();
+                    } else {
+                    	alert(error);
+                    }   
+        	    }
+        	});
+        }
         
         function paperByNameFormSubmit(e) {
             e.preventDefault();
@@ -63,30 +89,7 @@
             if (!paperName) {
             	alert('TBD: Display All Names');
             } else {
-            	dojo.xhrGet({
-            	    url: DB_NAME + encodeURI(paperName),
-            	    handleAs: "json",
-                    load: function(data, ioargs) {
-                		console.log("Document found", data);
-                		alert('TBD: Display document');
-            	    },
-                    error: function(error, ioargs) {
-                        if (ioargs.xhr.status == HTTP_NOT_FOUND) {
-                            dojo.byId('addPaperDialogPaperName').firstChild.nodeValue=paperName;
-                            dijit.byId('addPaperDialogPaperName').attr('value',paperName);
-
-                            var dateToday = dojo.date.locale.format(new Date(), {selector: 'date', fullYear: true, formatLength: 'medium'});
-                            dojo.byId('addPaperDialogPaperEntered').firstChild.nodeValue=dateToday;
-                            dijit.byId('addPaperDialogPaperEntered').attr('value',dateToday);
-
-                        	var addPaperDialog = dijit.byId('addPaperDialog');
-                        	addPaperDialog.reset();
-                        	addPaperDialog.show();
-                        } else {
-                        	alert(error);
-                        }   
-            	    }
-            	});
+            	loadPaper(paperName);
             }       
         }
 
@@ -114,6 +117,7 @@
         	    load: function(data, ioargs) {
                    console.log("Saved", data);
                    dijit.byId("addPaperDialog").hide();
+                   loadPaper(id);
         	    },
         	    error: function(error, ioargs) {
                     alert(error);
