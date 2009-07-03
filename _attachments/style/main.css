@@ -3,3 +3,18 @@
 		color:#ff0000;
 	} 
 
+.go {
+	background: transparent 2px 2px no-repeat; 
+	border: none;
+  	color: #666; 
+  	margin: 0; 
+  	padding: 1em 1em 1em 4em; 
+  	cursor: pointer;
+  	font-size: 95%; 
+  	font-weight: bold; 
+  	line-height: 16px;}
+.go:hover { 
+	color: #000; 
+	}
+.go:active {  
+	color: #000; }
