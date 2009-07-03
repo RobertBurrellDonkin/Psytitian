@@ -95,6 +95,9 @@
             var values = addPaperForm.attr('value');
             var id = values._id;
             values.types = [DC_BIBLIOGRAPHIC_RESOURCE];
+            if (values.abstract) {
+            	values.abstract = values.abstract.replace(/\n/g,' ');
+            }
             var args = dojo.toJson(values,true);
             console.log(args);
 
