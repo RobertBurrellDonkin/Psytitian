@@ -71,7 +71,9 @@
                         if (ioargs.xhr.status == HTTP_NOT_FOUND) {
                             dojo.byId('addPaperDialogPaperName').firstChild.nodeValue=paperName;
                             dijit.byId('addPaperDialogPaperName').attr('value',paperName);
-                        	dijit.byId('addPaperDialog').show();
+                        	var addPaperDialog = dijit.byId('addPaperDialog');
+                        	addPaperDialog.reset();
+                        	addPaperDialog.show();
                         } else {
                         	alert(error);
                         }   
