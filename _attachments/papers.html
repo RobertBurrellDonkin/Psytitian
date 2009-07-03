@@ -55,6 +55,7 @@
         dojo.require("dojox.validate.regexp");
         dojo.require("dojo.date.locale");
         dojo.require("dojo.date.stamp");
+        dojo.require("dojo.string");
         
         function paperByNameFormSubmit(e) {
             e.preventDefault();
@@ -97,6 +98,12 @@
             values.types = [DC_BIBLIOGRAPHIC_RESOURCE];
             if (values.abstract) {
             	values.abstract = values.abstract.replace(/\n/g,' ');
+                if (values.abstract.substring(0,9) == "Abstract.") {
+                	values.abstract = dojo.string.trim(values.abstract.substring(9));
+                } else if (values.abstract.substring(0,8) == "Abstract") {
+                    values.abstract = dojo.string.trim(values.abstract.substring(8));
+                }
+                console.log(values.abstract);
             }
             var args = dojo.toJson(values,true);
             console.log(args);
