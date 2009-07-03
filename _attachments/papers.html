@@ -69,7 +69,7 @@
                 		dojo.create("h3", { innerHTML: "Source" }, displayPaper);
                         var source = data.source;
                         if (source.substring(0,7) == "http://") {
-                            source = "<a href='" + source + "'>" + source + "</a>";
+                            source = "<a href='" + source + "' target='_blank'>" + source + "</a>";
                         }
                 		dojo.create("p", { innerHTML: source }, displayPaper);
                     }
