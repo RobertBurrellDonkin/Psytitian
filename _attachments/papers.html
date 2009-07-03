@@ -62,7 +62,16 @@
         	    url: DB_NAME + encodeURI(title),
         	    handleAs: "json",
                 load: function(data, ioargs) {
-            		console.log("Document found", data);
+            		var displayPaper = clearById("displayPaper");
+            		dojo.create("h2", { innerHTML: data.title }, displayPaper);
+                    if (data.source) {
+                		dojo.create("h3", { innerHTML: "Source" }, displayPaper);
+                		dojo.create("p", { innerHTML: data.source }, displayPaper);
+                    }
+                    if (data.abstract) {
+                		dojo.create("h3", { innerHTML: "Abstract" }, displayPaper);
+                		dojo.create("p", { innerHTML: data.abstract }, displayPaper);
+                    }
         	    },
                 error: function(error, ioargs) {
                     if (ioargs.xhr.status == HTTP_NOT_FOUND) {
@@ -144,6 +153,9 @@
                     required="true" trim="true" propercase="true" class='long'/>
             <button class='go' type="submit">Go</button>
         </form>
+        
+        <div id='displayPaper'>
+        </div>
         
         <div dojoType="dijit.Dialog" id="addPaperDialog" title="Add New Paper">
             <form dojoType="dijit.form.Form" id='addPaperForm'>
