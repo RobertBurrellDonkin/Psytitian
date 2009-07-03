@@ -30,8 +30,12 @@
 .go:active {  
 	color: #000; }
 
-table.entryDialog textarea {
+table.entryDialog textarea, input.long {
 	width: 500px;
+}
+
+table.entryDialog input {
+	width: 300px;
 }
 
 table.entryDialog label {
