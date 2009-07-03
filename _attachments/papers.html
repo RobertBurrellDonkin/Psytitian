@@ -93,7 +93,7 @@
             var addPaperForm = dijit.byId("addPaperForm");
             var values = addPaperForm.attr('value');
             var id = values._id;
-            values.types = ["http://purl.org/dc/terms/BibliographicResource"];
+            values.types = [DC_BIBLIOGRAPHIC_RESOURCE];
             var args = dojo.toJson(values,true);
             console.log(args);
 

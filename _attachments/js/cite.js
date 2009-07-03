@@ -15,4 +15,4 @@
   */
 
 const HTTP_NOT_FOUND='404';
-
+const DC_BIBLIOGRAPHIC_RESOURCE="http://purl.org/dc/terms/BibliographicResource";
