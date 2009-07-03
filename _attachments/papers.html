@@ -24,7 +24,6 @@
         @import "dijit/themes/tundra/tundra.css";
         @import "dojo/resources/dojo.css";
         @import "style/main.css";
-        #
     </style>
     
 	<!-- Dojo-->
@@ -53,6 +52,8 @@
         dojo.require("dijit.form.Form");
         dojo.require("dijit.InlineEditBox");
         dojo.require("dojox.validate.regexp");
+        dojo.require("dojo.date.locale");
+        dojo.require("dojo.date.stamp");
         
         function paperByNameFormSubmit(e) {
             e.preventDefault();
@@ -71,6 +72,11 @@
                         if (ioargs.xhr.status == HTTP_NOT_FOUND) {
                             dojo.byId('addPaperDialogPaperName').firstChild.nodeValue=paperName;
                             dijit.byId('addPaperDialogPaperName').attr('value',paperName);
+
+                            var dateToday = dojo.date.locale.format(new Date(), {selector: 'date', fullYear: true, formatLength: 'medium'});
+                            dojo.byId('addPaperDialogPaperEntered').firstChild.nodeValue=dateToday;
+                            dijit.byId('addPaperDialogPaperEntered').attr('value',dateToday);
+
                         	var addPaperDialog = dijit.byId('addPaperDialog');
                         	addPaperDialog.reset();
                         	addPaperDialog.show();
@@ -119,8 +125,12 @@
 					console.log("Using name ", name);
 					dojo.byId("addPaperFormTitle").setAttribute('value',name);
 					dojo.byId("addPaperFormID").setAttribute('value',name);
+                    var entryDate = dojo.date.stamp.toISOString(dojo.date.locale.parse(dijit.byId('addPaperDialogPaperEntered').attr('value'), {selector:'date', formatLength:'medium'}), {selector:'date', zulu:true});
+					console.log(entryDate);
+					dojo.byId("addPaperFormCreated").setAttribute('value',entryDate);
 				</script>
                 
+                <input type='hidden' value='[CREATED]' name='created' id='addPaperFormCreated' dojoType='dijit.form.TextBox'/>
                 <input type='hidden' value='[ID]' name='_id' id='addPaperFormID' dojoType="dijit.form.TextBox"/>
                 <input type='hidden' value='[TITLE]' name='title' id='addPaperFormTitle' dojoType='dijit.form.TextBox'/>
                 <table class='entryDialog'>
@@ -132,6 +142,16 @@
                             <span dojoType="dijit.InlineEditBox" editor="dijit.form.TextBox"
                                 title="The name of the paper" name='title'
                                 id='addPaperDialogPaperName'>[NAME]</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width='80'>
+                            <label for='addPaperDialogPaperEntered'>Entered On</label>
+                        </td>
+                        <td>
+                            <span dojoType="dijit.InlineEditBox" editor="dijit.form.DateTextBox" editorParams='{constraints: {formatLength:"medium"}}'
+                                title="Date when this paper was entered"
+                                id='addPaperDialogPaperEntered'>[TODAY]</span>
                         </td>
                     </tr>
                     <tr>
