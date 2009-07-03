@@ -63,6 +63,7 @@
         	    handleAs: "json",
                 load: function(data, ioargs) {
             		var displayPaper = clearById("displayPaper");
+                    dojo.addClass(displayPaper, "results");     
             		dojo.create("h2", { innerHTML: data.title }, displayPaper);
                     if (data.source) {
                 		dojo.create("h3", { innerHTML: "Source" }, displayPaper);
@@ -154,8 +155,7 @@
             <button class='go' type="submit">Go</button>
         </form>
         
-        <div id='displayPaper'>
-        </div>
+        <div id='displayPaper'></div>
         
         <div dojoType="dijit.Dialog" id="addPaperDialog" title="Add New Paper">
             <form dojoType="dijit.form.Form" id='addPaperForm'>

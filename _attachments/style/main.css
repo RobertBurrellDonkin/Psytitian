@@ -41,3 +41,27 @@ table.entryDialog input {
 table.entryDialog label {
 	border: 0, 5px;
 }
+
+div.results {
+	border: solid #666;	
+	padding: 1em 0;
+	margin: 4em 1em;
+}
+
+div.results p {
+	border: 0;	
+	padding: 0;
+	margin: 0em 8em;
+}
+
+div.results h3 {
+	border: 0;
+	padding: 0;
+	margin: 1em 4em;
+}
+
+div.results h2 {
+	border: 0;
+	padding: 0;
+	margin: 1em 2em;
+}
