@@ -92,9 +92,24 @@
             e.preventDefault();
             console.log("Submitting");
             var addPaperForm = dijit.byId("addPaperForm");
-            var args = dojo.toJson(addPaperForm.attr('value'),true)
-            args.source = "42";
+            var values = addPaperForm.attr('value');
+            var id = values._id;
+            var args = dojo.toJson(values,true);
             console.log(args);
+
+        	dojo.xhrPut({
+        	    url: "/citation/" + id,
+        	    postData: args,
+        	    handleAs: "json",
+        	    handle: function(data,args){
+            		if(typeof data == "error"){
+            		    console.warn("error!",args);
+            		}else{
+            		    // show our response 
+            		    console.log(data);
+            		}
+        	    }
+        	});
         }
         
         dojo.addOnLoad(function(){
