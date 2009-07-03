@@ -32,6 +32,7 @@
     
     <!-- Application -->
     <script type='text/javascript' src='js/cite.js'></script>
+    <script type='text/javascript' src='js/config.js'></script>
 
 	<script type="text/javascript">	
         dojo.require("dojo.parser");
@@ -62,7 +63,7 @@
             	alert('TBD: Display All Names');
             } else {
             	dojo.xhrGet({
-            	    url: "/citation/" + encodeURI(paperName),
+            	    url: DB_NAME + encodeURI(paperName),
             	    handleAs: "json",
                     load: function(data, ioargs) {
                 		console.log("Document found", data);
@@ -98,7 +99,7 @@
             console.log(args);
 
         	dojo.xhrPut({
-        	    url: "/citation/" + id,
+        	    url: DB_NAME + id,
         	    postData: args,
         	    handleAs: "json",
         	    load: function(data, ioargs) {
