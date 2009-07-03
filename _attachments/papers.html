@@ -36,6 +36,7 @@
 
 	<script type="text/javascript">	
         dojo.require("dojo.parser");
+        dojo.require("dijit.form.ValidationTextBox");
         dojo.require("dijit.form.TextBox");
         dojo.require("dijit.form.CheckBox");
         dojo.require("dijit.form.DateTextBox");
@@ -51,6 +52,7 @@
         dojo.require("dijit.form.Textarea");
         dojo.require("dijit.form.Form");
         dojo.require("dijit.InlineEditBox");
+        dojo.require("dojox.validate.regexp");
         
         function paperByNameFormSubmit(e) {
             e.preventDefault();
@@ -107,6 +109,15 @@
                             <span dojoType="dijit.InlineEditBox" editor="dijit.form.TextBox"
                                 title="The name of the paper" name='title'
                                 id='addPaperDialogPaperName'>[NAME]</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for='addPaperDialogSource'>Source (URL)</label>
+                        </td>
+                        <td>
+                            <input dojoType="dijit.form.TextBox"
+                                    trim="true" required="true"></input>
                         </td>
                     </tr>
                     <tr>
