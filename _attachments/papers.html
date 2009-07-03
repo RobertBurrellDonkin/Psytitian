@@ -62,7 +62,7 @@
             	alert('TBD: Display All Names');
             } else {
             	dojo.xhrGet({
-            	    url: "/citation/papers/" + paperName,
+            	    url: "/citation/" + encodeURI(paperName),
             	    handleAs: "json",
                     load: function(data, ioargs) {
                 		console.log("Document found", data);
@@ -90,10 +90,10 @@
 
         function addPaperFormSubmit(e) {
             e.preventDefault();
-            console.log("Submitting");
             var addPaperForm = dijit.byId("addPaperForm");
             var values = addPaperForm.attr('value');
             var id = values._id;
+            values.types = ["http://purl.org/dc/terms/BibliographicResource"];
             var args = dojo.toJson(values,true);
             console.log(args);
 
@@ -135,7 +135,7 @@
             <form dojoType="dijit.form.Form" id='addPaperForm'>
                 
                 <script type="dojo/method" event="onSubmit">
-					var name = dijit.byId('addPaperDialogPaperName').attr('value');;
+					var name = dijit.byId('addPaperDialogPaperName').attr('value');
 					dojo.byId("addPaperFormTitle").setAttribute('value',name);
 					dojo.byId("addPaperFormID").setAttribute('value',name);
                     var entryDate = dojo.date.stamp.toISOString(dojo.date.locale.parse(dijit.byId('addPaperDialogPaperEntered').attr('value'), {selector:'date', formatLength:'medium'}), {selector:'date', zulu:true});
