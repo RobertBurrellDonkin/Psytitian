@@ -24,6 +24,7 @@
         @import "dijit/themes/tundra/tundra.css";
         @import "dojo/resources/dojo.css";
         @import "style/main.css";
+        #
     </style>
     
 	<!-- Dojo-->
@@ -91,18 +92,41 @@
             <div dojoType="dijit.Tooltip" connectId="paperNameLabel">Find or create paper with given name</div>
             <label for='paperName' id='paperNameLabel'>Name</label>
             <input type="text" name="name" id='paperName' dojoType="dijit.form.TextBox" 
-                    required="true" trim="true" propercase="true" width="100em"/>
+                    required="true" trim="true" propercase="true"/>
             <button class='go' type="submit">Go</button>
         </form>
         
         <div dojoType="dijit.Dialog" id="addPaperDialog" title="Add New Paper">
             <form dojoType="dijit.form.Form" id='addPaperForm'>
-                <label for='addPaperDialogPaperName'>Title</label>
-                <span dojoType="dijit.InlineEditBox" editor="dijit.form.TextBox"
-                    width="100em" title="The name of the paper" name='title'
-                    id='addPaperDialogPaperName'>[NAME]</span><br/>
-                <button dojoType="dijit.form.Button" type="submit">Add New</button>
-                <button dojoType="dijit.form.Button" type="submit">Abort</button>
+                <table class='entryDialog'>
+                    <tr>
+                        <td>
+                            <label for='addPaperDialogPaperName'>Title</label>
+                        </td>
+                        <td>
+                            <span dojoType="dijit.InlineEditBox" editor="dijit.form.TextBox"
+                                title="The name of the paper" name='title'
+                                id='addPaperDialogPaperName'>[NAME]</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for='addPaperDialogAbstract'>Abstract</label>
+                        </td>
+                        <td>
+                            <textarea dojoType="dijit.form.Textarea" name='abstract' 
+                            id='addPaperDialogAbstract'></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button dojoType="dijit.form.Button" type="submit">Add New</button>
+                        </td>
+                        <td>
+                            <button dojoType="dijit.form.Button" type="submit">Abort</button>
+                        </td>
+                    </tr>
+                </table>
             </form>
         </div>
     </body>

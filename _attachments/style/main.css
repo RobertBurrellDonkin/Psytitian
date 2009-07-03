@@ -29,3 +29,7 @@
 	}
 .go:active {  
 	color: #000; }
+
+table.entryDialog textarea {
+	width: 500px;
+}
