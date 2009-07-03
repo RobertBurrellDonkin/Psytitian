@@ -66,6 +66,8 @@
             	    },
                     error: function(error, ioargs) {
                         if (ioargs.xhr.status == HTTP_NOT_FOUND) {
+                            dojo.byId('addPaperDialogPaperName').firstChild.nodeValue=paperName;
+                            dijit.byId('addPaperDialogPaperName').attr('value',paperName);
                         	dijit.byId('addPaperDialog').show();
                         } else {
                         	alert(error);
@@ -88,13 +90,20 @@
         <form dojoType="dijit.form.Form" id='paperByNameForm'>
             <div dojoType="dijit.Tooltip" connectId="paperNameLabel">Find or create paper with given name</div>
             <label for='paperName' id='paperNameLabel'>Name</label>
-            <input type="text" name="name" id='paperName' dojoType="dijit.form.TextBox" required="true" trim="true" propercase="true"/>
+            <input type="text" name="name" id='paperName' dojoType="dijit.form.TextBox" 
+                    required="true" trim="true" propercase="true" width="100em"/>
             <button class='go' type="submit">Go</button>
         </form>
         
         <div dojoType="dijit.Dialog" id="addPaperDialog" title="Add New Paper">
-            <button dojoType="dijit.form.Button" type="submit">Add New</button>
-            <button dojoType="dijit.form.Button" type="submit">Abort</button>
+            <form dojoType="dijit.form.Form" id='addPaperForm'>
+                <label for='addPaperDialogPaperName'>Title</label>
+                <span dojoType="dijit.InlineEditBox" editor="dijit.form.TextBox"
+                    width="100em" title="The name of the paper" name='title'
+                    id='addPaperDialogPaperName'>[NAME]</span><br/>
+                <button dojoType="dijit.form.Button" type="submit">Add New</button>
+                <button dojoType="dijit.form.Button" type="submit">Abort</button>
+            </form>
         </div>
     </body>
 </html>
