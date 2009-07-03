@@ -50,7 +50,7 @@
         dojo.require("dijit.form.Textarea");
         dojo.require("dijit.form.Form");
         dojo.require("dijit.InlineEditBox");
-
+        
         function paperByNameFormSubmit(e) {
             e.preventDefault();
             var paperName = dijit.byId("paperName").attr('value');
@@ -66,7 +66,7 @@
             	    },
                     error: function(error, ioargs) {
                         if (ioargs.xhr.status == HTTP_NOT_FOUND) {
-                        	alert('TBD: Create document'); 
+                        	dijit.byId('addPaperDialog').show();
                         } else {
                         	alert(error);
                         }   
@@ -91,5 +91,10 @@
             <input type="text" name="name" id='paperName' dojoType="dijit.form.TextBox" required="true" trim="true" propercase="true"/>
             <button class='go' type="submit">Go</button>
         </form>
+        
+        <div dojoType="dijit.Dialog" id="addPaperDialog" title="Add New Paper">
+            <button dojoType="dijit.form.Button" type="submit">Add New</button>
+            <button dojoType="dijit.form.Button" type="submit">Abort</button>
+        </div>
     </body>
 </html>
