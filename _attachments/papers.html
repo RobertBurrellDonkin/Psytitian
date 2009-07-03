@@ -113,6 +113,14 @@
         
         <div dojoType="dijit.Dialog" id="addPaperDialog" title="Add New Paper">
             <form dojoType="dijit.form.Form" id='addPaperForm'>
+                
+                <script type="dojo/method" event="onSubmit">
+					var name = dijit.byId('addPaperDialogPaperName').attr('value');
+					console.log("Using name ", name);
+					dojo.byId("addPaperFormTitle").setAttribute('value',name);
+					dojo.byId("addPaperFormID").setAttribute('value',name);
+				</script>
+                
                 <input type='hidden' value='[ID]' name='_id' id='addPaperFormID' dojoType="dijit.form.TextBox"/>
                 <input type='hidden' value='[TITLE]' name='title' id='addPaperFormTitle' dojoType='dijit.form.TextBox'/>
                 <table class='entryDialog'>
