@@ -101,13 +101,12 @@
         	    url: "/citation/" + id,
         	    postData: args,
         	    handleAs: "json",
-        	    handle: function(data,args){
-            		if(typeof data == "error"){
-            		    console.warn("error!",args);
-            		}else{
-            		    // show our response 
-            		    console.log(data);
-            		}
+        	    load: function(data, ioargs) {
+                   console.log("Saved", data);
+                   dijit.byId("addPaperDialog").hide();
+        	    },
+        	    error: function(error, ioargs) {
+                    alert(error);
         	    }
         	});
         }
