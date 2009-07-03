@@ -33,3 +33,7 @@
 table.entryDialog textarea {
 	width: 500px;
 }
+
+table.entryDialog label {
+	border: 0, 5px;
+}
