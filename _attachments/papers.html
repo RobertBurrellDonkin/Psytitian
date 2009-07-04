@@ -77,6 +77,8 @@
                 		dojo.create("h3", { innerHTML: "Abstract" }, displayPaper);
                 		dojo.create("p", { innerHTML: data.abstract }, displayPaper);
                     }
+                    dojo.create("h3", { innerHTML: "See Also" }, displayPaper);
+                    dojo.create("p", { innerHTML: '<ul><li><a target="_blank" href="_show/home/' +  encodeURI(data.title) +  '">Document Home</a></li></ul>' }, displayPaper);
         	    },
                 error: function(error, ioargs) {
                     if (ioargs.xhr.status == HTTP_NOT_FOUND) {
