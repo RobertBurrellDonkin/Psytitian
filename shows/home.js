@@ -23,7 +23,23 @@ function(doc, req) {
 	          if (source.substring(0,7) == "http://") {
 	              source = "<a href='" + source + "' target='_blank'>" + source + "</a>";
 	          }
-	          paper = paper + "<h3>Source</h3><p>" + source + "</p>"
+	          paper = paper + "<h3>Source</h3><p>" + source + "</p>";
+          }
+          
+          var publicationDetails;
+          if (doc.publisher) {
+              publicationDetails = doc.publisher;
+          }
+          if (doc.issued) {
+              if (publicationDetails) {
+              	publicationDetails = publicationDetails + ', ' + doc.issued;    
+              } else {
+                  publicationDetails = "First published " + doc.issued;
+              }
+              
+          }
+          if (publicationDetails) {
+        	  paper = paper + "<h3>Publication</h3><p>" + publicationDetails + "</p>";
           }
           
           if (doc.abstract) {
