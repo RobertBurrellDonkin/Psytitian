@@ -23,15 +23,16 @@ function clearById(id) {
 	return node;
 }
 
-function couchStore(widget, url) {
-    dijit.byId(widget).attr('displayedValue', "Loading...");
-    dijit.byId(widget).attr('disabled', true);
+function couchStore(widgetId, url) {
+	var widget = dijit.byId(widgetId);
+    widget.attr('displayedValue', "Loading...");
+    widget.attr('disabled', true);
     
     _loadItems({url:url, load:function(items) {
         var store = new dojo.data.ItemFileReadStore({data:items});
-        dijit.byId(widget).store = store;
-        dijit.byId(widget).attr('displayedValue', "");
-        dijit.byId(widget).attr('disabled', false);
+        widget.store = store;
+        widget.attr('displayedValue', "");
+        widget.attr('disabled', false);
     }});
 }
 

@@ -53,11 +53,13 @@
         dojo.require("dijit.form.Textarea");
         dojo.require("dijit.form.Form");
         dojo.require("dijit.InlineEditBox");
-        dojo.require("dojox.validate.regexp");
+        dojo.require("dijit.form.FilteringSelect");
+        dojo.require("dojo.data.ItemFileReadStore");
         dojo.require("dojo.date.locale");
         dojo.require("dojo.date.stamp");
         dojo.require("dojo.string");
-
+        dojo.require("dojox.validate.regexp");
+        
         function loadPaper(title) {
         	dojo.xhrGet({
         	    url: DB_NAME + encodeURI(title),
@@ -103,6 +105,10 @@
         	    },
                 error: function(error, ioargs) {
                     if (ioargs.xhr.status == HTTP_NOT_FOUND) {
+                        var addPaperDialog = dijit.byId('addPaperDialog');
+                    	addPaperDialog.reset();
+                        
+                    	couchStore("addPaperDialogPublisher", "_view/agent");
                         dojo.byId('addPaperDialogPaperName').firstChild.nodeValue=title;
                         dijit.byId('addPaperDialogPaperName').attr('value',title);
 
@@ -110,8 +116,6 @@
                         dojo.byId('addPaperDialogPaperEntered').firstChild.nodeValue=dateToday;
                         dijit.byId('addPaperDialogPaperEntered').attr('value',dateToday);
 
-                    	var addPaperDialog = dijit.byId('addPaperDialog');
-                    	addPaperDialog.reset();
                     	addPaperDialog.show();
                     } else {
                     	alert(error);
@@ -231,6 +235,15 @@
                                     maxlength="4"
                                     id="addPaperDialogPaperIssued"
                                     name='issued'>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for='addPaperDialogPublisher'>Publisher</label>
+                        </td>
+                        <td>
+                            <input dojoType="dijit.form.FilteringSelect"  name='publisher' 
+                            searchAttr="value" id='addPaperDialogPublisher'></input>
                         </td>
                     </tr>
                     <tr>
