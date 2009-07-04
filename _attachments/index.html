@@ -9,28 +9,31 @@
 	<!-- Dojo-->
 	<script type="text/javascript" src="dojo/dojo.js"
 	    djConfig="parseOnLoad:true, isDebug:true"></script>
+    
+    <!-- Application -->
+    <script type='text/javascript' src='js/cite.js'></script>
+    <script type='text/javascript' src='js/config.js'></script>
 
         <!-- Dojo Requires -->
 	<script type="text/javascript">	
     dojo.require("dojo.parser");
     dojo.require("dijit.form.FilteringSelect");
     dojo.require("dojo.data.ItemFileReadStore");
+    dojo.require("dijit.form.ComboBox");
+
+    
+    dojo.addOnLoad(function(){
+        couchStore("selectExample", "_view/biblio");
+    });
+
 	</script>
     
     </head>
     <body class="tundra">
     <h1>Bleh</h1>
-        <div dojoType="dojo.data.ItemFileReadStore" jsId="stateStore"
-              url="states.txt"></div>
-        <form method="post">
-                <input dojoType="dijit.form.FilteringSelect"
-                    store="stateStore"
-                        searchAttr="gonzo"
-                        labelAttr='wimp'
-                        name="state1"
-                        autocomplete="true"
-                        />
-            <input type="submit" value="Go!" />
-        </form>>
+        <div 
+            dojoType="dijit.form.FilteringSelect" 
+            searchAttr="value" 
+            id='selectExample'></div>
     </body>
 </html>
