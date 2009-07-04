@@ -12,10 +12,25 @@
 
         <!-- Dojo Requires -->
 	<script type="text/javascript">	
+    dojo.require("dojo.parser");
+    dojo.require("dijit.form.FilteringSelect");
+    dojo.require("dojo.data.ItemFileReadStore");
 	</script>
     
     </head>
     <body class="tundra">
     <h1>Bleh</h1>
+        <div dojoType="dojo.data.ItemFileReadStore" jsId="stateStore"
+              url="states.txt"></div>
+        <form method="post">
+                <input dojoType="dijit.form.FilteringSelect"
+                    store="stateStore"
+                        searchAttr="gonzo"
+                        labelAttr='wimp'
+                        name="state1"
+                        autocomplete="true"
+                        />
+            <input type="submit" value="Go!" />
+        </form>>
     </body>
 </html>
