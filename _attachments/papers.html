@@ -40,6 +40,7 @@
         dojo.require("dijit.form.TextBox");
         dojo.require("dijit.form.CheckBox");
         dojo.require("dijit.form.DateTextBox");
+        dojo.require("dijit.form.NumberSpinner");
         dojo.require("dijit.Tooltip");
         dojo.require("dijit.TitlePane");
         dojo.require("dijit.form.Button"); 
@@ -74,11 +75,30 @@
                         }
                 		dojo.create("p", { innerHTML: source }, displayPaper);
                     }
+                    
+                    var publicationDetails;
+                    if (data.publisher) {
+                        publicationDetails = publicationDetails + data.publisher;
+                    }
+                    if (data.issued) {
+                        if (publicationDetails) {
+                        	publicationDetails = publicationDetails + ', ' + data.issued;    
+                        } else {
+                            publicationDetails = "First published " + data.issued;
+                        }
+                        
+                    }
+                    if (publicationDetails) {
+                    	dojo.create("h3", { innerHTML: "Publication" }, displayPaper);
+                    	dojo.create("p", { innerHTML:  publicationDetails}, displayPaper);
+                    }
+                    
                     if (data.abstract) {
                 		dojo.create("h3", { innerHTML: "Abstract" }, displayPaper);
                 		dojo.create("p", { innerHTML: data.abstract }, displayPaper);
                     }
-                    dojo.create("h3", { innerHTML: "See Also" }, displayPaper);
+                    
+                    dojo.create("h2", { innerHTML: "See Also" }, displayPaper);
                     dojo.create("p", { innerHTML: '<ul><li><a target="_blank" href="_show/home/' +  encodeURI(data.title) +  '">Document Home</a></li></ul>' }, displayPaper);
         	    },
                 error: function(error, ioargs) {
@@ -190,13 +210,27 @@
                         </td>
                     </tr>
                     <tr>
-                        <td width='80'>
+                        <td>
                             <label for='addPaperDialogPaperEntered'>Entered On</label>
                         </td>
                         <td>
                             <span dojoType="dijit.InlineEditBox" editor="dijit.form.DateTextBox" editorParams='{constraints: {formatLength:"medium"}}'
                                 title="Date when this paper was entered"
                                 id='addPaperDialogPaperEntered'>[TODAY]</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for='addPaperDialogPaperIssued'>Issued On</label>
+                        </td>
+                        <td>
+                            <input dojoType="dijit.form.NumberSpinner"
+                                    value="2000"
+                                    smallDelta="1"
+                                    constraints="{min:1900,max:2020,places:0,pattern:'#'}"
+                                    maxlength="4"
+                                    id="addPaperDialogPaperIssued"
+                                    name='issued'>
                         </td>
                     </tr>
                     <tr>
