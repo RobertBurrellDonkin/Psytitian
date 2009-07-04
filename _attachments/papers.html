@@ -123,6 +123,10 @@
         	    }
         	});
         }
+
+        function newPublisherOnPaperForm() {
+            console.log("Create publisher on paper form");
+        }
         
         function paperByNameFormSubmit(e) {
             e.preventDefault();
@@ -244,6 +248,7 @@
                         <td>
                             <input dojoType="dijit.form.FilteringSelect"  name='publisher' 
                             searchAttr="value" id='addPaperDialogPublisher'></input>
+                            <button class='go' type='button' onclick='newPublisherOnPaperForm()'>Add</button>
                         </td>
                     </tr>
                     <tr>
