@@ -132,6 +132,11 @@
             addPublisherDialog.show();
         }
 
+        function closePublisherDialog() {
+        	dijit.byId('addPublisherDialog').hide();
+        	dijit.byId('addPaperDialog').show();
+        }
+
         function addPublisherDialogSubmit(e) {
             console.log("Publisher submit");
             console.log(e);
@@ -143,6 +148,7 @@
             values.types = [DC_AGENT];
             var args = dojo.toJson(values,true);
             console.log(args);
+            closePublisherDialog();
         }
         
         function paperByNameFormSubmit(e) {
@@ -193,7 +199,8 @@
             var addPaperForm = dojo.byId("addPaperForm");
             dojo.connect(addPaperForm,"submit", "addPaperFormSubmit");
             var addPublisherForm = dojo.byId("addPublisherForm");
-            dojo.connect(addPublisherForm,"submit", "addPublisherDialogSubmit")
+            dojo.connect(addPublisherForm,"submit", "addPublisherDialogSubmit");
+            dojo.connect(addPublisherForm,"reset", "closePublisherDialog");
         })
 	</script>
     
