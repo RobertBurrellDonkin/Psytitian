@@ -138,8 +138,6 @@
         }
 
         function addPublisherDialogSubmit(e) {
-            console.log("Publisher submit");
-            console.log(e);
             e.preventDefault();
 
             var addPublisherDialog = dijit.byId('addPublisherDialog');
@@ -147,8 +145,19 @@
             values._id = values.title;
             values.types = [DC_AGENT];
             var args = dojo.toJson(values,true);
-            console.log(args);
-            closePublisherDialog();
+            
+            dojo.xhrPut({
+                url: DB_NAME + values._id,
+                postData: args,
+                handleAs: "json",
+                load: function(data, ioargs) {
+                   console.log("Saved", data);
+                   closePublisherDialog();
+                },
+                error: function(error, ioargs) {
+                    alert(error);
+                }
+            });
         }
         
         function paperByNameFormSubmit(e) {
