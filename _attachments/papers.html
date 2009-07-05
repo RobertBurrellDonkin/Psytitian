@@ -119,7 +119,7 @@
 
                     	addPaperDialog.show();
                     } else {
-                    	alert(error);
+                    	dojo.byId('paperByNameFormError').innerHTML=error;
                     }   
         	    }
         	});
@@ -170,8 +170,9 @@
             e.preventDefault();
             var paperName = dijit.byId("paperName").attr('value');
             if (!paperName) {
-            	alert('TBD: Display All Names');
+            	dojo.byId('paperByNameFormError').innerHTML='Please enter a name';
             } else {
+            	dojo.byId('paperByNameFormError').innerHTML='';
             	loadPaper(paperName);
             }       
         }
@@ -203,7 +204,7 @@
                    loadPaper(id);
         	    },
         	    error: function(error, ioargs) {
-                    alert(error);
+        	    	aletr(error);
         	    }
         	});
         }
@@ -229,6 +230,7 @@
             <input type="text" name="name" id='paperName' dojoType="dijit.form.TextBox" 
                     required="true" trim="true" propercase="true" class='long'/>
             <button class='go' type="submit">Go</button>
+            <span class='error' id='paperByNameFormError'></span>
         </form>
         
         <div id='displayPaper'></div>
