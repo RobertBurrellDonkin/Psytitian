@@ -107,11 +107,12 @@
                     if (ioargs.xhr.status == HTTP_NOT_FOUND) {
                         var addPaperDialog = dijit.byId('addPaperDialog');
                     	addPaperDialog.reset();
-                        
-                    	couchStore("addPaperDialogPublisher", "_view/agent");
+
+                    	loadAgentsOnPaperDialog();
+                    	
                         dojo.byId('addPaperDialogPaperName').firstChild.nodeValue=title;
                         dijit.byId('addPaperDialogPaperName').attr('value',title);
-
+                        
                         var dateToday = dojo.date.locale.format(new Date(), {selector: 'date', fullYear: true, formatLength: 'medium'});
                         dojo.byId('addPaperDialogPaperEntered').firstChild.nodeValue=dateToday;
                         dijit.byId('addPaperDialogPaperEntered').attr('value',dateToday);
@@ -124,9 +125,12 @@
         	});
         }
 
+        function loadAgentsOnPaperDialog() {
+        	couchStore("addPaperDialogPublisher", "_view/agent");
+        }
+
         function newPublisherOnPaperForm() {
         	dijit.byId("addPaperDialog").hide();
-        	console.log("Publisher show");
         	var addPublisherDialog = dijit.byId('addPublisherDialog');
         	addPublisherDialog.reset();
         	dojo.byId('addPublisherDialogErrors').innerHTML='';
@@ -153,6 +157,7 @@
                 handleAs: "json",
                 load: function(data, ioargs) {
                     console.log("Saved", data);
+                    loadAgentsOnPaperDialog();
                     closePublisherDialog();
                 },
                 error: function(error, ioargs) {
