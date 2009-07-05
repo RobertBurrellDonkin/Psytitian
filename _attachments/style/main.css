@@ -70,3 +70,8 @@ div.results h1 {
 	padding: 0;
 	margin: 0.5em 0.5em;
 }
+
+span.error {
+	color: Red;
+	margin: 0em 0em;
+}

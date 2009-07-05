@@ -129,6 +129,7 @@
         	console.log("Publisher show");
         	var addPublisherDialog = dijit.byId('addPublisherDialog');
         	addPublisherDialog.reset();
+        	dojo.byId('addPublisherDialogErrors').innerHTML='';
             addPublisherDialog.show();
         }
 
@@ -151,11 +152,11 @@
                 postData: args,
                 handleAs: "json",
                 load: function(data, ioargs) {
-                   console.log("Saved", data);
-                   closePublisherDialog();
+                    console.log("Saved", data);
+                    closePublisherDialog();
                 },
                 error: function(error, ioargs) {
-                    alert(error);
+                    dojo.byId('addPublisherDialogErrors').innerHTML = error;
                 }
             });
         }
@@ -237,6 +238,12 @@
                         <td>
                             <input dojoType="dijit.form.TextBox" name='title' propercase="true" class='long'
                                 trim="true" required="true" id='addPublisherDialogTitle'></input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <span class='error' id='addPublisherDialogErrors'></span>
                         </td>
                     </tr>
                     <tr>
