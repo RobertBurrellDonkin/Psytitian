@@ -125,7 +125,24 @@
         }
 
         function newPublisherOnPaperForm() {
-            console.log("Create publisher on paper form");
+        	dijit.byId("addPaperDialog").hide();
+        	console.log("Publisher show");
+        	var addPublisherDialog = dijit.byId('addPublisherDialog');
+        	addPublisherDialog.reset();
+            addPublisherDialog.show();
+        }
+
+        function addPublisherDialogSubmit(e) {
+            console.log("Publisher submit");
+            console.log(e);
+            e.preventDefault();
+
+            var addPublisherDialog = dijit.byId('addPublisherDialog');
+            var values = addPublisherDialog.attr('value');
+            values._id = values.title;
+            values.types = [DC_AGENT];
+            var args = dojo.toJson(values,true);
+            console.log(args);
         }
         
         function paperByNameFormSubmit(e) {
@@ -175,6 +192,8 @@
             dojo.connect(nameForm,"submit","paperByNameFormSubmit");    
             var addPaperForm = dojo.byId("addPaperForm");
             dojo.connect(addPaperForm,"submit", "addPaperFormSubmit");
+            var addPublisherForm = dojo.byId("addPublisherForm");
+            dojo.connect(addPublisherForm,"submit", "addPublisherDialogSubmit")
         })
 	</script>
     
@@ -191,8 +210,30 @@
         </form>
         
         <div id='displayPaper'></div>
-        
-        <div dojoType="dijit.Dialog" id="addPaperDialog" title="Add New Paper">
+
+        <div dojoType="dijit.Dialog" id="addPublisherDialog"
+            title="Add Publisher">
+            <form dojoType="dijit.form.Form" id='addPublisherForm'>
+                <table class='entryDialog'>
+                    <tr>
+                        <td><label for='addPublisherDialogTitle'>Name</label>
+                        </td>
+                        <td>
+                            <input dojoType="dijit.form.TextBox" name='title' propercase="true" class='long'
+                                trim="true" required="true" id='addPublisherDialogTitle'></input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan='2' align='right'>
+                            <button dojoType="dijit.form.Button" type="submit">Add</button>
+                            <button dojoType="dijit.form.Button" type="reset">Abort</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+        <div dojoType="dijit.Dialog" id="addPaperDialog" title="Add Paper">
             <form dojoType="dijit.form.Form" id='addPaperForm'>
                 
                 <script type="dojo/method" event="onSubmit">

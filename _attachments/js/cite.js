@@ -16,6 +16,7 @@
 
 const HTTP_NOT_FOUND='404';
 const DC_BIBLIOGRAPHIC_RESOURCE="http://purl.org/dc/terms/BibliographicResource";
+const DC_AGENT="http://purl.org/dc/terms/Agent";
 
 function clearById(id) {
 	var node = dojo.byId(id);
