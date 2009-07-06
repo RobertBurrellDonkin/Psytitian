@@ -6,7 +6,7 @@ dojoAttachEvent='onreset:_onReset,onsubmit:_onSubmit' ${nameAttrSetting} >
             <td><label>Name</label>
             </td>
             <td>
-                <input dojoType="dijit.form.TextBox" name='title' propercase="true" class='long'
+                <input dojoType="dijit.form.ValidationTextBox" name='title' propercase="true" class='long'
                     trim="true" required="true"></input>
             </td>
         </tr>
@@ -15,7 +15,7 @@ dojoAttachEvent='onreset:_onReset,onsubmit:_onSubmit' ${nameAttrSetting} >
             </td>
             <td><!-- dc:description -->
                 <input dojoType="dijit.form.TextBox" name='description' class='long'
-                    trim="true" required="true"></input>
+                    trim="true"></input>
             </td>
         </tr>        
         <tr>
