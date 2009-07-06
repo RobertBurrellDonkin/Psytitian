@@ -25,7 +25,18 @@ dojo.declare("psytitian.widget.AgentForm",
     templatePath: dojo.moduleUrl("psytitian", "widget/AgentForm.html"),
     widgetsInTemplate:true,
     
-	onSubmit:function( /*Event*/ e) {
+	onSubmit:function(e) {
+		this.save();
+		return false;
+	},
+	
+	onReset:function(e) {
+		console.log("Reset");
+		this.postReset();
+		return false;
+	},
+
+	save:function() {
         var values = this.attr('value');
         values._id = values.title;
         values.types = [DC_AGENT];
@@ -39,14 +50,6 @@ dojo.declare("psytitian.widget.AgentForm",
             load: this.onSave,
             error: this.onError
         });
-        
-		return false;
-	},
-	
-	onReset:function( /*Event*/ e) {
-		console.log("Reset");
-		this.postReset();
-		return false;
 	},
 	
 	onSave:function(data, ioargs) {
