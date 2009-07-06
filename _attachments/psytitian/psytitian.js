@@ -15,6 +15,7 @@
   */
 
 const HTTP_NOT_FOUND='404';
+const HTTP_CONFLICT=409;
 const DC_BIBLIOGRAPHIC_RESOURCE="http://purl.org/dc/terms/BibliographicResource";
 const DC_AGENT="http://purl.org/dc/terms/Agent";
 
@@ -35,6 +36,29 @@ if (!psy.put) {
 		};
 		if (args.id) {
 			args.url = psy.dbName + args.id;
+		};
+		if (!args.errorDocumentExists) {
+			args.errorDocumentExists = function(error, ioargs) {
+				console.warn("Document already exists");
+				console.log(error);
+				console.log(ioargs);
+			};
+		};
+		if (!args.errorOther) {
+			args.errorOther = function(error, ioargs) {
+				console.warn(error);
+				console.log(ioargs);
+			}
+		};
+		
+		if (!args.error) {
+			args.error = function(error, ioargs) {
+				if (error.status == HTTP_CONFLICT) {
+					this.errorDocumentExists(error, ioargs);
+				} else {
+					this.errorOther(error, ioargs);
+				}
+			}
 		}
 		args.postData = json;
 		

@@ -46,7 +46,10 @@ dojo.declare("psytitian.widget.AgentForm",
         psy.put({
             id: values._id,
             load: this.onSave,
-            error: function(error, ioargs) {
+            errorDocumentExists: function(error, ioargs) {
+        		this._widget._onError("That name is already used.", ioargs);
+        	},
+            errorOther: function(error, ioargs) {
         		this._widget._onError(error, ioargs);
         	},
             _widget: this
