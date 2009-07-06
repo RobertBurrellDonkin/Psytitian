@@ -23,26 +23,45 @@ dojo.declare("psytitian.widget.AgentForm",
 [dijit._Widget, dijit._Templated, dijit.form.Form], {
     templateString:null,
     templatePath: dojo.moduleUrl("psytitian", "widget/AgentForm.html"),
+    widgetsInTemplate:true,
     
 	onSubmit:function( /*Event*/ e) {
-		console.log("Submit");
-		this.postSubmit();
+        var values = this.attr('value');
+        values._id = values.title;
+        values.types = [DC_AGENT];
+        var args = dojo.toJson(values,true);
+        console.log("Saving " + args);
+        
+        dojo.xhrPut({
+            url: DB_NAME + values._id,
+            postData: args,
+            handleAs: "json",
+            load: this.onSave,
+            error: this.onError
+        });
+        
 		return false;
 	},
 	
 	onReset:function( /*Event*/ e) {
 		console.log("Reset");
 		this.postReset();
-		this.reset();
 		return false;
 	},
 	
-	postSubmit:function() {
-		// summary: hook after successful commit
+	onSave:function(data, ioargs) {
+		// summary: hook after successful save
+		console.log("Saved", data);
+	},
+	
+	onError:function(error, ioargs) {
+		// summary: hook after unsuccessful save
+		console.warn(error);
 	},
 	
 	postReset:function() {
 		// summary: hook after reset complete
+		console.log("Post reset");
 	}
 });
 

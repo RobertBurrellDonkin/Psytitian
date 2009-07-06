@@ -144,30 +144,6 @@
         	dijit.byId('addPublisherDialog').hide();
         	dijit.byId('addPaperDialog').show();
         }
-
-        function addPublisherDialogSubmit(e) {
-            e.preventDefault();
-
-            var addPublisherDialog = dijit.byId('addPublisherDialog');
-            var values = addPublisherDialog.attr('value');
-            values._id = values.title;
-            values.types = [DC_AGENT];
-            var args = dojo.toJson(values,true);
-            
-            dojo.xhrPut({
-                url: DB_NAME + values._id,
-                postData: args,
-                handleAs: "json",
-                load: function(data, ioargs) {
-                    console.log("Saved", data);
-                    loadAgentsOnPaperDialog();
-                    closePublisherDialog();
-                },
-                error: function(error, ioargs) {
-                    dojo.byId('addPublisherDialogErrors').innerHTML = error;
-                }
-            });
-        }
         
         function paperByNameFormSubmit(e) {
             e.preventDefault();
@@ -238,7 +214,10 @@
         <div dojoType="dijit.Dialog" id="addPublisherDialog"
             title="Add Publisher">
             <div dojoType='psytitian.widget.AgentForm'>
-                <script type="dojo/method" event="postSubmit">closePublisherDialog();</script>
+                <script type="dojo/method" event="onSave">
+				loadAgentsOnPaperDialog();
+                closePublisherDialog();
+                </script>
                 <script type="dojo/method" event="postReset">closePublisherDialog();</script>
             </div>
         </div>
