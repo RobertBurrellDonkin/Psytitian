@@ -48,7 +48,10 @@ dojo.declare("psytitian.widget.AgentForm",
             postData: args,
             handleAs: "json",
             load: this.onSave,
-            error: this.onError
+            error: function(error, ioargs) {
+        		this._widget._onError(error, ioargs);
+        	},
+            _widget: this
         });
 	},
 	
@@ -57,8 +60,13 @@ dojo.declare("psytitian.widget.AgentForm",
 		console.log("Saved", data);
 	},
 	
+	_onError:function(error, ioargs) {
+		onError(error, ioargs);
+	},
+		
 	onError:function(error, ioargs) {
 		// summary: hook after unsuccessful save
+		console.log(ioargs);
 		console.warn(error);
 	},
 	
