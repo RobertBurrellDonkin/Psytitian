@@ -61,13 +61,21 @@ dojo.declare("psytitian.widget.AgentForm",
 	},
 	
 	_onError:function(error, ioargs) {
-		onError(error, ioargs);
+		this.onError(error, ioargs);
 	},
 		
 	onError:function(error, ioargs) {
 		// summary: hook after unsuccessful save
 		console.log(ioargs);
 		console.warn(error);
+		this.reportError(error);
+	},
+	
+	reportError: function(error) {
+		var errorNodes = dojo.query(".error", this.containerNode);
+		errorNodes.forEach(function (node) {
+			node.innerHTML = error;
+		});
 	},
 	
 	postReset:function() {
