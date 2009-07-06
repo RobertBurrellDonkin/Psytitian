@@ -24,7 +24,6 @@ if (!psy) {
 	var psy = new function() {
 		this.version = '0.1-SNAPSHOT';
 	};
-	console.log('Loaded Psytitian');
 }
 if (!psy.dbName) {
 	psy.dbName="/citation/";
@@ -59,10 +58,9 @@ if (!psy.put) {
 					this.errorOther(error, ioargs);
 				}
 			}
-		}
+		};
 		args.postData = json;
 		
         dojo.xhrPut(args);
-	}
-}
-console.log("PsyTitian GO!");
+	};
+};
