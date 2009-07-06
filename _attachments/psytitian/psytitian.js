@@ -28,4 +28,17 @@ if (!psy) {
 if (!psy.dbName) {
 	psy.dbName="/citation/";
 }
+if (!psy.put) {
+	psy.put = function(args, json) {
+		if (!args.handleAs) {
+			args.handleAs = "json";
+		};
+		if (args.id) {
+			args.url = psy.dbName + args.id;
+		}
+		args.postData = json;
+		
+        dojo.xhrPut(args);
+	}
+}
 console.log("PsyTitian GO!");
