@@ -44,7 +44,7 @@ dojo.declare("psytitian.widget.AgentForm",
         console.log("Saving " + args);
         
         dojo.xhrPut({
-            url: DB_NAME + values._id,
+            url: psy.dbName + values._id,
             postData: args,
             handleAs: "json",
             load: this.onSave,

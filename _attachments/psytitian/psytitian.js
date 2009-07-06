@@ -25,4 +25,7 @@ if (!psy) {
 	};
 	console.log('Loaded Psytitian');
 }
+if (!psy.dbName) {
+	psy.dbName="/citation/";
+}
 console.log("PsyTitian GO!");
