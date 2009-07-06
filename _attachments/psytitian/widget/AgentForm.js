@@ -16,7 +16,10 @@
 dojo.provide("psytitian.widget.AgentForm");
 dojo.require("dijit._Widget");
 dojo.require("dijit._Templated");
-dojo.provide("dijit.form.Form");
+dojo.require("dijit.form.TextBox");
+dojo.require("dijit.form.TextBox");
+dojo.require("dijit.form.Form");
+dojo.require("dijit.form.FilteringSelect");
 dojo.require("psytitian.agent");
 
 dojo.declare("psytitian.widget.AgentForm",
@@ -39,7 +42,18 @@ dojo.declare("psytitian.widget.AgentForm",
 	save:function() {
         var values = this.attr('value');
         values._id = values.title;
-        values.types = psy.agent.types;
+        values.types = psy.agent.type.base;
+        if(values.agencyType) {
+        	if (values.agencyType == 'Organization') {
+        		values.types = psy.agent.type.org;
+        	} else if (values.agencyType == 'Group') {
+        		values.types = psy.agent.type.group;
+        	} else if (values.agencyType == 'Person') {
+        		values.types = psy.agent.type.person;
+        	}
+        	delete values['agencyType'];
+        }
+        
         var args = dojo.toJson(values,true);
         console.log("Saving " + args);
         

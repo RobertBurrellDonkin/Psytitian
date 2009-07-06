@@ -19,6 +19,11 @@ dojo.provide("psytitian.agent");
 
 if (!psy.agent) {
 	psy.agent = new function() {
-		this.types=[DC_AGENT,FOAF_AGENT];
+		this.type={
+				base:[DC_AGENT,FOAF_AGENT],
+				org:[DC_AGENT,FOAF_AGENT, FOAF_ORGANIZATION],
+				group:[DC_AGENT,FOAF_AGENT, FOAF_GROUP],
+				person:[DC_AGENT,FOAF_AGENT, FOAF_PERSON]
+		};
 	};
 }

@@ -12,6 +12,17 @@ dojoAttachEvent='onreset:_onReset,onsubmit:_onSubmit' ${nameAttrSetting} >
         <tr>
             <td></td>
             <td>
+                <select dojoType="dijit.form.FilteringSelect" name='agencyType' autocomplete='true'>
+                    <option value='Organization'>Organization</option>
+                    <option value='Other'>Other</option>
+                    <option value='Group'>Group</option>
+                    <option value='Person'>Person</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
                 <span class='error'></span>
             </td>
         </tr>

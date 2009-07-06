@@ -23,7 +23,7 @@ const DC_AGENT="http://purl.org/dc/terms/Agent";
 const FOAF_AGENT='http://xmlns.com/foaf/0.1/Agent';
 const FOAF_PERSON='http://xmlns.com/foaf/0.1/Person';
 const FOAF_GROUP='http://xmlns.com/foaf/0.1/Group';
-const FOAF_ORGANISATION='http://xmlns.com/foaf/0.1/Organization';
+const FOAF_ORGANIZATION='http://xmlns.com/foaf/0.1/Organization';
 
 dojo.provide("psytitian.psytitian");
 if (!psy) {
