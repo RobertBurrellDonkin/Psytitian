@@ -38,3 +38,7 @@ div.psyForm .psyFooter {
 div.psyForm label {
 	margin: 5px;
 }
+
+.psyAgentFormSelect {
+	width:140px;
+}
