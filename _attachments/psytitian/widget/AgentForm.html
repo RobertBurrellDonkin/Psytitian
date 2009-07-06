@@ -1,0 +1,25 @@
+<form dojoAttachPoint='containerNode'
+dojoAttachEvent='onreset:_onReset,onsubmit:_onSubmit' ${nameAttrSetting} >
+    <table class='entryDialog'>
+        <tr>
+            <td><label for='addPublisherDialogTitle'>Name</label>
+            </td>
+            <td>
+                <input dojoType="dijit.form.TextBox" name='title' propercase="true" class='long'
+                    trim="true" required="true" id='addPublisherDialogTitle'></input>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <span class='error' id='addPublisherDialogErrors'></span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan='2' align='right'>
+                <button dojoType="dijit.form.Button" type="submit" >Add</button>
+                <button dojoType="dijit.form.Button" type="reset">Abort</button>
+            </td>
+        </tr>
+    </table>
+</form>

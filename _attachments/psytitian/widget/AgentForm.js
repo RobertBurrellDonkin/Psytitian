@@ -13,14 +13,38 @@
   *  See the License for the specific language governing permissions and
   * limitations under the License. 
   */
-dojo.provide("psytitian.widget.AgentWidget");
+dojo.provide("psytitian.widget.AgentForm");
 dojo.require("dijit._Widget");
 dojo.require("dijit._Templated");
+dojo.provide("dijit.form.Form");
 dojo.require("psytitian.agent");
-dojo.declare("psytitian.widget.AgentWidget",
-[dijit._Widget, dijit._Templated], {
+
+dojo.declare("psytitian.widget.AgentForm",
+[dijit._Widget, dijit._Templated, dijit.form.Form], {
     templateString:null,
-    templatePath: dojo.moduleUrl("psytitian", "widget/AgentWidget.html")		
+    templatePath: dojo.moduleUrl("psytitian", "widget/AgentForm.html"),
+    
+	onSubmit:function( /*Event*/ e) {
+		console.log("Submit");
+		this.postSubmit();
+		return false;
+	},
+	
+	onReset:function( /*Event*/ e) {
+		console.log("Reset");
+		this.postReset();
+		this.reset();
+		return false;
+	},
+	
+	postSubmit:function() {
+		// summary: hook after successful commit
+	},
+	
+	postReset:function() {
+		// summary: hook after reset complete
+	}
 });
 
-console.log("PsyTitian Agent Widget GO!");
+
+console.log("PsyTitian Agent Form GO!");
