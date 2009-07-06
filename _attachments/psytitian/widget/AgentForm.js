@@ -45,6 +45,9 @@ dojo.declare("psytitian.widget.AgentForm",
         var values = this.attr('value');
         values._id = values.title;
         values.name = values.title; // foaf:name
+        if (values.mbox) {
+        	values.mbox = "mailto:" + values.mbox;
+        }
         values.types = psy.agent.type.base;
         if(values.agencyType) {
         	if (values.agencyType == 'Organization') {
