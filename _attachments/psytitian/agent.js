@@ -19,6 +19,6 @@ dojo.provide("psytitian.agent");
 
 if (!psy.agent) {
 	psy.agent = new function() {
-		this.types=[DC_AGENT];
+		this.types=[DC_AGENT,FOAF_AGENT];
 	};
 }
