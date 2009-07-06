@@ -1,5 +1,5 @@
 <form dojoAttachPoint='containerNode'
-dojoAttachEvent='onreset:_onReset,onsubmit:_onSubmit' ${nameAttrSetting} >
+dojoAttachEvent='onreset:_onReset,onsubmit:_onSubmit' ${nameAttrSetting}>
     <table class='entryDialog'>
     <!-- owl:Thing -->
         <tr>
@@ -46,8 +46,7 @@ dojoAttachEvent='onreset:_onReset,onsubmit:_onSubmit' ${nameAttrSetting} >
                     regExpGen="dojox.validate.regexp.url"
                     trim="true"></input>
             </td>
-        </tr>   
-         
+        </tr>
         <tr>
             <td></td>
             <td>
@@ -59,17 +58,11 @@ dojoAttachEvent='onreset:_onReset,onsubmit:_onSubmit' ${nameAttrSetting} >
                 </select>
             </td>
         </tr>
-        <tr>
-            <td></td>
-            <td>
-                <span class='error'></span>
-            </td>
-        </tr>
-        <tr>
-            <td colspan='2' align='right'>
-                <button dojoType="dijit.form.Button" type="submit" >Add</button>
-                <button dojoType="dijit.form.Button" type="reset">Abort</button>
-            </td>
-        </tr>
     </table>
+    <p><span class='error'></span></p>
+    
+    <div class='FormFooter'>
+        <button dojoType="dijit.form.Button" type="submit" >Add</button>
+        <button dojoType="dijit.form.Button" type="reset">Abort</button>
+    </div>
 </form>
