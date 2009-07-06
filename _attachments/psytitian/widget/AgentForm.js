@@ -39,7 +39,7 @@ dojo.declare("psytitian.widget.AgentForm",
 	save:function() {
         var values = this.attr('value');
         values._id = values.title;
-        values.types = [DC_AGENT];
+        values.types = psy.agent.types;
         var args = dojo.toJson(values,true);
         console.log("Saving " + args);
         

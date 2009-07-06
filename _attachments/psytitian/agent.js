@@ -16,4 +16,9 @@
 
 dojo.require("psytitian.psytitian");
 dojo.provide("psytitian.agent");
-console.log("PsyTitian agent GO!");
+
+if (!psy.agent) {
+	psy.agent = new function() {
+		this.types=[DC_AGENT];
+	};
+}
