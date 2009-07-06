@@ -41,6 +41,12 @@ dojo.declare("psytitian.widget.AgentForm",
 		return false;
 	},
 
+	_httpUrl: function(values, name) {
+        if (values[name] && values[name].substring(0,7) != 'http://') {
+        	values[name] = 'http://' + values[name];
+        };
+	},
+	
 	save:function() {
         var values = this.attr('value');
         values._id = values.title;
@@ -48,6 +54,9 @@ dojo.declare("psytitian.widget.AgentForm",
         if (values.mbox) {
         	values.mbox = "mailto:" + values.mbox;
         }
+        this._httpUrl(values, "weblog");
+        this._httpUrl(values, "homepage");
+        
         values.types = psy.agent.type.base;
         if(values.agencyType) {
         	if (values.agencyType == 'Organization') {

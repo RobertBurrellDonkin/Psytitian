@@ -38,6 +38,15 @@ dojoAttachEvent='onreset:_onReset,onsubmit:_onSubmit' ${nameAttrSetting} >
                     trim="true"></input>
             </td>
         </tr>  
+        <tr>
+            <td><label>Blog</label>
+            </td>
+            <td><!-- foaf:weblog -->
+                <input dojoType="dijit.form.ValidationTextBox" name='weblog' 
+                    regExpGen="dojox.validate.regexp.url"
+                    trim="true"></input>
+            </td>
+        </tr>   
          
         <tr>
             <td></td>
