@@ -31,7 +31,7 @@ dojo.declare("psytitian.widget.AgentForm",
 	},
 	
 	onReset:function(e) {
-		console.log("Reset");
+		this.reportError('');
 		this.postReset();
 		return false;
 	},
@@ -85,6 +85,3 @@ dojo.declare("psytitian.widget.AgentForm",
 		console.log("Post reset");
 	}
 });
-
-
-console.log("PsyTitian Agent Form GO!");
