@@ -21,6 +21,8 @@ dojo.require("dijit.form.TextBox");
 dojo.require("dijit.form.Form");
 dojo.require("dijit.form.FilteringSelect");
 dojo.require("psytitian.agent");
+dojo.require("dojox.validate.regexp");
+dojo.require("dijit.form.ValidationTextBox");
 
 dojo.declare("psytitian.widget.AgentForm",
 [dijit._Widget, dijit._Templated, dijit.form.Form], {
