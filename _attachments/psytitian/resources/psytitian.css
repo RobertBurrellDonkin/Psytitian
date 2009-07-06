@@ -14,7 +14,7 @@
    limitations under the License. 
 */
 
-div.psyFormFooter {
+div.psyForm .psyFooter {
 	text-align: right;
 }
 
@@ -35,6 +35,6 @@ div.psyFormFooter {
 	width: 300px;
 }
 
-label {
-	border: 0, 5px;
+div.psyForm label {
+	margin: 5px;
 }

@@ -1,68 +1,70 @@
 <form dojoAttachPoint='containerNode'
 dojoAttachEvent='onreset:_onReset,onsubmit:_onSubmit' ${nameAttrSetting}>
-    <table>
-    <!-- owl:Thing -->
-        <tr>
-            <td><label>Name</label>
-            </td>
-            <td>
-                <input dojoType="dijit.form.ValidationTextBox" name='title' propercase="true" class='psyLong'
-                    trim="true" required="true"></input>
-            </td>
-        </tr>
-        <tr>
-            <td><label>Description</label>
-            </td>
-            <td><!-- dc:description -->
-                <input dojoType="dijit.form.TextBox" name='description' class='psyLong'
-                    trim="true"></input>
-            </td>
-        </tr>        
-        <tr>
-            <td><label>Home</label>
-            </td>
-            <td><!-- foaf:homepage -->
-                <input dojoType="dijit.form.ValidationTextBox" name='homepage' 
-                    regExpGen="dojox.validate.regexp.url" class='psyUrl'
-                    trim="true"></input>
-            </td>
-        </tr>     
+    <div class='psyForm'>
+        <table>
+        <!-- owl:Thing -->
+            <tr>
+                <td width='80'><label>Name</label>
+                </td>
+                <td>
+                    <input dojoType="dijit.form.ValidationTextBox" name='title' propercase="true" class='psyLong'
+                        trim="true" required="true"></input>
+                </td>
+            </tr>
+            <tr>
+                <td><label>Description</label>
+                </td>
+                <td><!-- dc:description -->
+                    <input dojoType="dijit.form.TextBox" name='description' class='psyLong'
+                        trim="true"></input>
+                </td>
+            </tr>        
+            <tr>
+                <td><label>Home</label>
+                </td>
+                <td><!-- foaf:homepage -->
+                    <input dojoType="dijit.form.ValidationTextBox" name='homepage' 
+                        regExpGen="dojox.validate.regexp.url" class='psyUrl'
+                        trim="true"></input>
+                </td>
+            </tr>     
+            
+             <!-- foaf:Agent -->
+             <tr>
+                <td><label>Mail</label>
+                </td>
+                <td><!-- foaf:mbox -->
+                    <input dojoType="dijit.form.ValidationTextBox" name='mbox' 
+                        regExpGen="dojox.validate.regexp.emailAddress" class='psyEmail'
+                        trim="true"></input>
+                </td>
+            </tr>  
+            <tr>
+                <td><label>Blog</label>
+                </td>
+                <td><!-- foaf:weblog -->
+                    <input dojoType="dijit.form.ValidationTextBox" name='weblog' 
+                        regExpGen="dojox.validate.regexp.url" class='psyUrl'
+                        trim="true"></input>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <select dojoType="dijit.form.FilteringSelect" name='agencyType' autocomplete='true'>
+                        <option value='Organization'>Organization</option>
+                        <option value='Other'>Other</option>
+                        <option value='Group'>Group</option>
+                        <option value='Person'>Person</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <p><span class='psyError'></span></p>
         
-         <!-- foaf:Agent -->
-         <tr>
-            <td><label>Mail</label>
-            </td>
-            <td><!-- foaf:mbox -->
-                <input dojoType="dijit.form.ValidationTextBox" name='mbox' 
-                    regExpGen="dojox.validate.regexp.emailAddress" class='psyEmail'
-                    trim="true"></input>
-            </td>
-        </tr>  
-        <tr>
-            <td><label>Blog</label>
-            </td>
-            <td><!-- foaf:weblog -->
-                <input dojoType="dijit.form.ValidationTextBox" name='weblog' 
-                    regExpGen="dojox.validate.regexp.url" class='psyUrl'
-                    trim="true"></input>
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <select dojoType="dijit.form.FilteringSelect" name='agencyType' autocomplete='true'>
-                    <option value='Organization'>Organization</option>
-                    <option value='Other'>Other</option>
-                    <option value='Group'>Group</option>
-                    <option value='Person'>Person</option>
-                </select>
-            </td>
-        </tr>
-    </table>
-    <p><span class='psyError'></span></p>
-    
-    <div class='psyFormFooter'>
-        <button dojoType="dijit.form.Button" type="submit" >Add</button>
-        <button dojoType="dijit.form.Button" type="reset">Abort</button>
+        <div class='psyFooter'>
+            <button dojoType="dijit.form.Button" type="submit" >Add</button>
+            <button dojoType="dijit.form.Button" type="reset">Abort</button>
+        </div>
     </div>
 </form>
