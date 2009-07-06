@@ -1,6 +1,7 @@
 <form dojoAttachPoint='containerNode'
 dojoAttachEvent='onreset:_onReset,onsubmit:_onSubmit' ${nameAttrSetting} >
     <table class='entryDialog'>
+    <!-- owl:Thing -->
         <tr>
             <td><label>Name</label>
             </td>
@@ -9,6 +10,16 @@ dojoAttachEvent='onreset:_onReset,onsubmit:_onSubmit' ${nameAttrSetting} >
                     trim="true" required="true"></input>
             </td>
         </tr>
+        <tr>
+            <td><label>Description</label>
+            </td>
+            <td><!-- dc:description -->
+                <input dojoType="dijit.form.TextBox" name='description' class='long'
+                    trim="true" required="true"></input>
+            </td>
+        </tr>        
+        
+         <!-- foaf:Agent -->
         <tr>
             <td></td>
             <td>
