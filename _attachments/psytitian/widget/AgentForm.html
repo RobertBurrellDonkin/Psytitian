@@ -1,12 +1,12 @@
 <form dojoAttachPoint='containerNode'
 dojoAttachEvent='onreset:_onReset,onsubmit:_onSubmit' ${nameAttrSetting}>
-    <table class='entryDialog'>
+    <table>
     <!-- owl:Thing -->
         <tr>
             <td><label>Name</label>
             </td>
             <td>
-                <input dojoType="dijit.form.ValidationTextBox" name='title' propercase="true" class='long'
+                <input dojoType="dijit.form.ValidationTextBox" name='title' propercase="true" class='psyLong'
                     trim="true" required="true"></input>
             </td>
         </tr>
@@ -14,7 +14,7 @@ dojoAttachEvent='onreset:_onReset,onsubmit:_onSubmit' ${nameAttrSetting}>
             <td><label>Description</label>
             </td>
             <td><!-- dc:description -->
-                <input dojoType="dijit.form.TextBox" name='description' class='long'
+                <input dojoType="dijit.form.TextBox" name='description' class='psyLong'
                     trim="true"></input>
             </td>
         </tr>        
@@ -23,7 +23,7 @@ dojoAttachEvent='onreset:_onReset,onsubmit:_onSubmit' ${nameAttrSetting}>
             </td>
             <td><!-- foaf:homepage -->
                 <input dojoType="dijit.form.ValidationTextBox" name='homepage' 
-                    regExpGen="dojox.validate.regexp.url"
+                    regExpGen="dojox.validate.regexp.url" class='psyUrl'
                     trim="true"></input>
             </td>
         </tr>     
@@ -34,7 +34,7 @@ dojoAttachEvent='onreset:_onReset,onsubmit:_onSubmit' ${nameAttrSetting}>
             </td>
             <td><!-- foaf:mbox -->
                 <input dojoType="dijit.form.ValidationTextBox" name='mbox' 
-                    regExpGen="dojox.validate.regexp.emailAddress"
+                    regExpGen="dojox.validate.regexp.emailAddress" class='psyEmail'
                     trim="true"></input>
             </td>
         </tr>  
@@ -43,7 +43,7 @@ dojoAttachEvent='onreset:_onReset,onsubmit:_onSubmit' ${nameAttrSetting}>
             </td>
             <td><!-- foaf:weblog -->
                 <input dojoType="dijit.form.ValidationTextBox" name='weblog' 
-                    regExpGen="dojox.validate.regexp.url"
+                    regExpGen="dojox.validate.regexp.url" class='psyUrl'
                     trim="true"></input>
             </td>
         </tr>
@@ -59,9 +59,9 @@ dojoAttachEvent='onreset:_onReset,onsubmit:_onSubmit' ${nameAttrSetting}>
             </td>
         </tr>
     </table>
-    <p><span class='error'></span></p>
+    <p><span class='psyError'></span></p>
     
-    <div class='FormFooter'>
+    <div class='psyFormFooter'>
         <button dojoType="dijit.form.Button" type="submit" >Add</button>
         <button dojoType="dijit.form.Button" type="reset">Abort</button>
     </div>

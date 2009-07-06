@@ -14,6 +14,27 @@
    limitations under the License. 
 */
 
-div.FormFooter {
+div.psyFormFooter {
 	text-align: right;
+}
+
+.psyError {
+	color: Red;
+	margin: 0em 0em;
+}
+
+.psyLong {
+	width: 500px;
+}
+
+.psyUrl {
+	width: 250px;
+}
+
+.psyEmail {
+	width: 300px;
+}
+
+label {
+	border: 0, 5px;
 }
