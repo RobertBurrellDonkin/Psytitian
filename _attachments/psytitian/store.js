@@ -53,7 +53,15 @@ if (!psy.store) {
 							if (widget) {
 							    widget.attr('displayedValue', "Loading...");
 							    widget.attr('disabled', true);
-								this._widgets.push(widget);
+							    
+							    for (i in this._widgets) {
+							    	if (this._widgets[i] == widget) {
+							    		var alreadyAdded = true;
+							    	}
+							    }
+							    if (!alreadyAdded) {
+							    	this._widgets.push(widget);
+							    }
 							} else {
 								console.log("Widget missing");
 							}
