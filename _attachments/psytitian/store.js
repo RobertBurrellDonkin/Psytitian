@@ -21,19 +21,44 @@ if (!psy.store) {
 	psy.store = {
 		/* Indexes stores by backing URL */
 		_storesByUrl: {},
-		url : function(url) {
-			var store = this._map[url];
+		
+		
+		forUrl : function(url) {
+			// summary: Returns a store for the given url
+			var store = this._storesByUrl[url];
 			if (store) {
-				console.log("Store already exists");
-				console.log(store);
 				return store;
 			} else {
-				console.log("Creating new store for " + url);
 				store = {
 						_url: url,
-						widgets: []
+						_widgets: [],
+						store: null,
+						load: function() {
+							// Summary Starts loading data from store.
+					        //         Data will be used for all widgets.
+							psy.store.loadItems({
+								url: this._url,
+								onItemLoad: dojo.hitch(this, function(items) {;
+									this.store = new dojo.data.ItemFileReadStore({data:items});
+					        		dojo.forEach(this._widgets, dojo.hitch(this, function(widget) {
+							        	widget.store = this.store;
+							        	widget.attr('displayedValue', "");
+							        	widget.attr('disabled', false);
+									}));
+								})
+							});
+						},
+						
+						add: function(widget) {
+						    widget.attr('displayedValue', "Loading...");
+						    widget.attr('disabled', true);
+							this._widgets.push(widget);
+							return this;
+						},
 				};
+				this._storesByUrl[url] = store;
 			};
+			return store;
 		},
 		
 		
@@ -66,7 +91,7 @@ if (!psy.store) {
 		    };
 		    
 		    if (!ioArgs.error) {
-		    	ioArgs._onError =  function(error, ioargs) {
+		    	ioArgs.error = function(error, ioargs) {
 			        console.warn(error);
 			    };
 		    }

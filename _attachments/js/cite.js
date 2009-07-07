@@ -22,15 +22,6 @@ function clearById(id) {
 
 function couchStore(widgetId, url) {
 	var widget = dijit.byId(widgetId);
-    widget.attr('displayedValue', "Loading...");
-    widget.attr('disabled', true);
-    
-    psy.store.loadItems({url:url, 
-    	onItemLoad:function(items) {
-        	var store = new dojo.data.ItemFileReadStore({data:items});
-        	widget.store = store;
-        	widget.attr('displayedValue', "");
-        	widget.attr('disabled', false);
-    }});
+	psy.store.forUrl(url).add(widget).load();
 }
 
