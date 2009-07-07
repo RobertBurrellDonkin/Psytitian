@@ -50,10 +50,18 @@ if (!psy.store) {
 						},
 						
 						add: function(widget) {
-						    widget.attr('displayedValue', "Loading...");
-						    widget.attr('disabled', true);
-							this._widgets.push(widget);
+							if (widget) {
+							    widget.attr('displayedValue', "Loading...");
+							    widget.attr('disabled', true);
+								this._widgets.push(widget);
+							} else {
+								console.log("Widget missing");
+							}
 							return this;
+						},
+						
+						addById: function(widgetId) {
+							return this.add(dijit.byId("addPaperDialogPublisher"));
 						}
 				};
 				this._storesByUrl[url] = store;
