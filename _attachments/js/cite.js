@@ -20,8 +20,3 @@ function clearById(id) {
 	return node;
 }
 
-function couchStore(widgetId, url) {
-	var widget = dijit.byId(widgetId);
-	psy.store.forUrl(url).add(widget).load();
-}
-

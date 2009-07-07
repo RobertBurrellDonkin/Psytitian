@@ -130,7 +130,8 @@
         }
 
         function loadAgentsOnPaperDialog() {
-        	couchStore("addPaperDialogPublisher", "_view/agent");
+        	var widget = dijit.byId("addPaperDialogPublisher");
+        	psy.store.forUrl("_view/agent").add(widget).load();
         }
 
         function newPublisherOnPaperForm() {

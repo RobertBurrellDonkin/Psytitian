@@ -54,7 +54,7 @@ if (!psy.store) {
 						    widget.attr('disabled', true);
 							this._widgets.push(widget);
 							return this;
-						},
+						}
 				};
 				this._storesByUrl[url] = store;
 			};
