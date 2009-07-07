@@ -25,48 +25,12 @@ function couchStore(widgetId, url) {
     widget.attr('displayedValue', "Loading...");
     widget.attr('disabled', true);
     
-    _loadItems({url:url, load:function(items) {
-        var store = new dojo.data.ItemFileReadStore({data:items});
-        widget.store = store;
-        widget.attr('displayedValue', "");
-        widget.attr('disabled', false);
+    psy.store.loadItems({url:url, 
+    	onItemLoad:function(items) {
+        	var store = new dojo.data.ItemFileReadStore({data:items});
+        	widget.store = store;
+        	widget.attr('displayedValue', "");
+        	widget.attr('disabled', false);
     }});
 }
 
-function _loadItems(args) {
-	if (args.load) {
-		this.load = args.load;
-	} else {
-		this.load = function(items) {
-			console.log(items);
-		}
-	}
-    
-    this._onLoad = function(data, ioargs) {
-        var items = {};
-        items.identifier = 'id';
-        items.label = 'value';
-        items.items = [];
-        dojo.forEach(
-                data.rows,
-                function(item){
-                    items.items.push(item);
-                }
-            );
-        load(items);
-    };
-    
-    if (args.error) {
-    	this.onError = args.error;
-    } else {
-	    this._onError =  function(error, ioargs) {
-	        console.warn(error);
-	    };
-    }
-    
-    dojo.xhrGet({
-        url: args.url,
-        handleAs: "json",
-        load: this._onLoad,
-        error: this._onError}); 
-}
