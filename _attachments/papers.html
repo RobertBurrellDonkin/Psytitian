@@ -69,7 +69,7 @@
         	    url: DB_NAME + encodeURI(title),
         	    handleAs: "json",
                 load: function(data, ioargs) {
-            		var displayPaper = clearById("displayPaper");
+            		var displayPaper = psy.clearById("displayPaper");
                     dojo.addClass(displayPaper, "results");     
                     dojo.create("h1", { innerHTML: data.title }, displayPaper);
             		dojo.create("h2", { innerHTML: 'Bibliography' }, displayPaper);

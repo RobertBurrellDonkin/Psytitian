@@ -14,9 +14,4 @@
   * limitations under the License. 
   */
 
-function clearById(id) {
-	var node = dojo.byId(id);
-	while(node.hasChildNodes()) node.removeChild(node.firstChild);
-	return node;
-}
 

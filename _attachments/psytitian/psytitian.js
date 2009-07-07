@@ -70,3 +70,11 @@ if (!psy.put) {
         dojo.xhrPut(args);
 	};
 };
+
+if (!psy.clearById) {
+	psy.clearById = function (id) {
+		var node = dojo.byId(id);
+		while(node.hasChildNodes()) node.removeChild(node.firstChild);
+		return node;
+	}
+}
