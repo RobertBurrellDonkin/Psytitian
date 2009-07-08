@@ -35,6 +35,7 @@ dojo.declare("psytitian.widget.TagEditor",
     
     setValue: function(value) {
     	dojo.query('.psyTag', this.containerNode).empty();
+    	dojo.query('.psyTagGhost', this.containerNode).empty();
     	dojo.forEach(value, this._add, this);
     },
     
