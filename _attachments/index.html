@@ -20,14 +20,7 @@
     dojo.require("dijit.form.FilteringSelect");
     dojo.require("dojo.data.ItemFileReadStore");
     dojo.require("dijit.form.ComboBox");
-    
-    dojo.require("psytitian.widget.AgentWidget");
-    console.log(psy);
-    console.log(psy.version);
-    
-    dojo.addOnLoad(function(){
-        couchStore("selectExample", "_view/biblio");
-    });
+    dojo.require("psytitian.widget.TagEditor");
     
 	</script>
     
@@ -41,7 +34,6 @@
             
     
 
-    <span dojoType="psytitian.widget.AgentWidget">press me</span>
-    
+    <div dojoType='psytitian.widget.TagEditor'></div>
     </body>
 </html>

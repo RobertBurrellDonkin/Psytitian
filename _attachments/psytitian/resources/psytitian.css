@@ -35,6 +35,16 @@ div.psyForm .psyFooter {
 	width: 300px;
 }
 
+.psyTag {
+	border: none;
+  	color: #666; 
+  	margin: 0; 
+  	cursor: pointer;
+  	font-size: 90%; 
+  	font-weight: bold; 
+	margin: 0em 1em;
+}
+
 div.psyForm label {
 	margin: 5px;
 }
