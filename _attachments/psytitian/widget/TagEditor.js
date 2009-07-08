@@ -16,6 +16,8 @@
 dojo.provide("psytitian.widget.TagEditor");
 dojo.require("dijit._Widget");
 dojo.require("dijit._Templated");
+dojo.require("psytitian.store");
+dojo.require("dijit.form.FilteringSelect");
 
 dojo.declare("psytitian.widget.TagEditor",
 [dijit._Widget, dijit._Templated], {
@@ -60,6 +62,16 @@ dojo.declare("psytitian.widget.TagEditor",
     	if (!valueAlreadyIncluded) {
     		this._add(value);
     	}
+    },
+    
+    setUrl: function(url) {
+    	psy.store.forUrl("_view/agent").add(new dijit.form.FilteringSelect({
+    		searchAttr: "value",
+    	    onChange: function(value) {
+    			console.log("New value " + value);
+    			console.log(this);
+    		}
+    	}, this.storeContainerNode)).load();
     },
     
     _add: function(value) {
