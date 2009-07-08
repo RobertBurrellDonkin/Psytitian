@@ -47,7 +47,7 @@ div.psyForm label {
 	border: none;
   	color: #666; 
   	margin: 0; 
-  	cursor: pointer;
+  	cursor: url(images/minus.png), pointer;
   	font-size: 90%; 
   	font-weight: bold; 
 	margin: 0.5em 1em;
