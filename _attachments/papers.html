@@ -277,7 +277,8 @@
                             <label for='addPaperDialogContributors'>Authors</label>
                         </td>
                         <td>
-                            <div dojoType='psytitian.widget.TagEditor' id='addPaperDialogContributors' url="_view/agent"></div>
+                            <button dojoType='dijit.form.Button' onclick='newPublisherOnPaperForm()'>+</button>
+                            <input dojoType='psytitian.widget.TagEditor' id='addPaperDialogContributors' url="_view/agent"></input>
                         </td>
                     </tr>                   
                     <tr>
@@ -285,9 +286,9 @@
                             <label for='addPaperDialogPublisher'>Publisher</label>
                         </td>
                         <td>
+                            <button dojoType='dijit.form.Button' onclick='newPublisherOnPaperForm()'>+</button>
                             <input dojoType="dijit.form.FilteringSelect"  name='publisher' 
                             searchAttr="value" id='addPaperDialogPublisher'></input>
-                            <button class='go' type='button' onclick='newPublisherOnPaperForm()'>Add</button>
                         </td>
                     </tr>
                     <tr>
