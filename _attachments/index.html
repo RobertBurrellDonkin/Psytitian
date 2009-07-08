@@ -30,6 +30,11 @@
     function printValues() {
         console.log(dijit.byId("tagEditor").getValue());
     }
+
+    function addValue() {
+        dijit.byId("tagEditor").add('Jean-Paul Sartre');
+    }
+    
     
     dojo.addOnLoad(function(){
         dijit.byId("tagEditor").setValue(["Plato", "Aristotle", "Karl Marx"]);
@@ -48,5 +53,6 @@
 <p><span class='psyTag'>Roger</span><span class='psyTag'>Rick</span><span class='psyTag'>Hugo</span></p>
     <div dojoType='psytitian.widget.TagEditor' id='tagEditor'></div>
     <button onClick='printValues();'>Grab</button>
+    <button onClick='addValue();'>Jean-Paul Sartre</button>
     </body>
 </html>

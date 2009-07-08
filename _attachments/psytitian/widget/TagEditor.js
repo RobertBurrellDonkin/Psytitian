@@ -35,11 +35,17 @@ dojo.declare("psytitian.widget.TagEditor",
     
     setValue: function(value) {
     	dojo.query('.psyTag', this.containerNode).empty();
-    	dojo.forEach(value, function(value) {
-    		dojo.query(dojo.create("span", {innerHTML: value}, this.containerNode))
-    			.addClass('psyTag').onclick(function(e) {
-    				dojo.query(this).toggleClass('psyTagGhost').toggleClass('psyTag');
-    			});
-    	}, this);
+    	dojo.forEach(value, this._add, this);
+    },
+    
+    add: function(value) {
+    	this._add(value);
+    },
+    
+    _add: function(value) {
+		dojo.query(dojo.create("span", {innerHTML: value}, this.containerNode))
+		.addClass('psyTag').onclick(function(e) {
+			dojo.query(this).toggleClass('psyTagGhost').toggleClass('psyTag');
+		});
     }
 });
