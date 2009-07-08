@@ -60,3 +60,17 @@ div.psyForm label {
 .psyTag:active {  
 	color: #DF0101; 
 }
+
+.psyTagGhost {
+	border: none;
+  	color: #EEE; 
+  	margin: 0; 
+  	cursor: url(images/plus.png), pointer;
+  	font-size: 90%; 
+  	font-weight: bold; 
+	margin: 0.5em 1em;
+}
+
+.psyTagGhost:hover { 
+	color: #999; 
+}
