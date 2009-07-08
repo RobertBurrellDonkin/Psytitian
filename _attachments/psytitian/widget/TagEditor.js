@@ -38,9 +38,7 @@ dojo.declare("psytitian.widget.TagEditor",
     	dojo.forEach(value, function(value) {
     		dojo.query(dojo.create("span", {innerHTML: value}, this.containerNode))
     			.addClass('psyTag').onclick(function(e) {
-    				console.log(this);
-    				console.log(e);
-    				dojo.query(this).removeClass('psyTag').addClass('psyTagGhost');
+    				dojo.query(this).toggleClass('psyTagGhost').toggleClass('psyTag');
     			});
     	}, this);
     }
