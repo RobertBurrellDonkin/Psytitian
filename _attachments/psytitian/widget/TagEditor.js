@@ -67,17 +67,16 @@ dojo.declare("psytitian.widget.TagEditor",
     setUrl: function(url) {
     	psy.store.forUrl("_view/agent").add(new dijit.form.FilteringSelect({
     		searchAttr: "value",
-    	    onChange: function(value) {
-    			console.log("New value " + value);
-    			console.log(this);
-    		}
+    	    onChange: dojo.hitch(this, this.add)
     	}, this.storeContainerNode)).load();
     },
     
     _add: function(value) {
-		dojo.query(dojo.create("span", {innerHTML: value}, this.containerNode))
-		.addClass('psyTag').onclick(function(e) {
-			dojo.query(this).toggleClass('psyTagGhost').toggleClass('psyTag');
-		});
+    	if (value) {
+			dojo.query(dojo.create("span", {innerHTML: value}, this.containerNode))
+			.addClass('psyTag').onclick(function(e) {
+				dojo.query(this).toggleClass('psyTagGhost').toggleClass('psyTag');
+			});
+	    }
     }
 });
