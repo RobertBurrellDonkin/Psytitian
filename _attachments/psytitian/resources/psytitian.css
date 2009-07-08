@@ -35,6 +35,14 @@ div.psyForm .psyFooter {
 	width: 300px;
 }
 
+div.psyForm label {
+	margin: 5px;
+}
+
+.psyAgentFormSelect {
+	width:140px;
+}
+
 .psyTag {
 	border: none;
   	color: #666; 
@@ -42,13 +50,13 @@ div.psyForm .psyFooter {
   	cursor: pointer;
   	font-size: 90%; 
   	font-weight: bold; 
-	margin: 0em 1em;
+	margin: 0.5em 1em;
 }
 
-div.psyForm label {
-	margin: 5px;
+.psyTag:hover { 
+	color: #DF0101; 
 }
 
-.psyAgentFormSelect {
-	width:140px;
+.psyTag:active {  
+	color: #DF0101; 
 }

@@ -21,5 +21,23 @@ dojo.declare("psytitian.widget.TagEditor",
 [dijit._Widget, dijit._Templated], {
     templateString:null,
     templatePath: dojo.moduleUrl("psytitian", "widget/TagEditor.html"),
-    widgetsInTemplate:true
+    _tags: [],
+    getValue: function() {
+		this._tags = [];
+		var tagNodes = dojo.query('.psyTag', this.containerNode);
+		if (tagNodes) {
+			tagNodes.forEach(function(node) {
+				this._tags.push(node.innerHTML);
+			}, this);
+		}
+    	return this._tags;
+    },
+    
+    setValue: function(value) {
+    	dojo.query('.psyTag', this.containerNode).empty();
+    	dojo.forEach(value, function(value) {
+    		dojo.query(dojo.create("span", {innerHTML: value}, this.containerNode))
+    			.addClass('psyTag');
+    	}, this);
+    }
 });
