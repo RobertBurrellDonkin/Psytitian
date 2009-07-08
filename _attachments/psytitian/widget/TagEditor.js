@@ -89,5 +89,8 @@ dojo.declare("psytitian.widget.TagEditor",
 				dojo.query(this).toggleClass('psyTagGhost').toggleClass('psyTag');
 			});
 	    }
+    },
+    reset: function() {
+    	this.setValue({});
     }
 });

@@ -113,6 +113,7 @@
                     	addPaperDialog.reset();
 
                     	loadAgentsOnPaperDialog();
+                    	dijit.byId('addPaperDialogContributors').reset();
                     	
                         dojo.byId('addPaperDialogPaperName').firstChild.nodeValue=title;
                         dijit.byId('addPaperDialogPaperName').attr('value',title);
@@ -225,7 +226,6 @@
 
         <div dojoType="dijit.Dialog" id="addPaperDialog" title="Add Paper">
             <form dojoType="dijit.form.Form" id='addPaperForm'>
-                
                 <script type="dojo/method" event="onSubmit">
 					var name = dijit.byId('addPaperDialogPaperName').attr('value');
 					dojo.byId("addPaperFormTitle").setAttribute('value',name);
