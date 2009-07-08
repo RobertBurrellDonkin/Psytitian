@@ -24,6 +24,7 @@ dojo.declare("psytitian.widget.TagEditor",
     templateString:null,
     templatePath: dojo.moduleUrl("psytitian", "widget/TagEditor.html"),
     _tags: [],
+    url: "",
     getValue: function() {
 		this._tags = [];
 		var tagNodes = dojo.query('.psyTag', this.containerNode);
@@ -33,6 +34,16 @@ dojo.declare("psytitian.widget.TagEditor",
 			}, this);
 		}
     	return this._tags;
+    },
+    
+    startup: function() {
+    	try {
+	    	if (this.url != "") {
+	    		this.setUrl(this.url);
+	    	}
+    	} catch (e) {
+    		console.warn(e);
+    	}
     },
     
     setValue: function(value) {
@@ -65,7 +76,7 @@ dojo.declare("psytitian.widget.TagEditor",
     },
     
     setUrl: function(url) {
-    	psy.store.forUrl("_view/agent").add(new dijit.form.FilteringSelect({
+    	psy.store.forUrl(url).add(new dijit.form.FilteringSelect({
     		searchAttr: "value",
     	    onChange: dojo.hitch(this, this.add)
     	}, this.storeContainerNode)).load();

@@ -61,6 +61,7 @@
         dojo.require("dojox.validate.regexp");
         dojo.require('psytitian.widget.AgentForm');
         dojo.require('psytitian.store');
+        dojo.require("psytitian.widget.TagEditor");
 
         
         function loadPaper(title) {
@@ -270,6 +271,15 @@
                                     name='issued'>
                         </td>
                     </tr>
+                     <tr>
+                        <td>
+                            <label for='addPaperDialogPublisher'>Publisher</label>
+                        </td>
+                        <td>
+                            <button class='go' type='button' onclick='newPublisherOnPaperForm()'>+</button>
+                            <div dojoType='psytitian.widget.TagEditor' id='addPaperDialogContributors' url="_view/agent"></div>
+                        </td>
+                    </tr>                   
                     <tr>
                         <td>
                             <label for='addPaperDialogPublisher'>Publisher</label>
