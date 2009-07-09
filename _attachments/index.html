@@ -28,7 +28,7 @@
     dojo.require("psytitian.widget.TagEditor");
 
     function printValues() {
-        console.log(dijit.byId("tagEditor").getValue());
+        console.log(dijit.byId("tagEditor").attr('value'));
     }
 
     function addValue() {
@@ -36,11 +36,11 @@
     }
     
     function setUrl() {
-    	dijit.byId("tagEditor").setUrl("_view/agent");
+    	dijit.byId("tagEditor").attr('url',"_view/agent");
     }
     
     dojo.addOnLoad(function(){
-        dijit.byId("tagEditor").setValue(["Plato", "Aristotle", "Karl Marx"]);
+        dijit.byId("tagEditor").attr('value',["Plato", "Aristotle", "Karl Marx"]);
     });
 	</script>
     

@@ -25,7 +25,7 @@ dojo.declare("psytitian.widget.TagEditor",
     templatePath: dojo.moduleUrl("psytitian", "widget/TagEditor.html"),
     _tags: [],
     url: "",
-    getValue: function() {
+    _getValueAttr: function() {
 		this._tags = [];
 		var tagNodes = dojo.query('.psyTag', this.containerNode);
 		if (tagNodes) {
@@ -36,24 +36,14 @@ dojo.declare("psytitian.widget.TagEditor",
     	return this._tags;
     },
     
-    startup: function() {
-    	try {
-	    	if (this.url != "") {
-	    		this.setUrl(this.url);
-	    	}
-    	} catch (e) {
-    		console.warn(e);
-    	}
-    },
-    
-    setValue: function(value) {
+    _setValueAttr: function(value) {
     	dojo.query('.psyTag', this.containerNode).empty();
     	dojo.query('.psyTagGhost', this.containerNode).empty();
     	dojo.forEach(value, this._add, this);
     },
     
     add: function(value) {
-    	var existingTags = this.getValue();
+    	var existingTags = this.attr('value');
     	for(i in existingTags) {
     		if (existingTags[i] == value) {
     			var valueAlreadyIncluded = true;
@@ -75,7 +65,7 @@ dojo.declare("psytitian.widget.TagEditor",
     	}
     },
     
-    setUrl: function(url) {
+    _setUrlAttr: function(url) {
     	psy.store.forUrl(url).add(new dijit.form.FilteringSelect({
     		searchAttr: "value",
     	    onChange: dojo.hitch(this, this.add)
@@ -91,6 +81,6 @@ dojo.declare("psytitian.widget.TagEditor",
 	    }
     },
     reset: function() {
-    	this.setValue({});
+    	this.attr('value', []);
     }
 });
