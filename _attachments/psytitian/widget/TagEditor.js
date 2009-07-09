@@ -66,6 +66,7 @@ dojo.declare("psytitian.widget.TagEditor",
     },
     
     _setUrlAttr: function(url) {
+    	dojo.query(this.storeContainerNode).empty();
     	psy.store.forUrl(url).add(new dijit.form.FilteringSelect({
     		searchAttr: "value",
     	    onChange: dojo.hitch(this, this.add)
