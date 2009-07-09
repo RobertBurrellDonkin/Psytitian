@@ -25,6 +25,8 @@ const FOAF_PERSON='http://xmlns.com/foaf/0.1/Person';
 const FOAF_GROUP='http://xmlns.com/foaf/0.1/Group';
 const FOAF_ORGANIZATION='http://xmlns.com/foaf/0.1/Organization';
 
+const SKOS_CONCEPT="http://www.w3.org/2004/02/skos/core#Concept";
+
 dojo.provide("psytitian.psytitian");
 if (!psy) {
 	var psy = new function() {
