@@ -26,6 +26,7 @@
     dojo.require("dojo.data.ItemFileReadStore");
     dojo.require("dijit.form.ComboBox");
     dojo.require("psytitian.widget.TagEditor");
+    dojo.require("psytitian.widget.Thing");
 
     function printValues() {
         console.log(dijit.byId("tagEditor").attr('value'));
@@ -58,5 +59,7 @@
     <button onClick='printValues();'>Grab</button>
     <button onClick='addValue();'>Jean-Paul Sartre</button>
     <button onClick='setUrl();'>Set URL</button>
+    <div dojoType='psytitian.widget.Thing' id='Thing' url='init'></div>
+    <button onClick='dijit.byId("Thing").attr("url", "novel")'>Set Thing</button>
     </body>
 </html>

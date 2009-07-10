@@ -71,6 +71,7 @@
                 load: function(data, ioargs) {
             		var displayPaper = psy.clearById("displayPaper");
                     dojo.addClass(displayPaper, "results");     
+                    
                     dojo.create("h1", { innerHTML: data.title }, displayPaper);
             		dojo.create("h2", { innerHTML: 'Bibliography' }, displayPaper);
                     if (data.source) {
