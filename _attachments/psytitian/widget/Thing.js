@@ -40,6 +40,9 @@ dojo.declare("psytitian.widget.Thing",
 	_setDataAttr: function(value) {
 		console.log("[THING] Setting data");
 		console.log(value);
+		if (value.title) {
+			dojo.create("h1", { innerHTML: value.title }, this.containerNode);
+		}
 		this.biblio.attr('data', value);
 		this.data = value;
 	},

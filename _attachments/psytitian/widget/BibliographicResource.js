@@ -16,6 +16,7 @@
 dojo.provide("psytitian.widget.BibliographicResource");
 dojo.require("dijit._Widget");
 dojo.require("dijit._Templated");
+dojo.require("psytitian.psytitian");
 
 dojo.declare("psytitian.widget.BibliographicResource",
 [dijit._Widget, dijit._Templated], {
@@ -27,6 +28,45 @@ dojo.declare("psytitian.widget.BibliographicResource",
 	_setDataAttr: function(value) {
 		console.log("[BIBLIO] Setting data");
 		console.log(value);
+		
+		if (value.types && value.types.indexOf(DC_BIBLIOGRAPHIC_RESOURCE) != -1) {
+			console.log("Type match");
+    		dojo.create("h2", { innerHTML: 'Bibliography' }, this.containerNode);
+            if (value.source) {
+        		dojo.create("h3", { innerHTML: "Source" }, this.containerNode);
+                var source = value.source;
+                if (source.substring(0,7) == "http://") {
+                    source = "<a href='" + source + "' target='_blank'>" + source + "</a>";
+                }
+        		dojo.create("p", { innerHTML: source }, this.containerNode);
+            }
+            
+            var publicationDetails;
+            if (value.publisher) {
+                publicationDetails = value.publisher;
+            }
+            if (value.issued) {
+                if (publicationDetails) {
+                	publicationDetails = publicationDetails + ', ' + value.issued;    
+                } else {
+                    publicationDetails = "First published " + value.issued;
+                }
+                
+            }
+            if (publicationDetails) {
+            	dojo.create("h3", { innerHTML: "Publication" }, this.containerNode);
+            	dojo.create("p", { innerHTML:  publicationDetails}, this.containerNode);
+            }
+            
+            if (value.abstract) {
+        		dojo.create("h3", { innerHTML: "Abstract" }, this.containerNode);
+        		dojo.create("p", { innerHTML: value.abstract }, this.containerNode);
+            }
+		} else {
+			console.log("Type mismatch");
+			dojo.query(this.containerNode).empty();
+		}
+		console.log(this.containerNode);
 		this.data = value;
 	},
 	

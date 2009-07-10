@@ -61,6 +61,6 @@
     <button onClick='setUrl();'>Set URL</button>
     <div dojoType='psytitian.widget.Thing' id='Thing' url='init' data='{scooby:"doo"}'></div>
     <button onClick='dijit.byId("Thing").attr("url", "novel")'>Set Thing</button>
-    <button onClick='dijit.byId("Thing").attr("data", {right:"wrong"})'>Set Data</button>
+    <button onClick='dijit.byId("Thing").attr("data", {right:"wrong", types:["http://purl.org/dc/terms/BibliographicResource"]})'>Set Data</button>
     </body>
 </html>

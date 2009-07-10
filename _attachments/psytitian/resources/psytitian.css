@@ -78,3 +78,7 @@ div.psyForm label {
 .psyTagEditor {
 	display: inline;
 }
+
+.psyHidden {
+	display: none !important;
+}
