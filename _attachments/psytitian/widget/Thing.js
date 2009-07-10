@@ -24,17 +24,19 @@ dojo.declare("psytitian.widget.Thing",
     templatePath: dojo.moduleUrl("psytitian", "widget/Thing.html"),
     widgetsInTemplate:true,
     
+    // summary: URL from which the JSON representation of Thing can be loaded
     url:"",
     
     _setUrlAttr: function(value) {
-		console.log("Setting url to " + value);
 		this.url = value;
+		this.reload();
 	},
 
 	_getUrlAttr: function() {
 		return url;
 	},
 	
+	// summary: Data attribute holds JSON representation of the Thing
 	data: {},
 	
 	_setDataAttr: function(value) {
@@ -51,5 +53,46 @@ dojo.declare("psytitian.widget.Thing",
 	
 	_getDataAttr: function(value) {
 		return this.data;
-	}
+	},
+	
+	// summary: loads data from url
+	reload: function() {
+		if (this.url) {
+        	dojo.xhrGet({
+        	    url: this.url,
+        	    handleAs: "json",
+                load: dojo.hitch(this, this._load),
+                error: dojo.hitch(this, this._error)
+        	});
+		} else {
+			console.log("Set url with JSON load address");
+		}
+	},
+	
+	_load: function(data, ioargs) {
+		try {
+			this._setDataAttr(data);
+			this.onLoad(data);
+		} catch (e) {
+			console.warn(e);
+		}
+	},
+	
+	_error: function(error, ioargs) {
+		try {
+			console.log(error);
+			console.log(ioargs);
+			this.onError(error, ioargs);
+		} catch (e) {
+			console.warn(e);
+		}
+	},
+	
+	// Override to handle errors
+	onError: function(error, ioargs) {
+		console.warn(error);
+	},
+	
+	// Hook for overriding
+	onLoad: function(data) {}
 });

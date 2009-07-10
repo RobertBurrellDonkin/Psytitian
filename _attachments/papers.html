@@ -66,36 +66,8 @@
 
         
         function loadPaper(title) {
-        	dojo.xhrGet({
-        	    url: DB_NAME + encodeURI(title),
-        	    handleAs: "json",
-                load: function(data, ioargs) {
-                    dijit.byId("displayPaper").attr("data", data);
-                    var displayPaper = dojo.byId("displayPaper");
-                    dojo.create("h2", { innerHTML: "See Also" }, displayPaper);
-                    dojo.create("p", { innerHTML: '<ul><li><a target="_blank" href="_show/home/' +  encodeURI(data.title) +  '">Document Home</a></li></ul>' }, displayPaper);
-        	    },
-                error: function(error, ioargs) {
-                    if (ioargs.xhr.status == HTTP_NOT_FOUND) {
-                        var addPaperDialog = dijit.byId('addPaperDialog');
-                    	addPaperDialog.reset();
-
-                    	loadAgentsOnPaperDialog();
-                    	dijit.byId('addPaperDialogContributors').reset();
-                    	
-                        dojo.byId('addPaperDialogPaperName').firstChild.nodeValue=title;
-                        dijit.byId('addPaperDialogPaperName').attr('value',title);
-                        
-                        var dateToday = dojo.date.locale.format(new Date(), {selector: 'date', fullYear: true, formatLength: 'medium'});
-                        dojo.byId('addPaperDialogPaperEntered').firstChild.nodeValue=dateToday;
-                        dijit.byId('addPaperDialogPaperEntered').attr('value',dateToday);
-
-                    	addPaperDialog.show();
-                    } else {
-                    	dojo.byId('paperByNameFormError').innerHTML=error;
-                    }   
-        	    }
-        	});
+        	var displayPaperWidget = dijit.byId("displayPaper");
+        	displayPaperWidget.attr("url", DB_NAME + encodeURI(title));
         }
 
         function loadAgentsOnPaperDialog() {
@@ -163,6 +135,33 @@
             dojo.connect(nameForm,"submit","paperByNameFormSubmit");    
             var addPaperForm = dojo.byId("addPaperForm");
             dojo.connect(addPaperForm,"submit", "addPaperFormSubmit");
+            var displayPaperWidget = dijit.byId("displayPaper");
+            displayPaperWidget.onError =  function(error, ioargs) {
+                if (ioargs.xhr.status == HTTP_NOT_FOUND) {
+                	var title = dijit.byId("paperName").attr('value');
+                    var addPaperDialog = dijit.byId('addPaperDialog');
+                    addPaperDialog.reset();
+
+                    loadAgentsOnPaperDialog();
+                    dijit.byId('addPaperDialogContributors').reset();
+                    
+                    dojo.byId('addPaperDialogPaperName').firstChild.nodeValue=title;
+                    dijit.byId('addPaperDialogPaperName').attr('value',title);
+                    
+                    var dateToday = dojo.date.locale.format(new Date(), {selector: 'date', fullYear: true, formatLength: 'medium'});
+                    dojo.byId('addPaperDialogPaperEntered').firstChild.nodeValue=dateToday;
+                    dijit.byId('addPaperDialogPaperEntered').attr('value',dateToday);
+
+                    addPaperDialog.show();
+                } else {
+                    dojo.byId('paperByNameFormError').innerHTML=error;
+                }   
+            };
+            displayPaperWidget.onLoad = function(data) {
+                var displayPaper = dojo.byId("displayPaper");
+                dojo.create("h2", { innerHTML: "See Also" }, displayPaper);
+                dojo.create("p", { innerHTML: '<ul><li><a target="_blank" href="_show/home/' +  encodeURI(data.title) +  '">Document Home</a></li></ul>' }, displayPaper);
+            }; 
         })
 	</script>
     
