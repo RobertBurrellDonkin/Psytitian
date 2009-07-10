@@ -91,5 +91,17 @@ dojo.declare("psytitian.widget.TagEditor",
     },
     reset: function() {
     	this.attr('value', []);
+    },
+    
+    // Controls whether this editor is just a view
+    readOnly: false,
+    
+    _setReadOnlyAttr: function(readOnly) {
+    	this.readOnly = readOnly;
+    	if (readOnly) {
+    		dojo.query(this.storeContainerNode).addClass('psyReadOnly');
+    	} else {
+    		dojo.query(this.storeContainerNode).removeClass('psyReadOnly');
+    	}
     }
 });
