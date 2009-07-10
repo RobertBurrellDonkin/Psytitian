@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+	"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+    	<title>Sandbox</title>    
+
+    <style type="text/css">
+        @import "dijit/themes/tundra/tundra.css";
+        @import "dojo/resources/dojo.css";
+        @import "psytitian/resources/psytitian.css";
+        @import "style/main.css";
+    </style>
+    
+	<!-- Dojo-->
+	<script type="text/javascript" src="dojo/dojo.js"
+	    djConfig="parseOnLoad:true, isDebug:true"></script>
+    
+    <!-- Application -->
+    <script type='text/javascript' src='js/cite.js'></script>
+    <script type='text/javascript' src='js/config.js'></script>
+
+        <!-- Dojo Requires -->
+	<script type="text/javascript">	
+    dojo.require("dojo.parser");
+    dojo.require("dijit.form.FilteringSelect");
+    dojo.require("dojo.data.ItemFileReadStore");
+    dojo.require("dijit.form.ComboBox");
+    dojo.require("psytitian.widget.TagEditor");
+
+    function printValues() {
+        console.log(dijit.byId("tagEditor").attr('value'));
+    }
+
+    function addValue() {
+        dijit.byId("tagEditor").add('Jean-Paul Sartre');
+    }
+    
+    function setUrl() {
+    	dijit.byId("tagEditor").attr('url',"_view/agent");
+    }
+    
+    dojo.addOnLoad(function(){
+        dijit.byId("tagEditor").attr('value',["Plato", "Aristotle", "Karl Marx"]);
+    });
+	</script>
+    
+    </head>
+    <body class="tundra">
+    <h1>Bleh</h1>
+        <div 
+            dojoType="dijit.form.FilteringSelect" 
+            searchAttr="value" 
+            id='selectExample'></div>
+            
+    
+<p><span class='psyTag'>Roger</span><span class='psyTag'>Rick</span><span class='psyTag'>Hugo</span></p>
+    <div dojoType='psytitian.widget.TagEditor' id='tagEditor'></div>
+    <button onClick='printValues();'>Grab</button>
+    <button onClick='addValue();'>Jean-Paul Sartre</button>
+    <button onClick='setUrl();'>Set URL</button>
+    </body>
+</html>
