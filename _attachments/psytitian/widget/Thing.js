@@ -21,6 +21,7 @@ dojo.declare("psytitian.widget.Thing",
 [dijit._Widget, dijit._Templated], {
     templateString:null,
     templatePath: dojo.moduleUrl("psytitian", "widget/Thing.html"),
+    widgetsInTemplate:true,
     
     url:"",
     
@@ -31,5 +32,16 @@ dojo.declare("psytitian.widget.Thing",
 
 	_getUrlAttr: function() {
 		return url;
+	},
+	
+	data: {},
+	
+	_setDataAttr: function(value) {
+		console.log("Setting data to " + value);
+		this.data = value;
+	},
+	
+	_getDataAttr: function(value) {
+		return this.data;
 	}
 });
