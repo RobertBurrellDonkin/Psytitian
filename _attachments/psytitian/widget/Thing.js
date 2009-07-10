@@ -38,10 +38,9 @@ dojo.declare("psytitian.widget.Thing",
 	data: {},
 	
 	_setDataAttr: function(value) {
-		console.log("[THING] Setting data");
-		console.log(value);
+		dojo.query(this.base).empty();
 		if (value.title) {
-			dojo.create("h1", { innerHTML: value.title }, this.containerNode);
+			dojo.create("h1", { innerHTML: value.title }, this.base);
 		}
 		this.biblio.attr('data', value);
 		this.data = value;
