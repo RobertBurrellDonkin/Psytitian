@@ -82,3 +82,33 @@ div.psyForm label {
 .psyHidden {
 	display: none !important;
 }
+
+div.psyThing {
+	border: solid #666;	
+	padding: 1em 0;
+	margin: 4em 1em;
+}
+
+div.psyThing p {
+	border: 0;	
+	padding: 0;
+	margin: 0em 8em;
+}
+
+div.psyThing h3 {
+	border: 0;
+	padding: 0;
+	margin: 1em 4em;
+}
+
+div.psyThing h2 {
+	border: 0;
+	padding: 0;
+	margin: 1em 2em;
+}
+
+div.psyThing h1 {
+	border: 0;
+	padding: 0;
+	margin: 0.5em 0.5em;
+}

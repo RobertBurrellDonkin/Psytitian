@@ -39,11 +39,14 @@ dojo.declare("psytitian.widget.Thing",
 	
 	_setDataAttr: function(value) {
 		dojo.query(this.base).empty();
-		if (value.title) {
+		if (value && value.title) {
+			dojo.query(this.containerNode).addClass('psyThing');
 			dojo.create("h1", { innerHTML: value.title }, this.base);
+			this.biblio.attr('data', value);
+			this.data = value;
+		} else {
+			dojo.query(this.containerNode).removeClass('psyThing');
 		}
-		this.biblio.attr('data', value);
-		this.data = value;
 	},
 	
 	_getDataAttr: function(value) {
