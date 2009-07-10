@@ -62,6 +62,7 @@
         dojo.require('psytitian.widget.AgentForm');
         dojo.require('psytitian.store');
         dojo.require("psytitian.widget.TagEditor");
+        dojo.require("psytitian.widget.Thing");
 
         
         function loadPaper(title) {
@@ -69,42 +70,8 @@
         	    url: DB_NAME + encodeURI(title),
         	    handleAs: "json",
                 load: function(data, ioargs) {
-            		var displayPaper = psy.clearById("displayPaper");
-                    dojo.addClass(displayPaper, "results");     
-                    
-                    dojo.create("h1", { innerHTML: data.title }, displayPaper);
-            		dojo.create("h2", { innerHTML: 'Bibliography' }, displayPaper);
-                    if (data.source) {
-                		dojo.create("h3", { innerHTML: "Source" }, displayPaper);
-                        var source = data.source;
-                        if (source.substring(0,7) == "http://") {
-                            source = "<a href='" + source + "' target='_blank'>" + source + "</a>";
-                        }
-                		dojo.create("p", { innerHTML: source }, displayPaper);
-                    }
-                    
-                    var publicationDetails;
-                    if (data.publisher) {
-                        publicationDetails = data.publisher;
-                    }
-                    if (data.issued) {
-                        if (publicationDetails) {
-                        	publicationDetails = publicationDetails + ', ' + data.issued;    
-                        } else {
-                            publicationDetails = "First published " + data.issued;
-                        }
-                        
-                    }
-                    if (publicationDetails) {
-                    	dojo.create("h3", { innerHTML: "Publication" }, displayPaper);
-                    	dojo.create("p", { innerHTML:  publicationDetails}, displayPaper);
-                    }
-                    
-                    if (data.abstract) {
-                		dojo.create("h3", { innerHTML: "Abstract" }, displayPaper);
-                		dojo.create("p", { innerHTML: data.abstract }, displayPaper);
-                    }
-                    
+                    dijit.byId("displayPaper").attr("data", data);
+                    var displayPaper = dojo.byId("displayPaper");
                     dojo.create("h2", { innerHTML: "See Also" }, displayPaper);
                     dojo.create("p", { innerHTML: '<ul><li><a target="_blank" href="_show/home/' +  encodeURI(data.title) +  '">Document Home</a></li></ul>' }, displayPaper);
         	    },
@@ -212,7 +179,7 @@
             <span class='error' id='paperByNameFormError'></span>
         </form>
         
-        <div id='displayPaper'></div>
+        <div id='displayPaper' dojoType='psytitian.widget.Thing'></div>
 
         <div dojoType="dijit.Dialog" id="addPublisherDialog"
             title="Add Agent">
