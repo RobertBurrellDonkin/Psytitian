@@ -26,11 +26,7 @@ dojo.declare("psytitian.widget.BibliographicResource",
     data: {},
 	
 	_setDataAttr: function(value) {
-		console.log("[BIBLIO] Setting data");
-		console.log(value);
-		
 		if (value.types && value.types.indexOf(DC_BIBLIOGRAPHIC_RESOURCE) != -1) {
-			console.log("Type match");
     		dojo.create("h2", { innerHTML: 'Bibliography' }, this.containerNode);
             if (value.source) {
         		dojo.create("h3", { innerHTML: "Source" }, this.containerNode);
@@ -63,7 +59,6 @@ dojo.declare("psytitian.widget.BibliographicResource",
         		dojo.create("p", { innerHTML: value.abstract }, this.containerNode);
             }
 		} else {
-			console.log("Type mismatch");
 			dojo.query(this.containerNode).empty();
 		}
 		console.log(this.containerNode);
