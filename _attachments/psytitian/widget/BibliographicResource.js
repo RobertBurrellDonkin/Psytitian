@@ -61,7 +61,6 @@ dojo.declare("psytitian.widget.BibliographicResource",
 		} else {
 			dojo.query(this.containerNode).empty();
 		}
-		console.log(this.containerNode);
 		this.data = value;
 	},
 	
