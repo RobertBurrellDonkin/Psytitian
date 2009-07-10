@@ -13,32 +13,19 @@
   *  See the License for the specific language governing permissions and
   * limitations under the License. 
   */
-dojo.provide("psytitian.widget.Thing");
+dojo.provide("psytitian.widget.BibliographicResource");
 dojo.require("dijit._Widget");
 dojo.require("dijit._Templated");
-dojo.require("psytitian.widget.BibliographicResource");
 
-dojo.declare("psytitian.widget.Thing",
+dojo.declare("psytitian.widget.BibliographicResource",
 [dijit._Widget, dijit._Templated], {
     templateString:null,
-    templatePath: dojo.moduleUrl("psytitian", "widget/Thing.html"),
-    widgetsInTemplate:true,
+    templatePath: dojo.moduleUrl("psytitian", "widget/BibliographicResource.html"),
     
-    url:"",
-    
-    _setUrlAttr: function(value) {
-		console.log("Setting url to " + value);
-		this.url = value;
-	},
-
-	_getUrlAttr: function() {
-		return url;
-	},
-	
-	data: {},
+    data: {},
 	
 	_setDataAttr: function(value) {
-		console.log("[THING] Setting data");
+		console.log("[BIBLIO] Setting data");
 		console.log(value);
 		this.data = value;
 	},
