@@ -70,6 +70,15 @@ if (!psy.store) {
 						
 						addById: function(widgetId) {
 							return this.add(dijit.byId("addPaperDialogPublisher"));
+						},
+						
+						remove: function(widget) {
+							if (widget) {
+								var index = this._widgets.indexOf(widget);
+								if (index) {
+									this._widgets.splice(index, 1);
+								}
+							}
 						}
 				};
 				this._storesByUrl[url] = store;

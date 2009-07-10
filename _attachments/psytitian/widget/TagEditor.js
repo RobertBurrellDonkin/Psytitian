@@ -66,11 +66,19 @@ dojo.declare("psytitian.widget.TagEditor",
     },
     
     _setUrlAttr: function(url) {
+    	// Remove existing
     	dojo.query(this.storeContainerNode).empty();
-    	psy.store.forUrl(url).add(new dijit.form.FilteringSelect({
+    	if (this._selectionWidget) {
+    		psy.store.forUrl(this.url).remove(this._selectionWidget);
+    	}
+    	
+    	// Add new
+    	this._selectionWidget = new dijit.form.FilteringSelect({
     		searchAttr: "value",
     	    onChange: dojo.hitch(this, this.add)
-    	}, this.storeContainerNode)).load();
+    	}, this.storeContainerNode);
+    	psy.store.forUrl(url).add(this._selectionWidget).load();
+    	this.url = url;
     },
     
     _add: function(value) {
