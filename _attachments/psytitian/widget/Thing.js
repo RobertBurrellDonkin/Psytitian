@@ -45,6 +45,9 @@ dojo.declare("psytitian.widget.Thing",
 		if (value && value.title) {
 			dojo.query(this.containerNode).addClass('psyThing');
 			dojo.create("h1", { innerHTML: value.title }, this.base);
+			if (value.description) {
+				dojo.create("p", {innerHTML: value.description}, this.base);
+			}
 			if (value.created) {
 				dojo.create("p", {innerHTML: "Loaded on " + value.created}, this.base);
 			}
