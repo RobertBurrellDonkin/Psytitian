@@ -59,6 +59,21 @@ div.psyReadOnly .psyTag,  div.psyReadOnly .psyTagGhost{
 	background-color: #EEF3E2;
 }
 
+div.psyReadOnly .psyTag:link,  div.psyReadOnly .psyTagGhost:link {
+	color: #483D8B; 
+  	cursor: pointer;
+}
+
+div.psyReadOnly .psyTag:visited,  div.psyReadOnly .psyTagGhost:visited {
+	color: #2F4F4F; 
+  	cursor: pointer;
+}
+
+div.psyReadOnly .psyTag:hover,  div.psyReadOnly .psyTagGhost:hover {
+	color: #9400D3; 
+  	cursor: pointer;
+}
+
 .psyTag {
   	color: #666; 
   	cursor: url(images/minus.png), pointer;
