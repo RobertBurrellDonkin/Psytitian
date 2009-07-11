@@ -77,18 +77,24 @@ dojo.declare("psytitian.widget.TagEditor",
     },
     
     // The base URL for tag home pages
-    base: null,
-    _setBaseAttr: function(value) {
-    	this.base = value;
+    baseUrl: "",
+    _setBaseUrlAttr: function(value) {
+    	this.baseUrl = value;
     },
-    _getBaseAttr: function() {
-    	return this.base;
+    _getBaseUrlAttr: function() {
+    	return this.baseUrl;
     },
     
 // Methods
     _add: function(value) {
     	if (value) {
-			dojo.query(dojo.create("span", {innerHTML: value}, this.containerNode))
+    		var node;
+    		if (this.baseUrl && this.readOnly) {
+    			node = dojo.create("a", {href: this.baseUrl + value, innerHTML: value}, this.containerNode);
+    		} else {
+    			node = dojo.create("span", {innerHTML: value}, this.containerNode);
+    		}
+			dojo.query(node)
 			.addClass('psyTag').onclick(function(e) {
 				dojo.query(this).toggleClass('psyTagGhost').toggleClass('psyTag');
 			});
