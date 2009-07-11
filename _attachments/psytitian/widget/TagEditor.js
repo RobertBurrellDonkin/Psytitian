@@ -23,8 +23,11 @@ dojo.declare("psytitian.widget.TagEditor",
 [dijit._Widget, dijit._Templated], {
     templateString:null,
     templatePath: dojo.moduleUrl("psytitian", "widget/TagEditor.html"),
+    
+    
+//Properties
+    // Value collects the tags
     _tags: [],
-    url: "",
     _getValueAttr: function() {
 		this._tags = [];
 		var tagNodes = dojo.query('.psyTag', this.containerNode);
@@ -40,6 +43,50 @@ dojo.declare("psytitian.widget.TagEditor",
     	dojo.query('.psyTag', this.containerNode).empty();
     	dojo.query('.psyTagGhost', this.containerNode).empty();
     	dojo.forEach(value, this._add, this);
+    },
+
+    // URL for selection JSON 
+    // Optional
+    url: "",
+    _setUrlAttr: function(url) {
+    	// Remove existing
+    	dojo.query(this.storeContainerNode).empty();
+    	if (this._selectionWidget) {
+    		psy.store.forUrl(this.url).remove(this._selectionWidget);
+    	}
+    	
+    	// Add new
+    	this._selectionWidget = new dijit.form.FilteringSelect({
+    		searchAttr: "value",
+    	    onChange: dojo.hitch(this, this.add)
+    	}, this.storeContainerNode);
+    	psy.store.forUrl(url).add(this._selectionWidget).load();
+    	this.url = url;
+    },
+
+    // Controls whether this editor is just a view
+    readOnly: false,
+    
+    _setReadOnlyAttr: function(readOnly) {
+    	this.readOnly = readOnly;
+    	if (readOnly) {
+    		dojo.query(this.containerNode).addClass('psyReadOnly');
+    	} else {
+    		dojo.query(this.containerNode).removeClass('psyReadOnly');
+    	}
+    },
+    
+// Methods
+    _add: function(value) {
+    	if (value) {
+			dojo.query(dojo.create("span", {innerHTML: value}, this.containerNode))
+			.addClass('psyTag').onclick(function(e) {
+				dojo.query(this).toggleClass('psyTagGhost').toggleClass('psyTag');
+			});
+	    }
+    },
+    reset: function() {
+    	this.attr('value', []);
     },
     
     add: function(value) {
@@ -63,45 +110,6 @@ dojo.declare("psytitian.widget.TagEditor",
     	if (!valueAlreadyIncluded) {
     		this._add(value);
     	}
-    },
-    
-    _setUrlAttr: function(url) {
-    	// Remove existing
-    	dojo.query(this.storeContainerNode).empty();
-    	if (this._selectionWidget) {
-    		psy.store.forUrl(this.url).remove(this._selectionWidget);
-    	}
-    	
-    	// Add new
-    	this._selectionWidget = new dijit.form.FilteringSelect({
-    		searchAttr: "value",
-    	    onChange: dojo.hitch(this, this.add)
-    	}, this.storeContainerNode);
-    	psy.store.forUrl(url).add(this._selectionWidget).load();
-    	this.url = url;
-    },
-    
-    _add: function(value) {
-    	if (value) {
-			dojo.query(dojo.create("span", {innerHTML: value}, this.containerNode))
-			.addClass('psyTag').onclick(function(e) {
-				dojo.query(this).toggleClass('psyTagGhost').toggleClass('psyTag');
-			});
-	    }
-    },
-    reset: function() {
-    	this.attr('value', []);
-    },
-    
-    // Controls whether this editor is just a view
-    readOnly: false,
-    
-    _setReadOnlyAttr: function(readOnly) {
-    	this.readOnly = readOnly;
-    	if (readOnly) {
-    		dojo.query(this.containerNode).addClass('psyReadOnly');
-    	} else {
-    		dojo.query(this.containerNode).removeClass('psyReadOnly');
-    	}
     }
+    
 });
