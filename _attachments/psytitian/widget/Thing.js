@@ -17,6 +17,7 @@ dojo.provide("psytitian.widget.Thing");
 dojo.require("dijit._Widget");
 dojo.require("dijit._Templated");
 dojo.require("psytitian.widget.BibliographicResource");
+dojo.require("psytitian.widget.Agent");
 
 dojo.declare("psytitian.widget.Thing",
 [dijit._Widget, dijit._Templated], {
@@ -49,6 +50,7 @@ dojo.declare("psytitian.widget.Thing",
 			}
 			  
 			this.biblio.attr('data', value);
+			this.agent.attr('data', value);
 			this.data = value;
 		} else {
 			dojo.query(this.containerNode).removeClass('psyThing');
