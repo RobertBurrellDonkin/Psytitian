@@ -28,14 +28,14 @@ dojo.declare("psytitian.widget.BibliographicResource",
 	
 	_setDataAttr: function(value) {
 		if (value.types && value.types.indexOf(DC_BIBLIOGRAPHIC_RESOURCE) != -1) {
-    		dojo.create("h2", { innerHTML: 'Bibliography' }, this.containerNode);
+    		dojo.create("h2", { innerHTML: 'Bibliography' }, this.introNode);
             if (value.source) {
-        		dojo.create("h3", { innerHTML: "Source" }, this.containerNode);
+        		dojo.create("h3", { innerHTML: "Source" }, this.introNode);
                 var source = value.source;
                 if (source.substring(0,7) == "http://") {
                     source = "<a href='" + source + "' target='_blank'>" + source + "</a>";
                 }
-        		dojo.create("p", { innerHTML: source }, this.containerNode);
+        		dojo.create("p", { innerHTML: source }, this.introNode);
             }
             
             var publicationDetails;
@@ -51,25 +51,26 @@ dojo.declare("psytitian.widget.BibliographicResource",
                 
             }
             if (publicationDetails) {
-            	dojo.create("h3", { innerHTML: "Publication" }, this.containerNode);
-            	dojo.create("p", { innerHTML:  publicationDetails}, this.containerNode);
+            	dojo.create("h3", { innerHTML: "Publication" }, this.introNode);
+            	dojo.create("p", { innerHTML:  publicationDetails}, this.introNode);
             }
             
             if (value.abstract) {
-        		dojo.create("h3", { innerHTML: "Abstract" }, this.containerNode);
-        		dojo.create("p", { innerHTML: value.abstract }, this.containerNode);
+        		dojo.create("h3", { innerHTML: "Abstract" }, this.introNode);
+        		dojo.create("p", { innerHTML: value.abstract }, this.introNode);
             }
             
             if (value.contributor && value.contributor.length>0 ) {
-            	dojo.create('h3', {innerHTML: 'Authors'}, this.containerNode);
+            	dojo.create('h3', {innerHTML: 'Authors'}, this.authorsNode);
             	new psytitian.widget.TagEditor({
 	            		id: dijit.getUniqueId("ContributorTags"), 
 	            		readOnly: true,
 	            		value: value.contributor
-            		}, this.containerNode);
+            		}, this.authorsNode);
             }
 		} else {
-			dojo.query(this.containerNode).empty();
+			dojo.query(this.introNode).empty();
+			dojo.query(this.authorNode).empty();
 		}
 		this.data = value;
 	},

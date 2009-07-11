@@ -76,6 +76,15 @@ dojo.declare("psytitian.widget.TagEditor",
     	}
     },
     
+    // The base URL for tag home pages
+    base: null,
+    _setBaseAttr: function(value) {
+    	this.base = value;
+    },
+    _getBaseAttr: function() {
+    	return this.base;
+    },
+    
 // Methods
     _add: function(value) {
     	if (value) {
