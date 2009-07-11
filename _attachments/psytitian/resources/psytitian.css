@@ -54,8 +54,14 @@ div.psyForm label {
 	margin: 0.5em 1em;
 }
 
-.psyTag:hover { 
-	color: #DF0101; 
+.psyTagGhost {
+	border: none;
+  	color: #EEE; 
+  	margin: 0; 
+  	cursor: url(images/plus.png), pointer;
+  	font-size: 90%; 
+  	font-weight: bold; 
+	margin: 0.5em 1em;
 }
 
 div.psyReadOnly .psyTag,  div.psyReadOnly .psyTagGhost{
@@ -65,14 +71,8 @@ div.psyReadOnly .psyTag,  div.psyReadOnly .psyTagGhost{
 	background-color: #EEF3E2;
 }
 
-.psyTagGhost {
-	border: none;
-  	color: #EEE; 
-  	margin: 0; 
-  	cursor: url(images/plus.png), pointer;
-  	font-size: 90%; 
-  	font-weight: bold; 
-	margin: 0.5em 1em;
+.psyTag:hover { 
+	color: #DF0101; 
 }
 
 .psyTagGhost:hover { 
