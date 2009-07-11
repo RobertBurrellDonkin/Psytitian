@@ -27,10 +27,31 @@ dojo.declare("psytitian.widget.Agent",
     data: {},
 	
 	_setDataAttr: function(value) {
+    	console.log(value);
+    	dojo.query(this.introNode).empty();
 		if (value.types && value.types.indexOf(DC_AGENT) != -1) {
-    		dojo.create("h2", { innerHTML: 'Agent Information' }, this.introNode);
-		} else {
-			dojo.query(this.introNode).empty();
+			var agentType = 'Organisation';
+			if (value.types.indexOf(FOAF_PERSON) != -1) {
+				agentType = 'Personal Information';
+			} else if (value.types.indexOf(FOAF_GROUP) != -1) {
+				agentType = 'Group Information';
+			} 
+    		dojo.create("h2", { innerHTML: agentType }, this.introNode);
+    		
+    		var listNode = dojo.create('dl', {}, this.introNode);
+            
+    		if (value.homepage) {
+            	dojo.create("dt", { innerHTML: "Homepage"}, listNode);
+        		dojo.create("a", {href: value.homepage, innerHTML: value.homepage}, dojo.create("dd", {}, listNode));
+            }
+            if (value.mbox) {
+            	dojo.create("dt", { innerHTML: "Email"}, listNode);
+        		dojo.create("a", {href: value.mbox, innerHTML: value.mbox.substr(7)}, dojo.create("dd", {}, listNode));
+            }
+            if (value.weblog) {
+            	dojo.create("dt", { innerHTML: "Blog"}, listNode);
+        		dojo.create("dd", { innerHTML: value.weblog }, listNode);
+            }
 		}
 		this.data = value;
 	},
