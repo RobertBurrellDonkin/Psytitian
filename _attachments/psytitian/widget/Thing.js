@@ -60,10 +60,10 @@ dojo.declare("psytitian.widget.Thing",
 	},
 	
 	baseHomeUrl: "",
-	_getBaseHomeUrl: function() {
+	_getBaseHomeUrlAttr: function() {
 		return this.baseHomeUrl;
 	},
-	_setBaseHomeUrl: function(value) {
+	_setBaseHomeUrlAttr: function(value) {
 		this.baseHomeUrl = value;
 		if (this.biblio) {
 			this.biblio.attr('baseHomeUrl', value);
