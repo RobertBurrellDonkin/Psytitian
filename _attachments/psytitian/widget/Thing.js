@@ -59,6 +59,17 @@ dojo.declare("psytitian.widget.Thing",
 		return this.data;
 	},
 	
+	baseHomeUrl: "",
+	_getBaseHomeUrl: function() {
+		return this.baseHomeUrl;
+	},
+	_setBaseHomeUrl: function(value) {
+		this.baseHomeUrl = value;
+		if (this.biblio) {
+			this.biblio.attr('baseHomeUrl', value);
+		}
+	},
+	
 	// summary: loads data from url
 	reload: function() {
 		if (this.url) {

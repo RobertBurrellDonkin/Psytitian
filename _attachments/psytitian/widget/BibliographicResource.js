@@ -62,7 +62,7 @@ dojo.declare("psytitian.widget.BibliographicResource",
             
             if (value.contributor && value.contributor.length>0 ) {
             	dojo.create('h3', {innerHTML: 'Authors'}, this.authorsNode);
-            	new psytitian.widget.TagEditor({
+            	this._contributorTags = new psytitian.widget.TagEditor({
 	            		id: dijit.getUniqueId("ContributorTags"), 
 	            		readOnly: true,
 	            		value: value.contributor
@@ -77,5 +77,16 @@ dojo.declare("psytitian.widget.BibliographicResource",
 	
 	_getDataAttr: function(value) {
 		return this.data;
+	},
+	
+	baseHomeUrl: "",
+	_getBaseHomeUrl: function() {
+		return this.baseHomeUrl;
+	},
+	_setBaseHomeUrl: function(value) {
+		this.baseHomeUrl = value;
+		if (this._contributorTags) {
+			this._contributorTags.attr('baseUrl', value);
+		}
 	}
 });
