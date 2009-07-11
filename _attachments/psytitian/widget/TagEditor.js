@@ -99,9 +99,9 @@ dojo.declare("psytitian.widget.TagEditor",
     _setReadOnlyAttr: function(readOnly) {
     	this.readOnly = readOnly;
     	if (readOnly) {
-    		dojo.query(this.storeContainerNode).addClass('psyReadOnly');
+    		dojo.query(this.containerNode).addClass('psyReadOnly');
     	} else {
-    		dojo.query(this.storeContainerNode).removeClass('psyReadOnly');
+    		dojo.query(this.containerNode).removeClass('psyReadOnly');
     	}
     }
 });
