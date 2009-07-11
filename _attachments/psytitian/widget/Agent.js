@@ -50,7 +50,7 @@ dojo.declare("psytitian.widget.Agent",
             }
             if (value.weblog) {
             	dojo.create("dt", { innerHTML: "Blog"}, listNode);
-        		dojo.create("dd", { innerHTML: value.weblog }, listNode);
+            	dojo.create("a", {href: value.weblog, innerHTML: value.weblog}, dojo.create("dd", {}, listNode));
             }
 		}
 		this.data = value;
