@@ -49,7 +49,8 @@ div.psyForm label {
   	margin: 0; 
   	cursor: url(images/minus.png), pointer;
   	font-size: 90%; 
-  	font-weight: bold; 
+  	font-weight: bold;
+  	font-family: Monospace; 
 	margin: 0.5em 1em;
 }
 
@@ -57,8 +58,11 @@ div.psyForm label {
 	color: #DF0101; 
 }
 
-.psyTag.psyReadOnly .psyTagGhost.psyReadOnly {
-	border: Red solid 4em;
+div.psyReadOnly .psyTag,  div.psyReadOnly .psyTagGhost{
+	color: Black;
+	cursor: auto;
+	font-weight: normal;
+	background-color: #EEF3E2;
 }
 
 .psyTagGhost {
