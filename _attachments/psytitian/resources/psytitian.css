@@ -124,6 +124,15 @@ div.psyThing h3 {
 	margin: 1em 4em;
 }
 
+div.psyThing dt {
+	font-weight: bold;
+	margin: 0 4em;
+}
+
+div.psyThing dd {
+	margin: 0 10em;
+}
+
 div.psyThing h2 {
 	border: 0;
 	padding: 0;
