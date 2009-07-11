@@ -17,6 +17,7 @@ dojo.provide("psytitian.widget.BibliographicResource");
 dojo.require("dijit._Widget");
 dojo.require("dijit._Templated");
 dojo.require("psytitian.psytitian");
+dojo.require("psytitian.widget.TagEditor");
 
 dojo.declare("psytitian.widget.BibliographicResource",
 [dijit._Widget, dijit._Templated], {
@@ -57,6 +58,15 @@ dojo.declare("psytitian.widget.BibliographicResource",
             if (value.abstract) {
         		dojo.create("h3", { innerHTML: "Abstract" }, this.containerNode);
         		dojo.create("p", { innerHTML: value.abstract }, this.containerNode);
+            }
+            
+            if (value.contributor && value.contributor.length>0 ) {
+            	dojo.create('h3', {innerHTML: 'Authors'}, this.containerNode);
+            	new psytitian.widget.TagEditor({
+	            		id: dijit.getUniqueId("ContributorTags"), 
+	            		readOnly: true,
+	            		value: value.contributor
+            		}, dojo.create('p', {}, this.containerNode));
             }
 		} else {
 			dojo.query(this.containerNode).empty();
