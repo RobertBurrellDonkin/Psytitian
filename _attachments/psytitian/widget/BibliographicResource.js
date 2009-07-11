@@ -66,7 +66,7 @@ dojo.declare("psytitian.widget.BibliographicResource",
 	            		id: dijit.getUniqueId("ContributorTags"), 
 	            		readOnly: true,
 	            		value: value.contributor
-            		}, dojo.create('p', {}, this.containerNode));
+            		}, this.containerNode);
             }
 		} else {
 			dojo.query(this.containerNode).empty();
