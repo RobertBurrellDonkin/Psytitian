@@ -59,6 +59,7 @@ dojo.declare("psytitian.widget.Thing",
 		return this.data;
 	},
 	
+	// summary: base url for home documents
 	baseHomeUrl: "",
 	_getBaseHomeUrlAttr: function() {
 		return this.baseHomeUrl;
