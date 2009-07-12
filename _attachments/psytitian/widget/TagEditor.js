@@ -66,6 +66,7 @@ dojo.declare("psytitian.widget.TagEditor",
     	} else {
     		dojo.query(this.containerNode).removeClass('psyReadOnly');
     	}
+    	this._rebuildSelection();
     },
     
     // The base URL for tag home pages
@@ -105,12 +106,13 @@ dojo.declare("psytitian.widget.TagEditor",
     	// summary: rebuilds selection widget after changes to settings
     	// Remove existing
     	dojo.query(this.storeContainerNode).empty();
-    	// Add new
-    	this._selectionWidget = new dijit.form.FilteringSelect({
-    		searchAttr: "value",
-    	    onChange: dojo.hitch(this, this.add)
-    	}, this.storeContainerNode);
-    	psy.store.forUrl(this.url).add(this._selectionWidget).load();
+    	if (!this.readOnly) {
+	    	this._selectionWidget = new dijit.form.FilteringSelect({
+	    		searchAttr: "value",
+	    	    onChange: dojo.hitch(this, this.add)
+	    	}, this.storeContainerNode);
+	    	psy.store.forUrl(this.url).add(this._selectionWidget).load();
+    	}
     },
     
     _add: function(value) {
