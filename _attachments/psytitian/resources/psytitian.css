@@ -14,6 +14,33 @@
    limitations under the License. 
 */
 
+img.psyEditAdd, img.psyEditOk, img.psyEditAbort, img.psyEditStart {
+	width: 10px;
+	height: 10px;
+	background-image: url(images/edit.png);
+	margin: 0px 2px;  
+}
+
+img.psyEditAdd:hover, img.psyEditOk:hover, img.psyEditAbort:hover, img.psyEditStart:hover {
+	background-image: url(images/edit-hover.png);
+}
+
+img.psyEditOk {
+	background-position: -10px;
+}
+
+img.psyEditAbort {
+	background-position: -20px;
+}
+
+img.psyEditStart {
+	background-position: -30px;
+}
+
+div.psyEditBar {
+	display:inline;
+}
+
 div.psyForm .psyFooter {
 	text-align: right;
 }

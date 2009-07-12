@@ -85,6 +85,22 @@ dojo.declare("psytitian.widget.TagEditor",
     	return this.baseUrl;
     },
     
+    // The edit bar allow the user to initiate and control editing
+    editBar: false,
+    _setEditBarAttr: function(value) {
+    	if (value) {
+    		this.editBar = true;
+    		dojo.query(
+    				dojo.create('img',
+    						{src: dojo.moduleUrl('psytitian', 'resources/images/blank.png').toString()} , 
+    						this.editBarNode))
+    					.addClass('psyEditStart');
+    	} else {
+    		this.editBar = false;
+    		dojo.query(this.editBarNode).empty();
+    	}
+    },
+    
 // Methods
     _add: function(value) {
     	if (value) {

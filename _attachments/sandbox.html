@@ -52,13 +52,15 @@
             dojoType="dijit.form.FilteringSelect" 
             searchAttr="value" 
             id='selectExample'></div>
-            
+<p>Wibble<img src='blank.png' class='psyEditAdd' alt='Add'></img><img src='blank.png' class='psyEditOk' alt='Ok'></img><img src='blank.png' class='psyEditAbort' alt='Cancel'></img><img src='blank.png' class='psyEditStart' alt='Start editing'></img></p>
     
 <p><span class='psyTag'>Roger</span><span class='psyTag'>Rick</span><span class='psyTag'>Hugo</span></p>
     <div dojoType='psytitian.widget.TagEditor' id='tagEditor' readOnly='true' baseUrl='_show/home/'></div>
     <button onClick='printValues();'>Grab</button>
     <button onClick='addValue();'>Jean-Paul Sartre</button>
     <button onClick='setUrl();'>Set URL</button>
+     <button onClick='dijit.byId("tagEditor").attr("editBar", true)'>Show Edit bar</button>
+     <button onClick='dijit.byId("tagEditor").attr("editBar", false)'>Hide Edit bar</button>
     <div dojoType='psytitian.widget.Thing' id='Thing' url='init' data='{scooby:"doo"}'></div>
     <button onClick='dijit.byId("Thing").attr("url", "novel")'>Set Thing</button>
     <button onClick='dijit.byId("Thing").attr("data", {right:"wrong", types:["http://purl.org/dc/terms/BibliographicResource"]})'>Set Data</button>
