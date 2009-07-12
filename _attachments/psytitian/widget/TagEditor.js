@@ -90,6 +90,15 @@ dojo.declare("psytitian.widget.TagEditor",
     },
     
 // Methods
+    startEditing: function() {
+    	try {
+	    	console.log("Starting editing");
+	    	console.log(this);
+	    	this._setReadOnlyAttr(false);
+    	} catch (e) {
+    		console.warn(e);
+    	}
+    },
     _rebuildEditBar: function() {
     	// summary: rebuilds edit bar after changes to settings
     	if (this.editBar) {
@@ -97,7 +106,7 @@ dojo.declare("psytitian.widget.TagEditor",
     				dojo.create('img',
     						{src: dojo.moduleUrl('psytitian', 'resources/images/blank.png').toString()} , 
     						this.editBarNode))
-    					.addClass('psyEditStart');
+    					.addClass('psyEditStart').onclick(dojo.hitch(this, this.startEditing));
     	} else {
     		dojo.query(this.editBarNode).empty();
     	}
