@@ -90,18 +90,26 @@ dojo.declare("psytitian.widget.TagEditor",
     _setEditBarAttr: function(value) {
     	if (value) {
     		this.editBar = true;
+    	} else {
+    		this.editBar = false;
+    	}
+    	this._rebuildEditBar();
+    },
+    
+// Methods
+    _rebuildEditBar: function() {
+    	// summary: rebuilds edit bar after changes to settings
+    	if (this.editBar) {
     		dojo.query(
     				dojo.create('img',
     						{src: dojo.moduleUrl('psytitian', 'resources/images/blank.png').toString()} , 
     						this.editBarNode))
     					.addClass('psyEditStart');
     	} else {
-    		this.editBar = false;
     		dojo.query(this.editBarNode).empty();
     	}
     },
     
-// Methods
     _add: function(value) {
     	if (value) {
     		var node;
