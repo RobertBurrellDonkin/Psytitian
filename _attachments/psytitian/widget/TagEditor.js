@@ -49,19 +49,11 @@ dojo.declare("psytitian.widget.TagEditor",
     // Optional
     url: "",
     _setUrlAttr: function(url) {
-    	// Remove existing
-    	dojo.query(this.storeContainerNode).empty();
     	if (this._selectionWidget) {
     		psy.store.forUrl(this.url).remove(this._selectionWidget);
     	}
-    	
-    	// Add new
-    	this._selectionWidget = new dijit.form.FilteringSelect({
-    		searchAttr: "value",
-    	    onChange: dojo.hitch(this, this.add)
-    	}, this.storeContainerNode);
-    	psy.store.forUrl(url).add(this._selectionWidget).load();
     	this.url = url;
+    	this._rebuildSelection();    	
     },
 
     // Controls whether this editor is just a view
@@ -108,6 +100,17 @@ dojo.declare("psytitian.widget.TagEditor",
     	} else {
     		dojo.query(this.editBarNode).empty();
     	}
+    },
+    _rebuildSelection: function() {
+    	// summary: rebuilds selection widget after changes to settings
+    	// Remove existing
+    	dojo.query(this.storeContainerNode).empty();
+    	// Add new
+    	this._selectionWidget = new dijit.form.FilteringSelect({
+    		searchAttr: "value",
+    	    onChange: dojo.hitch(this, this.add)
+    	}, this.storeContainerNode);
+    	psy.store.forUrl(this.url).add(this._selectionWidget).load();
     },
     
     _add: function(value) {
