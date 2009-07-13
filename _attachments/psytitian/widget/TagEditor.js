@@ -130,11 +130,14 @@ dojo.declare("psytitian.widget.TagEditor",
     _rebuildSelection: function() {
     	// summary: rebuilds selection widget after changes to settings
     	// Remove existing
+    	var selectionControl = dojo.query(this.selectionControlNode);
     	if (this.readOnly) {
+    		selectionControl.addClass('psyHidden');
     		if (this._selectionWidget) {
     			this._selectionWidget.attr('readOnly', true);
     		}
     	} else {
+    		selectionControl.removeClass('psyHidden');
 	    	if (this._selectionWidget) {
 	    		this._selectionWidget.attr('readOnly', false);
 	    	} else if (this.url) {
