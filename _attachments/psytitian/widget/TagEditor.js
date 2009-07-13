@@ -114,30 +114,14 @@ dojo.declare("psytitian.widget.TagEditor",
     		dojo.query(this.editBarNode).empty();
     		if (this.isEditing) {
     			if (this.addNew) {
-    				dojo.query(
-        				dojo.create('img',
-        						{src: dojo.moduleUrl('psytitian', 'resources/images/blank.png').toString()} , 
-        						this.editBarNode))
-        					.addClass('psyEditAdd').onclick(dojo.hitch(this, this.addNew));
+    				this._addEditBarImage('psyEditAdd', this.addNew);
     			}
     			if (this.save) {
-    				dojo.query(
-    	    			dojo.create('img',
-        						{src: dojo.moduleUrl('psytitian', 'resources/images/blank.png').toString()} , 
-        						this.editBarNode))
-        					.addClass('psyEditOk').onclick(dojo.hitch(this, this.save));
+    				this._addEditBarImage('psyEditOk', this.save);
     			}
-        	    dojo.query(
-        				dojo.create('img',
-        						{src: dojo.moduleUrl('psytitian', 'resources/images/blank.png').toString()} , 
-        						this.editBarNode))
-        					.addClass('psyEditAbort').onclick(dojo.hitch(this, this.abortEditing));
+        	    this._addEditBarImage('psyEditAbort', dojo.hitch(this, this.abortEditing));
     		} else {
-    			dojo.query(
-    				dojo.create('img',
-    						{src: dojo.moduleUrl('psytitian', 'resources/images/blank.png').toString()} , 
-    						this.editBarNode))
-    					.addClass('psyEditStart').onclick(dojo.hitch(this, this.startEditing));
+    			this._addEditBarImage('psyEditStart', dojo.hitch(this, this.startEditing));
     		}
     	} else {
     		dojo.query(this.editBarNode).empty();
@@ -161,6 +145,14 @@ dojo.declare("psytitian.widget.TagEditor",
 		    	psy.store.forUrl(this.url).add(this._selectionWidget).load();
 	    	}
     	}
+    },
+    
+    _addEditBarImage: function(type, onclick) {
+		dojo.query(
+				dojo.create('img',
+						{src: dojo.moduleUrl('psytitian', 'resources/images/blank.png').toString()} , 
+						this.editBarNode))
+					.addClass(type).onclick(onclick);
     },
     
     _add: function(value) {
@@ -203,5 +195,4 @@ dojo.declare("psytitian.widget.TagEditor",
     		this._add(value);
     	}
     }
-    
 });
