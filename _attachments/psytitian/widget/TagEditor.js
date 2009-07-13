@@ -67,6 +67,7 @@ dojo.declare("psytitian.widget.TagEditor",
     		dojo.query(this.containerNode).removeClass('psyReadOnly');
     	}
     	this._rebuildSelection();
+    	this.attr('value', this.attr('value'));
     },
     
     // The base URL for tag home pages
@@ -92,8 +93,6 @@ dojo.declare("psytitian.widget.TagEditor",
 // Methods
     startEditing: function() {
     	try {
-	    	console.log("Starting editing");
-	    	console.log(this);
 	    	this._setReadOnlyAttr(false);
     	} catch (e) {
     		console.warn(e);
