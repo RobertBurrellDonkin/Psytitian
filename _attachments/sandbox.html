@@ -59,6 +59,9 @@
     <button onClick='printValues();'>Grab</button>
     <button onClick='addValue();'>Jean-Paul Sartre</button>
     <button onClick='setUrl();'>Set URL</button>
+    <button onClick='setUrl();'>Set AddNew</button>
+    <button onClick='dijit.byId("tagEditor").save=function() {console.log("Save");}'>Set Save</button>
+    <button onClick='dijit.byId("tagEditor").addNew=function() {console.log("Add New");}'>Set Add new</button>
      <button onClick='dijit.byId("tagEditor").attr("editBar", true)'>Show Edit bar</button>
      <button onClick='dijit.byId("tagEditor").attr("editBar", false)'>Hide Edit bar</button>
     <div dojoType='psytitian.widget.Thing' id='Thing' url='init' data='{scooby:"doo"}'></div>
