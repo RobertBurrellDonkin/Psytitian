@@ -62,11 +62,15 @@ dojo.declare("psytitian.widget.Concept",
 				}
 				return false;
 			},
-			
-			_onDialogSave: function(data, ioargs) {
+
+			hideDialog: function() {
 				if (this._openDialog) {
 					this._openDialog.hide();
 				}
+			},
+			_onDialogSave: function(data, ioargs) {
+				this.hideDialog();
+				this.onSave(data, ioargs);
 			},
 			_onDialogError: function(error, ioargs) {
 				console.log(ioargs);
@@ -79,9 +83,14 @@ dojo.declare("psytitian.widget.Concept",
 			},
 			
 			_onDialogReset: function(event) {
-				console.log("Reset");
-				console.log(this);
-				console.log(event);
+				this.hideDialog();
 				return true;
+			},
+			
+			onSave: function(data, ioargs) {
+				// summary: hook called after successful save
+				console.log(data);
+				console.log(ioargs);
+				console.log("This is the 'onSave' empty hook");
 			}
 });
