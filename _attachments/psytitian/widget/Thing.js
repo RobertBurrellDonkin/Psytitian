@@ -18,6 +18,7 @@ dojo.require("dijit._Widget");
 dojo.require("dijit._Templated");
 dojo.require("psytitian.widget.BibliographicResource");
 dojo.require("psytitian.widget.Agent");
+dojo.require("psytitian.widget.TagEditor");
 
 dojo.declare("psytitian.widget.Thing",
 [dijit._Widget, dijit._Templated], {
