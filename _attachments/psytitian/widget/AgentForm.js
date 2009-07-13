@@ -17,7 +17,6 @@ dojo.provide("psytitian.widget.AgentForm");
 dojo.require("dijit._Widget");
 dojo.require("dijit._Templated");
 dojo.require("dijit.form.TextBox");
-dojo.require("dijit.form.TextBox");
 dojo.require("dijit.form.Form");
 dojo.require("dijit.form.FilteringSelect");
 dojo.require("psytitian.agent");

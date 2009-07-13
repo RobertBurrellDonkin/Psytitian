@@ -16,7 +16,11 @@
 dojo.provide("psytitian.widget.Concept");
 dojo.require("dijit._Widget");
 dojo.require("dijit._Templated");
+dojo.require("dijit.form.TextBox");
 dojo.require("dijit.Dialog");
+dojo.require("dijit.form.Form");
+dojo.require("dijit.form.ValidationTextBox");
+dojo.require("dijit.form.Button");
 
 dojo.declare("psytitian.widget.Concept",
 		[dijit._Widget, dijit._Templated], {
@@ -25,11 +29,25 @@ dojo.declare("psytitian.widget.Concept",
 		    widgetsInTemplate:true,
 		    
 		    showNewDialog: function() {
-				var dialog = new dijit.Dialog({
-			        title: "Add New Concept",
-			        style: "width: 500px"
-			    });
-				dialog.attr('content', dojo.create("p", {innerHTML: 'Hello, World!'}));
-				dialog.show();
+				this._openDialog = new dijit.Dialog({title: "Add New Concept"});
+				this._openDialog.attr('content', this.newFormNode);
+				this.newFormNode.onSubmit = dojo.hitch(this, this._onDialogSubmit);
+				this.newFormNode.onReset = dojo.hitch(this, this._onDialogReset);
+				this._openDialog.show();
+			},
+
+			_onDialogSubmit: function(event) {
+				console.log("Submit");
+				console.log(this);
+				console.log(event);
+				this._openDialog.hide();
+				return false;
+			},
+			
+			_onDialogReset: function(event) {
+				console.log("Reset");
+				console.log(this);
+				console.log(event);
+				return true;
 			}
 });
