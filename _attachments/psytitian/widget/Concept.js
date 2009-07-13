@@ -36,6 +36,8 @@ dojo.declare("psytitian.widget.Concept",
 					this.newFormNode.onSubmit = dojo.hitch(this, this._onDialogSubmit);
 					this.newFormNode.onReset = dojo.hitch(this, this._onDialogReset);
 				}
+				this._reportDialogError("");
+				this._openDialog.reset();
 				this._openDialog.show();
 			},
 
