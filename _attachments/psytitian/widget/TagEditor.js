@@ -150,10 +150,13 @@ dojo.declare("psytitian.widget.TagEditor",
     	// summary: rebuilds selection widget after changes to settings
     	// Remove existing
     	if (this.readOnly) {
-    		console.log("Rebuilding read only selection");
+    		if (this._selectionWidget) {
+    			this._selectionWidget.attr('readOnly', true);
+    		}
     	} else {
-    		console.log("Rebuilding read write selection");
-	    	if (!this._selectionWidget && this.url) {
+	    	if (this._selectionWidget) {
+	    		this._selectionWidget.attr('readOnly', false);
+	    	} else if (this.url) {
 		    	this._selectionWidget = new dijit.form.FilteringSelect({
 		    		searchAttr: "value",
 		    	    onChange: dojo.hitch(this, this.add)
