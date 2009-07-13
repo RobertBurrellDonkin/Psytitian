@@ -40,8 +40,7 @@ dojo.declare("psytitian.widget.TagEditor",
     },
     
     _setValueAttr: function(value) {
-    	dojo.query('.psyTag', this.containerNode).empty();
-    	dojo.query('.psyTagGhost', this.containerNode).empty();
+    	dojo.query(this.tagsContainerNode).empty();
     	dojo.forEach(value, this._add, this);
     },
 
@@ -164,9 +163,9 @@ dojo.declare("psytitian.widget.TagEditor",
     	if (value) {
     		var node;
     		if (this.baseUrl && this.readOnly) {
-    			node = dojo.create("a", {href: this.baseUrl + value, innerHTML: value}, this.containerNode);
+    			node = dojo.create("a", {href: this.baseUrl + value, innerHTML: value}, this.tagsContainerNode);
     		} else {
-    			node = dojo.create("span", {innerHTML: value}, this.containerNode);
+    			node = dojo.create("span", {innerHTML: value}, this.tagsContainerNode);
     		}
 			dojo.query(node)
 			.addClass('psyTag').onclick(function(e) {
