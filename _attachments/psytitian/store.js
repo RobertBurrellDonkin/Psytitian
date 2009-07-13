@@ -40,18 +40,26 @@ if (!psy.store) {
 								url: this._url,
 								onItemLoad: dojo.hitch(this, function(items) {;
 									try {
-										this.store = new dojo.data.ItemFileReadStore({data:items});
-						        		dojo.forEach(this._widgets, dojo.hitch(this, function(widget) {
-						        			try {
-									        	widget.store = this.store;
+										if (items.items.length>0) {
+											this.store = new dojo.data.ItemFileReadStore({data:items});
+							        		dojo.forEach(this._widgets, dojo.hitch(this, function(widget) {
+							        			try {
+										        	widget.store = this.store;
+										        	widget.attr('displayedValue', "");
+										        	widget.attr('disabled', false);
+							        			} catch (e) {
+							        				console.log("Cannot set store on widget");
+							        				console.warn(e);
+							        				console.log(widget);
+							        			}
+											}));
+										} else {
+											console.log("No values found");
+											dojo.forEach(this._widgets, dojo.hitch(this, function(widget) {
 									        	widget.attr('displayedValue', "");
-									        	widget.attr('disabled', false);
-						        			} catch (e) {
-						        				console.log("Cannot set store on widget");
-						        				console.warn(e);
-						        				console.log(widget);
-						        			}
-										}));
+									        	widget.attr('disabled', true);
+											}));
+										}
 									} catch (e) {
 										console.log("Cannot load items into store");
 										console.warn(e);
