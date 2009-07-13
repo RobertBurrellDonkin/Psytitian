@@ -150,7 +150,7 @@ dojo.declare("psytitian.widget.TagEditor",
     	// summary: rebuilds selection widget after changes to settings
     	// Remove existing
     	dojo.query(this.storeContainerNode).empty();
-    	if (!this.readOnly) {
+    	if (!this.readOnly && !this._selectionWidget && this.url) {
 	    	this._selectionWidget = new dijit.form.FilteringSelect({
 	    		searchAttr: "value",
 	    	    onChange: dojo.hitch(this, this.add)
