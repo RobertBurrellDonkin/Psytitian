@@ -19,6 +19,7 @@ dojo.require("dijit._Templated");
 dojo.require("psytitian.widget.BibliographicResource");
 dojo.require("psytitian.widget.Agent");
 dojo.require("psytitian.widget.TagEditor");
+dojo.require("psytitian.widget.Concept");
 
 dojo.declare("psytitian.widget.Thing",
 [dijit._Widget, dijit._Templated], {
@@ -55,7 +56,7 @@ dojo.declare("psytitian.widget.Thing",
 	},
 	
 	_addNewConcept: function() {
-		console.log("Adding new subject");
+		this.concept.showNewDialog();
 	},
 	
 	// summary: Data attribute holds JSON representation of the Thing
