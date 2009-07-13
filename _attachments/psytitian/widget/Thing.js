@@ -45,9 +45,18 @@ dojo.declare("psytitian.widget.Thing",
 		if (value) {
 			this.subjectEditor.attr('url', value);
 			this.subjectEditor.attr('editBar', true);
+			this.subjectEditor.save = dojo.hitch(this, this._saveSubject);
+			this.subjectEditor.addNew = dojo.hitch(this, this._addNewConcept);
 		}
 	},
 	
+	_saveSubject: function() {
+		console.log("Saving subject");
+	},
+	
+	_addNewConcept: function() {
+		console.log("Adding new subject");
+	},
 	
 	// summary: Data attribute holds JSON representation of the Thing
 	data: {},

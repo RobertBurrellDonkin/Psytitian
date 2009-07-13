@@ -167,8 +167,8 @@ dojo.declare("psytitian.widget.TagEditor",
     			node = dojo.create("span", {innerHTML: value}, this.tagsContainerNode);
     		}
 			dojo.query(node)
-			.addClass('psyTag').onclick(function(e) {
-				dojo.query(this).toggleClass('psyTagGhost').toggleClass('psyTag');
+				.addClass('psyTag').onclick(function(e) {
+					dojo.query(this).toggleClass('psyTagGhost').toggleClass('psyTag');
 			});
 	    }
     },
