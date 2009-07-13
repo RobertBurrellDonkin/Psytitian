@@ -30,10 +30,12 @@ dojo.declare("psytitian.widget.Concept",
 		    widgetsInTemplate:true,
 		    
 		    showNewDialog: function() {
-				this._openDialog = new dijit.Dialog({title: "Add New Concept"});
-				this._openDialog.attr('content', this.newFormNode);
-				this.newFormNode.onSubmit = dojo.hitch(this, this._onDialogSubmit);
-				this.newFormNode.onReset = dojo.hitch(this, this._onDialogReset);
+				if (!this._openDialog) {
+					this._openDialog = new dijit.Dialog({title: "Add New Concept"});
+					this._openDialog.attr('content', this.newFormNode);
+					this.newFormNode.onSubmit = dojo.hitch(this, this._onDialogSubmit);
+					this.newFormNode.onReset = dojo.hitch(this, this._onDialogReset);
+				}
 				this._openDialog.show();
 			},
 
@@ -46,10 +48,25 @@ dojo.declare("psytitian.widget.Concept",
 			        
 			        var args = dojo.toJson(values,true);
 			        console.log("Saving " + args);
-			        
-					this._openDialog.hide();
+			        psy.put({
+			            id: values._id,
+			            load: dojo.hitch(this, this._onDialogSave),
+			            errorDocumentExists: function(error, ioargs) {
+			        		this._widget._onError("That name is already used.", ioargs);
+			        	},
+			            errorOther: function(error, ioargs) {
+			        		this._widget._onError(error, ioargs);
+			        	}
+			        }, 
+			        args);
 				}
 				return false;
+			},
+			
+			_onDialogSave: function(data, ioargs) {
+				if (this._openDialog) {
+					this._openDialog.hide();
+				}
 			},
 			
 			_reportDialogError: function(error) {
