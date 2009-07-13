@@ -149,13 +149,17 @@ dojo.declare("psytitian.widget.TagEditor",
     _rebuildSelection: function() {
     	// summary: rebuilds selection widget after changes to settings
     	// Remove existing
-    	dojo.query(this.storeContainerNode).empty();
-    	if (!this.readOnly && !this._selectionWidget && this.url) {
-	    	this._selectionWidget = new dijit.form.FilteringSelect({
-	    		searchAttr: "value",
-	    	    onChange: dojo.hitch(this, this.add)
-	    	}, this.storeContainerNode);
-	    	psy.store.forUrl(this.url).add(this._selectionWidget).load();
+    	if (this.readOnly) {
+    		console.log("Rebuilding read only selection");
+    	} else {
+    		console.log("Rebuilding read write selection");
+	    	if (!this._selectionWidget && this.url) {
+		    	this._selectionWidget = new dijit.form.FilteringSelect({
+		    		searchAttr: "value",
+		    	    onChange: dojo.hitch(this, this.add)
+		    	}, this.storeContainerNode);
+		    	psy.store.forUrl(this.url).add(this._selectionWidget).load();
+	    	}
     	}
     },
     
