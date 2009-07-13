@@ -40,10 +40,12 @@ dojo.declare("psytitian.widget.Thing",
 	
 	// summary: URL from which JSON representations of concepts can be loaded
 	conceptUrl:"",
-	_setConceptUrl: function() {
-		this.conceptUrl = conceptUrl;
-		this.subjectEditor.attr('url', conceptUrl);
-		this.subjectEditor.attr('editBar', true);
+	_setConceptUrlAttr: function(value) {
+		this.conceptUrl = value;
+		if (value) {
+			this.subjectEditor.attr('url', value);
+			this.subjectEditor.attr('editBar', true);
+		}
 	},
 	
 	
