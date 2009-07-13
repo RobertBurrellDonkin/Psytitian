@@ -56,6 +56,9 @@ dojo.declare("psytitian.widget.Thing",
 	},
 	
 	_addNewConcept: function() {
+		this.concept.onSave = dojo.hitch(this, function() {
+			this.subjectEditor.reload();
+		});
 		this.concept.showNewDialog();
 	},
 	

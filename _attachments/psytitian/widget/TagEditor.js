@@ -197,5 +197,12 @@ dojo.declare("psytitian.widget.TagEditor",
     	if (!valueAlreadyIncluded) {
     		this._add(value);
     	}
+    },
+    
+    reload: function() {
+    	// summary: Reloads stored content
+    	if(this.url) {
+    		psy.store.forUrl(this.url).load();
+    	}
     }
 });
