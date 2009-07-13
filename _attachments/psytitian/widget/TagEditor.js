@@ -67,6 +67,7 @@ dojo.declare("psytitian.widget.TagEditor",
     		dojo.query(this.containerNode).removeClass('psyReadOnly');
     	}
     	this._rebuildSelection();
+    	this._rebuildEditBar();
     	this.attr('value', this.attr('value'));
     },
     
@@ -91,6 +92,7 @@ dojo.declare("psytitian.widget.TagEditor",
     },
     
 // Methods
+    isEditing: false,
     _editingAdd: function() {
     	console.log('add');
     	console.log(this);
@@ -100,29 +102,16 @@ dojo.declare("psytitian.widget.TagEditor",
     	console.log(this);
     },
     _editingAbort: function() {
-    	console.log('abort');
-    	console.log(this);
+    	this.isEditing = false;
+    	this.attr('value', this._preEditValue);
+    	delete this._preEditValue;
+    	this._setReadOnlyAttr(true);
     },
     startEditing: function() {
     	try {
+    		this.isEditing = true;
 	    	this._setReadOnlyAttr(false);
-	    	
-	    	dojo.query(this.editBarNode).empty();
-	    	dojo.query(
-    				dojo.create('img',
-    						{src: dojo.moduleUrl('psytitian', 'resources/images/blank.png').toString()} , 
-    						this.editBarNode))
-    					.addClass('psyEditAdd').onclick(dojo.hitch(this, this._editingAdd));
-	    	dojo.query(
-    				dojo.create('img',
-    						{src: dojo.moduleUrl('psytitian', 'resources/images/blank.png').toString()} , 
-    						this.editBarNode))
-    					.addClass('psyEditOk').onclick(dojo.hitch(this, this._editingSave));
-    	    dojo.query(
-    				dojo.create('img',
-    						{src: dojo.moduleUrl('psytitian', 'resources/images/blank.png').toString()} , 
-    						this.editBarNode))
-    					.addClass('psyEditAbort').onclick(dojo.hitch(this, this._editingAbort));
+	    	this._preEditValue = this.attr('value');
     	} catch (e) {
     		console.warn(e);
     	}
@@ -130,11 +119,30 @@ dojo.declare("psytitian.widget.TagEditor",
     _rebuildEditBar: function() {
     	// summary: rebuilds edit bar after changes to settings
     	if (this.editBar) {
-    		dojo.query(
+    		dojo.query(this.editBarNode).empty();
+    		if (this.isEditing) {
+    	    	dojo.query(
+        				dojo.create('img',
+        						{src: dojo.moduleUrl('psytitian', 'resources/images/blank.png').toString()} , 
+        						this.editBarNode))
+        					.addClass('psyEditAdd').onclick(dojo.hitch(this, this._editingAdd));
+    	    	dojo.query(
+        				dojo.create('img',
+        						{src: dojo.moduleUrl('psytitian', 'resources/images/blank.png').toString()} , 
+        						this.editBarNode))
+        					.addClass('psyEditOk').onclick(dojo.hitch(this, this._editingSave));
+        	    dojo.query(
+        				dojo.create('img',
+        						{src: dojo.moduleUrl('psytitian', 'resources/images/blank.png').toString()} , 
+        						this.editBarNode))
+        					.addClass('psyEditAbort').onclick(dojo.hitch(this, this._editingAbort));
+    		} else {
+    			dojo.query(
     				dojo.create('img',
     						{src: dojo.moduleUrl('psytitian', 'resources/images/blank.png').toString()} , 
     						this.editBarNode))
     					.addClass('psyEditStart').onclick(dojo.hitch(this, this.startEditing));
+    		}
     	} else {
     		dojo.query(this.editBarNode).empty();
     	}
