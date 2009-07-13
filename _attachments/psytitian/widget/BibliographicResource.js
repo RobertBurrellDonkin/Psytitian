@@ -61,7 +61,7 @@ dojo.declare("psytitian.widget.BibliographicResource",
             }
             
             if (value.contributor && value.contributor.length>0 ) {
-            	dojo.create('h3', {innerHTML: 'Authors'}, this.authorsNode);
+            	dojo.create('h3', {innerHTML: 'Authors'}, this.authorsHeaderNode);
             	this._contributorTags = new psytitian.widget.TagEditor({
 	            		id: dijit.getUniqueId("ContributorTags"), 
 	            		readOnly: true,
