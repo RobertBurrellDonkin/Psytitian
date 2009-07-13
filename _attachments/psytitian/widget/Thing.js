@@ -38,6 +38,15 @@ dojo.declare("psytitian.widget.Thing",
 		return url;
 	},
 	
+	// summary: URL from which JSON representations of concepts can be loaded
+	conceptUrl:"",
+	_setConceptUrl: function() {
+		this.conceptUrl = conceptUrl;
+		this.subjectEditor.attr('url', conceptUrl);
+		this.subjectEditor.attr('editBar', true);
+	},
+	
+	
 	// summary: Data attribute holds JSON representation of the Thing
 	data: {},
 	
