@@ -14,8 +14,9 @@
   * limitations under the License. 
   */
 
-dojo.require("psytitian.psytitian");
 dojo.provide("psytitian.store");
+dojo.require("dojo.data.ItemFileReadStore");
+dojo.require("psytitian.psytitian");
 
 if (!psy.store) {
 	psy.store = {
