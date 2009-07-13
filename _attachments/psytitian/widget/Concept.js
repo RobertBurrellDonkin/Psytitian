@@ -21,6 +21,7 @@ dojo.require("dijit.Dialog");
 dojo.require("dijit.form.Form");
 dojo.require("dijit.form.ValidationTextBox");
 dojo.require("dijit.form.Button");
+dojo.require("psytitian.psytitian");
 
 dojo.declare("psytitian.widget.Concept",
 		[dijit._Widget, dijit._Templated], {
@@ -37,11 +38,25 @@ dojo.declare("psytitian.widget.Concept",
 			},
 
 			_onDialogSubmit: function(event) {
-				console.log("Submit");
-				console.log(this);
-				console.log(event);
-				this._openDialog.hide();
+				if (this.newFormNode.isValid()) {
+			        var values = this.newFormNode.attr('value');
+			        values._id = values.title;
+			        values.name = values.title; // foaf:name
+			        values.types= [SKOS_CONCEPT];
+			        
+			        var args = dojo.toJson(values,true);
+			        console.log("Saving " + args);
+			        
+					this._openDialog.hide();
+				}
 				return false;
+			},
+			
+			_reportDialogError: function(error) {
+				var errorNodes = dojo.query(".error", this.newFormNode);
+				errorNodes.forEach(function (node) {
+					node.innerHTML = error;
+				});
 			},
 			
 			_onDialogReset: function(event) {
