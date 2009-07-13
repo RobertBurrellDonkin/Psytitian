@@ -51,12 +51,10 @@ dojo.declare("psytitian.widget.Concept",
 			        psy.put({
 			            id: values._id,
 			            load: dojo.hitch(this, this._onDialogSave),
-			            errorDocumentExists: function(error, ioargs) {
-			        		this._widget._onError("That name is already used.", ioargs);
-			        	},
-			            errorOther: function(error, ioargs) {
-			        		this._widget._onError(error, ioargs);
-			        	}
+			            errorDocumentExists: dojo.hitch(this, function(error, ioargs) {
+			            	this._onDialogError("That name is already used.", ioargs);
+			            }),
+			            errorOther: dojo.hitch(this, this._onDialogError)
 			        }, 
 			        args);
 				}
@@ -68,12 +66,14 @@ dojo.declare("psytitian.widget.Concept",
 					this._openDialog.hide();
 				}
 			},
+			_onDialogError: function(error, ioargs) {
+				console.log(ioargs);
+				console.log(error);
+				this._reportDialogError(error);
+			},
 			
 			_reportDialogError: function(error) {
-				var errorNodes = dojo.query(".error", this.newFormNode);
-				errorNodes.forEach(function (node) {
-					node.innerHTML = error;
-				});
+				this.newFormErrorNode.innerHTML = error;
 			},
 			
 			_onDialogReset: function(event) {
