@@ -26,11 +26,11 @@ img.psyEditAdd:hover, img.psyEditOk:hover, img.psyEditAbort:hover, img.psyEditSt
 }
 
 img.psyEditOk {
-	background-position: -10px;
+	background-position: -20px;
 }
 
 img.psyEditAbort {
-	background-position: -20px;
+	background-position: -10px;
 }
 
 img.psyEditStart {
