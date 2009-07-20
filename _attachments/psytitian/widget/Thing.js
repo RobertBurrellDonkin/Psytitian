@@ -36,7 +36,7 @@ dojo.declare("psytitian.widget.Thing",
 	},
 
 	_getUrlAttr: function() {
-		return url;
+		return this.url;
 	},
 	
 	// summary: URL from which JSON representations of concepts can be loaded
