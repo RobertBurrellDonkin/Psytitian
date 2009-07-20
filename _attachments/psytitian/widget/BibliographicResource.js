@@ -27,6 +27,9 @@ dojo.declare("psytitian.widget.BibliographicResource",
     data: {},
 	
 	_setDataAttr: function(value) {
+		dojo.query(this.introNode).empty();
+		dojo.query(this.authorNode).empty();
+		dojo.query(this.authorsHeaderNode).empty();
 		if (value.types && value.types.indexOf(DC_BIBLIOGRAPHIC_RESOURCE) != -1) {
     		dojo.create("h2", { innerHTML: 'Bibliography' }, this.introNode);
             if (value.source) {
@@ -69,9 +72,6 @@ dojo.declare("psytitian.widget.BibliographicResource",
 	            		value: value.contributor
             		}, this.authorsNode);
             }
-		} else {
-			dojo.query(this.introNode).empty();
-			dojo.query(this.authorNode).empty();
 		}
 		this.data = value;
 	},
