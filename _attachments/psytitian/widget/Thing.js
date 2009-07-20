@@ -107,6 +107,9 @@ dojo.declare("psytitian.widget.Thing",
 		if (this.biblio) {
 			this.biblio.attr('baseHomeUrl', value);
 		}
+		if (this.subjectEditor) {
+			this.subjectEditor.attr('baseUrl', value);
+		}
 	},
 	
 	// summary: loads data from url
