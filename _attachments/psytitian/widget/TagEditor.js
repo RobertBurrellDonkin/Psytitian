@@ -93,11 +93,14 @@ dojo.declare("psytitian.widget.TagEditor",
 // Methods
     isEditing: false,
 
-    abortEditing: function() {
+    finishEditing: function() {
     	this.isEditing = false;
+    	this._setReadOnlyAttr(true);
+    },
+    abortEditing: function() {
     	this.attr('value', this._preEditValue);
     	delete this._preEditValue;
-    	this._setReadOnlyAttr(true);
+    	this.finishEditing();
     },
     startEditing: function() {
     	try {

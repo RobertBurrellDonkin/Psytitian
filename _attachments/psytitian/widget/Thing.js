@@ -57,6 +57,7 @@ dojo.declare("psytitian.widget.Thing",
 			id: this.data._id,
 			load: dojo.hitch(this, this.reload)
 		}, dojo.toJson(this.data, true));
+		this.subjectEditor.finishEditing();
 	},
 	
 	_addNewConcept: function() {
