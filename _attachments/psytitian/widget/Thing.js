@@ -52,7 +52,11 @@ dojo.declare("psytitian.widget.Thing",
 	},
 	
 	_saveSubject: function() {
-		console.log("Saving subject");
+		this.data.subject = this.subjectEditor.attr('value');
+		psy.put({
+			id: this.data._id,
+			load: dojo.hitch(this, this.reload)
+		}, dojo.toJson(this.data, true));
 	},
 	
 	_addNewConcept: function() {
@@ -79,13 +83,16 @@ dojo.declare("psytitian.widget.Thing",
 			  
 			this.biblio.attr('data', value);
 			this.agent.attr('data', value);
+			if (value.subject) {
+				this.subjectEditor.attr('value', value.subject);
+			}
 			this.data = value;
 		} else {
 			dojo.query(this.containerNode).removeClass('psyThing');
 		}
 	},
 	
-	_getDataAttr: function(value) {
+	_getDataAttr: function() {
 		return this.data;
 	},
 	
