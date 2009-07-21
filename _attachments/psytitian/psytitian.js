@@ -48,6 +48,14 @@ if (!psy) {
 if (!psy.dbName) {
 	psy.dbName="/citation/";
 }
+if (!psy.appName) {
+	psy.appName="cite/";
+}
+if (!psy.view) {
+	psy.view = function(name) {
+		return psy.dbName + "_design/" + psy.appName + "_view/" + name;
+	};
+}
 if (!psy.put) {
 	psy.put = function(args, json) {
 		if (!args.handleAs) {
