@@ -29,22 +29,26 @@ dojo.declare("psytitian.widget.Annotation",
     
     href:null,
     _setHrefAttr: function(value) {
+		this._reportError("");
     	this.href = value._id;
     	dojo.xhrGet({
     		handleAs: 'json',
     		url: psy.view('annotation'),
     		content: {key: dojo.toJson(this.href)},
-    		load: function(args, ioargs) {
-    			console.log("Loaded");
-    			console.log(args);
-    			console.log(ioargs);
-    		},
-    		error: function(error, ioargs) {
-    			console.log("error");
-    			console.log(error);
-    			console.log(ioargs);
-    		}
+    		load: dojo.hitch(this, this._loadAnnotations),
+    		error: dojo.hitch(this, this._reportError)
     	});
+    },
+    
+    _loadAnnotations: function(json) {
+    	console.log(json);
+    	for(row in json.rows) {
+    		console.log(json.rows[row]);
+    	}
+    },
+    
+    _reportError: function(error) {
+    	this.errorNode.innerHTML = error;
     },
     
     showNewDialog: function() {

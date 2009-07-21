@@ -1,31 +1,34 @@
-<div class='psyHidden'>
-    <div dojoType='dijit.form.Form' dojoAttachPoint='newFormNode'>
-        <div class='psyForm'>
-            <table>
-            <!-- owl:Thing -->
-                <tr>
-                    <td width='80'><label>Name</label>
-                    </td>
-                    <td>
-                        <input dojoType="dijit.form.ValidationTextBox" name='title' propercase="true" class='psyLong'
-                            trim="true" required="true"></input>
-                    </td>
-                </tr>
-                <tr>
-                    <td><label>Description</label>
-                    </td>
-                    <td><!-- dc:description -->
-                        <input dojoType="dijit.form.TextBox" name='description' class='psyLong'
-                            trim="true"></input>
-                    </td>
-                </tr>        
-            </table>
-            <p><span class='psyError' dojoAttachPoint='newFormErrorNode'></span></p>
-            
-            <div class='psyFooter'>
-                <button dojoType="dijit.form.Button" type="submit" >Add</button>
-                <button dojoType="dijit.form.Button" type="reset">Abort</button>
+<div class='psyAnnotation'>
+    <div class='psyHidden'>
+        <div dojoType='dijit.form.Form' dojoAttachPoint='newFormNode'>
+            <div class='psyForm'>
+                <table>
+                <!-- owl:Thing -->
+                    <tr>
+                        <td width='80'><label>Name</label>
+                        </td>
+                        <td>
+                            <input dojoType="dijit.form.ValidationTextBox" name='title' propercase="true" class='psyLong'
+                                trim="true" required="true"></input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label>Description</label>
+                        </td>
+                        <td><!-- dc:description -->
+                            <input dojoType="dijit.form.TextBox" name='description' class='psyLong'
+                                trim="true"></input>
+                        </td>
+                    </tr>        
+                </table>
+                <p><span class='psyError' dojoAttachPoint='newFormErrorNode'></span></p>
+                
+                <div class='psyFooter'>
+                    <button dojoType="dijit.form.Button" type="submit" >Add</button>
+                    <button dojoType="dijit.form.Button" type="reset">Abort</button>
+                </div>
             </div>
         </div>
     </div>
+    <span class='psyError' dojoAttachPoint='errorNode'></span>
 </div>
