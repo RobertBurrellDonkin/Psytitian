@@ -1,0 +1,18 @@
+Psytition
+---------
+
+Is a useful toy... 
+Uses Dojo...
+Runs on CouchDB...
+Is experimental...
+
+Installation
+------------
+
+1. Install CouchDB
+2. Install CouchApp
+3. Push application to couch using CouchApp
+
+Licensing
+---------
+
