@@ -76,7 +76,7 @@ dojo.declare("psytitian.widget.Thing",
 	_setDataAttr: function(value) {
 		dojo.query(this.base).empty();
 		if (value && value.title) {
-			dojo.query(this.containerNode).addClass('psyThing');
+			dojo.query(this.containerNode).addClass('psyThing').removeClass('psyHidden');
 			dojo.create("h1", { innerHTML: value.title }, this.base);
 			if (value.description) {
 				dojo.create("p", {innerHTML: value.description}, this.base);
@@ -92,7 +92,7 @@ dojo.declare("psytitian.widget.Thing",
 			}
 			this.data = value;
 		} else {
-			dojo.query(this.containerNode).removeClass('psyThing');
+			dojo.query(this.containerNode).removeClass('psyThing').addClass('psyHidden');
 		}
 	},
 	
