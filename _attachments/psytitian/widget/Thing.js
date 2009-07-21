@@ -23,6 +23,7 @@ dojo.require("psytitian.widget.BibliographicResource");
 dojo.require("psytitian.widget.Agent");
 dojo.require("psytitian.widget.TagEditor");
 dojo.require("psytitian.widget.Concept");
+dojo.require("psytitian.widget.Annotation");
 
 dojo.declare("psytitian.widget.Thing",
 [dijit._Widget, dijit._Templated], {

@@ -30,6 +30,15 @@ const FOAF_ORGANIZATION='http://xmlns.com/foaf/0.1/Organization';
 
 const SKOS_CONCEPT="http://www.w3.org/2004/02/skos/core#Concept";
 
+const ANNOTEA_ANNOTATION="http://www.w3.org/2000/10/annotation-ns#Annotation";
+const ANNOTEA_TYPE_SEE_ALSO="http://www.w3.org/2000/10/annotationType#SeeAlso";
+const ANNOTEA_TYPE_QUESTION="http://www.w3.org/2000/10/annotationType#Question";
+const ANNOTEA_TYPE_EXPLANATION="http://www.w3.org/2000/10/annotationType#Explanation";
+const ANNOTEA_TYPE_EXAMPLE="http://www.w3.org/2000/10/annotationType#Example";
+const ANNOTEA_TYPE_COMMENT="http://www.w3.org/2000/10/annotationType#Comment";
+const ANNOTEA_TYPE_CHANGE="http://www.w3.org/2000/10/annotationType#Change";
+const ANNOTEA_TYPE_ADVICE="http://www.w3.org/2000/10/annotationType#Advice";
+
 dojo.provide("psytitian.psytitian");
 if (!psy) {
 	var psy = new function() {
