@@ -42,8 +42,9 @@ dojo.declare("psytitian.widget.Annotation",
     
     _loadAnnotations: function(json) {
     	console.log(json);
+    	dojo.query(this.display).empty();
     	for(row in json.rows) {
-    		console.log(json.rows[row]);
+    		dojo.create("a", {href: psy.home(json.rows[row].id), innerHTML: json.rows[row].value}, this.display);
     	}
     },
     

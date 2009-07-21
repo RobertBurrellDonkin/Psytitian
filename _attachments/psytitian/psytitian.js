@@ -56,6 +56,11 @@ if (!psy.view) {
 		return psy.dbName + "_design/" + psy.appName + "_view/" + name;
 	};
 }
+if (!psy.home) {
+	psy.home = function(id) {
+		return psy.dbName + "_design/" + psy.appName + "_show/home/" + id;
+	};
+}
 if (!psy.put) {
 	psy.put = function(args, json) {
 		if (!args.handleAs) {
