@@ -95,6 +95,12 @@ if (!psy) {
 				
 		        dojo.xhrPost(args);
 			},
+		view: function(name) {
+				return psy.dbName + "_design/" + psy.appName + "_view/" + name;
+			},
+		home: function(id) {
+				return psy.dbName + "_design/" + psy.appName + "_show/home/" + id;
+			},
 		formatDate: function(date) {
 				return dojo.date.stamp.toISOString(date, {selector:'date', zulu:true});
 			},
@@ -106,19 +112,6 @@ if (!psy) {
 	};
 };
 
-
-
-
-if (!psy.view) {
-	psy.view = function(name) {
-		return psy.dbName + "_design/" + psy.appName + "_view/" + name;
-	};
-}
-if (!psy.home) {
-	psy.home = function(id) {
-		return psy.dbName + "_design/" + psy.appName + "_show/home/" + id;
-	};
-}
 if (!psy.put) {
 	psy.put = function(args, json) {
 		if (!args.handleAs) {
