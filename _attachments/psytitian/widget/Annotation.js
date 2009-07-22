@@ -36,15 +36,7 @@ dojo.declare("psytitian.widget.Annotation",
 		this._reportError("");
     	this.href = href;
     	dojo.query(this.references).empty();
-    	if (this.href) {
-	    	dojo.xhrGet({
-	    		handleAs: 'json',
-	    		url: psy.view('annotation'),
-	    		content: {key: dojo.toJson(this.href)},
-	    		load: dojo.hitch(this, this._loadAnnotations),
-	    		error: dojo.hitch(this, this._reportError)
-	    	});
-    	}
+    	this._reloadReferences();
     },
     
     data:{},
@@ -63,6 +55,18 @@ dojo.declare("psytitian.widget.Annotation",
     		
     	} else {
     		dojo.query(this.details).addClass('psyHidden');
+    	}
+    },
+    
+    _reloadReferences: function() {
+    	if (this.href) {
+	    	dojo.xhrGet({
+	    		handleAs: 'json',
+	    		url: psy.view('annotation'),
+	    		content: {key: dojo.toJson(this.href)},
+	    		load: dojo.hitch(this, this._loadAnnotations),
+	    		error: dojo.hitch(this, this._reportError)
+	    	});
     	}
     },
     
