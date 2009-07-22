@@ -84,8 +84,9 @@ dojo.declare("psytitian.widget.Annotation",
 	        values.types= [ANNOTEA_ANNOTATION, values.annotationType];
 	        delete values.annotationType;
 	        values.annotates = this.href;
-	        values.created = psy.formatDate(new Date()); // annotea:created
+	        values.created = psy.formatDate(new Date()); // an:created
 	        values.date = values.created; // dc:date
+	        values.creator = psy.user; // an:creator
 	        var args = dojo.toJson(values,true);
 	        console.log(args);
 		}

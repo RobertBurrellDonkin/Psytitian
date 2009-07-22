@@ -62,6 +62,10 @@ if (!psy.annotationTypes) {
 	};
 }
 
+if (!psy.user) {
+	psy.user = "Anonymous"
+}
+
 if (!psy.formatDate) {
 	psy.formatDate = function(date) {
 		return dojo.date.stamp.toISOString(date, {selector:'date', zulu:true});
