@@ -41,12 +41,20 @@ dojo.declare("psytitian.widget.Annotation",
     },
     
     _loadAnnotations: function(json) {
-    	console.log(json);
     	dojo.query(this.display).empty();
+		dojo.query(
+				dojo.create('img',
+						{src: dojo.moduleUrl('psytitian', 'resources/images/blank.png').toString()} , 
+						this.display))
+					.addClass("psyEditAdd").onclick(dojo.hitch(this, this._addNewAnnotation));
     	for(row in json.rows) {
     		dojo.query(dojo.create("a", {href: psy.home(json.rows[row].id), innerHTML: json.rows[row].value}, this.display))
     			.addClass("psyTag");
     	}
+    },
+    
+    _addNewAnnotation: function() {
+    	console.log("Clicked");
     },
     
     _reportError: function(error) {
