@@ -20,6 +20,7 @@ dojo.provide("psytitian.widget.Annotation");
 dojo.require("dijit._Widget");
 dojo.require("dijit._Templated");
 dojo.require("dijit.form.FilteringSelect");
+dojo.require("dijit.form.Textarea");
 dojo.require("dojo.data.ItemFileReadStore");
 dojo.require("psytitian.psytitian");
 
@@ -77,12 +78,13 @@ dojo.declare("psytitian.widget.Annotation",
 	},
 
 	_onDialogSubmit: function(event) {
-        console.log("Saving");
 		if (this.newFormNode.isValid()) {
 	        var values = this.newFormNode.attr('value');
 	        values.name = values.title; // foaf:name
 	        values.types= [ANNOTEA_ANNOTATION, values.annotationType];
 	        delete values.annotationType;
+	        values._attachments={body: {content_type: "text/plain", data: values.body}};
+	        values.body = "body"; // Should be a relative URL but not sure can be done until the ID is known
 	        values.annotates = this.href;
 	        values.created = psy.formatDate(new Date()); // an:created
 	        values.modified = values.created; // an:modified
