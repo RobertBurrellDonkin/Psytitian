@@ -94,15 +94,19 @@ if (!psy) {
 				args.postData = json;
 				
 		        dojo.xhrPost(args);
+			},
+		formatDate: function(date) {
+				return dojo.date.stamp.toISOString(date, {selector:'date', zulu:true});
+			},
+		clearById: function (id) {
+				var node = dojo.byId(id);
+				while(node.hasChildNodes()) node.removeChild(node.firstChild);
+				return node;
 			}
 	};
 };
 
-if (!psy.formatDate) {
-	psy.formatDate = function(date) {
-		return dojo.date.stamp.toISOString(date, {selector:'date', zulu:true});
-	}
-}
+
 
 
 if (!psy.view) {
@@ -151,11 +155,3 @@ if (!psy.put) {
         dojo.xhrPut(args);
 	};
 };
-
-if (!psy.clearById) {
-	psy.clearById = function (id) {
-		var node = dojo.byId(id);
-		while(node.hasChildNodes()) node.removeChild(node.firstChild);
-		return node;
-	}
-}
