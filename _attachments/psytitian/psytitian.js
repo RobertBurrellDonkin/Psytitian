@@ -44,6 +44,20 @@ dojo.provide("psytitian.psytitian");
 if (!psy) {
 	var psy = {
 		version: '0.1-SNAPSHOT',
+		annotationTypes: {
+				identifier: "url",
+				label: "name",
+				items: [
+				        {name: "See Also", url: ANNOTEA_TYPE_SEE_ALSO},
+				        {name: "Question", url: ANNOTEA_TYPE_QUESTION},
+				        {name: "Explanation", url: ANNOTEA_TYPE_EXPLANATION},
+				        {name: "Example", url: ANNOTEA_TYPE_EXAMPLE},
+				        {name: "Comment", url: ANNOTEA_TYPE_COMMENT},
+				        {name: "Change", url: ANNOTEA_TYPE_CHANGE},
+				        {name: "Advice", url: ANNOTEA_TYPE_ADVICE}
+				]
+		},
+		
 		post: function(args, json) {
 				if (!args.handleAs) {
 					args.handleAs = "json";
@@ -80,21 +94,6 @@ if (!psy) {
 			}
 	};
 };
-if (!psy.annotationTypes) {
-	psy.annotationTypes = {
-			identifier: "url",
-			label: "name",
-			items: [
-			        {name: "See Also", url: ANNOTEA_TYPE_SEE_ALSO},
-			        {name: "Question", url: ANNOTEA_TYPE_QUESTION},
-			        {name: "Explanation", url: ANNOTEA_TYPE_EXPLANATION},
-			        {name: "Example", url: ANNOTEA_TYPE_EXAMPLE},
-			        {name: "Comment", url: ANNOTEA_TYPE_COMMENT},
-			        {name: "Change", url: ANNOTEA_TYPE_CHANGE},
-			        {name: "Advice", url: ANNOTEA_TYPE_ADVICE}
-			]
-	};
-}
 
 if (!psy.user) {
 	psy.user = "Anonymous"
