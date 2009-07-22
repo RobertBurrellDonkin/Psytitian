@@ -61,75 +61,56 @@ if (!psy) {
 		dbName: "/citation/",
 		appName: "cite/",
 		
-		post: function(args, json) {
-				if (!args.handleAs) {
-					args.handleAs = "json";
+		_addStandardJson: function(args, json) {
+			if (!args.handleAs) {
+				args.handleAs = "json";
+			};
+			args.postData = json;
+		},
+		_addStandardErrorHandling: function(args) {
+			if (!args.errorDocumentExists) {
+				args.errorDocumentExists = function(error, ioargs) {
+					console.warn("Document already exists");
+					console.log(error);
+					console.log(ioargs);
 				};
+			};
+			if (!args.errorOther) {
+				args.errorOther = function(error, ioargs) {
+					console.warn(error);
+					console.log(ioargs);
+				}
+			};
+			
+			if (!args.error) {
+				args.error = function(error, ioargs) {
+					if (error.status == HTTP_CONFLICT) {
+						this.errorDocumentExists(error, ioargs);
+					} else {
+						this.errorOther(error, ioargs);
+					}
+				};
+			};
+		},
+		post: function(args, json) {
 				if (!args.url) {
 					args.url = psy.dbName;
 				};
-				if (!args.errorDocumentExists) {
-					args.errorDocumentExists = function(error, ioargs) {
-						console.warn("Document already exists");
-						console.log(error);
-						console.log(ioargs);
-					};
-				};
-				if (!args.errorOther) {
-					args.errorOther = function(error, ioargs) {
-						console.warn(error);
-						console.log(ioargs);
-					}
-				};
-				
-				if (!args.error) {
-					args.error = function(error, ioargs) {
-						if (error.status == HTTP_CONFLICT) {
-							this.errorDocumentExists(error, ioargs);
-						} else {
-							this.errorOther(error, ioargs);
-						}
-					};
-				};
-				args.postData = json;
-				
+				this._addStandardErrorHandling(args);
+				this._addStandardJson(args, json);
 		        dojo.xhrPost(args);
 			},
 
 		put: function(args, json) {
-				if (!args.handleAs) {
-					args.handleAs = "json";
-				};
 				if (args.id) {
 					args.url = psy.dbName + args.id;
 				};
-				if (!args.errorDocumentExists) {
-					args.errorDocumentExists = function(error, ioargs) {
-						console.warn("Document already exists");
-						console.log(error);
-						console.log(ioargs);
-					};
-				};
-				if (!args.errorOther) {
-					args.errorOther = function(error, ioargs) {
-						console.warn(error);
-						console.log(ioargs);
-					}
-				};
-				
-				if (!args.error) {
-					args.error = function(error, ioargs) {
-						if (error.status == HTTP_CONFLICT) {
-							this.errorDocumentExists(error, ioargs);
-						} else {
-							this.errorOther(error, ioargs);
-						}
-					}
-				};
-				args.postData = json;
-				
+				this._addStandardErrorHandling(args);
+				this._addStandardJson(args, json);
 		        dojo.xhrPut(args);
 			},
+			
+			
 		view: function(name) {
 				return psy.dbName + "_design/" + psy.appName + "_view/" + name;
 			},
