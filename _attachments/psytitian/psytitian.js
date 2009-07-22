@@ -95,6 +95,41 @@ if (!psy) {
 				
 		        dojo.xhrPost(args);
 			},
+
+		put: function(args, json) {
+				if (!args.handleAs) {
+					args.handleAs = "json";
+				};
+				if (args.id) {
+					args.url = psy.dbName + args.id;
+				};
+				if (!args.errorDocumentExists) {
+					args.errorDocumentExists = function(error, ioargs) {
+						console.warn("Document already exists");
+						console.log(error);
+						console.log(ioargs);
+					};
+				};
+				if (!args.errorOther) {
+					args.errorOther = function(error, ioargs) {
+						console.warn(error);
+						console.log(ioargs);
+					}
+				};
+				
+				if (!args.error) {
+					args.error = function(error, ioargs) {
+						if (error.status == HTTP_CONFLICT) {
+							this.errorDocumentExists(error, ioargs);
+						} else {
+							this.errorOther(error, ioargs);
+						}
+					}
+				};
+				args.postData = json;
+				
+		        dojo.xhrPut(args);
+			},
 		view: function(name) {
 				return psy.dbName + "_design/" + psy.appName + "_view/" + name;
 			},
@@ -109,42 +144,5 @@ if (!psy) {
 				while(node.hasChildNodes()) node.removeChild(node.firstChild);
 				return node;
 			}
-	};
-};
-
-if (!psy.put) {
-	psy.put = function(args, json) {
-		if (!args.handleAs) {
-			args.handleAs = "json";
-		};
-		if (args.id) {
-			args.url = psy.dbName + args.id;
-		};
-		if (!args.errorDocumentExists) {
-			args.errorDocumentExists = function(error, ioargs) {
-				console.warn("Document already exists");
-				console.log(error);
-				console.log(ioargs);
-			};
-		};
-		if (!args.errorOther) {
-			args.errorOther = function(error, ioargs) {
-				console.warn(error);
-				console.log(ioargs);
-			}
-		};
-		
-		if (!args.error) {
-			args.error = function(error, ioargs) {
-				if (error.status == HTTP_CONFLICT) {
-					this.errorDocumentExists(error, ioargs);
-				} else {
-					this.errorOther(error, ioargs);
-				}
-			}
-		};
-		args.postData = json;
-		
-        dojo.xhrPut(args);
 	};
 };
