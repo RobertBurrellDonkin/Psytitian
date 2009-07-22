@@ -50,6 +50,16 @@ dojo.declare("psytitian.widget.Annotation",
     _setDataAttr: function(value) {
     	if (psy.isAnnotation(value)) {
     		dojo.query(this.details).removeClass('psyHidden');
+    		this.author.innerHTML = value.author;
+    		this.modified.innerHTML = value.modified;
+    		for (type in value.types) {
+    			for (item in psy.annotationTypes.items) {
+    				if (value.types[type] == psy.annotationTypes.items[item].url) {
+    					this.type.innerHTML = psy.annotationTypes.items[item].name;
+    				}
+    			}
+    		}
+    		
     	} else {
     		dojo.query(this.details).addClass('psyHidden');
     	}
