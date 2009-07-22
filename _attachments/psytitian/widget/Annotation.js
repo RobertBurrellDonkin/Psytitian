@@ -19,6 +19,8 @@
 dojo.provide("psytitian.widget.Annotation");
 dojo.require("dijit._Widget");
 dojo.require("dijit._Templated");
+dojo.require("dijit.form.FilteringSelect");
+dojo.require("dojo.data.ItemFileReadStore");
 dojo.require("psytitian.psytitian");
 
 dojo.declare("psytitian.widget.Annotation",
@@ -67,6 +69,7 @@ dojo.declare("psytitian.widget.Annotation",
 			this._openDialog.attr('content', this.newFormNode);
 			this.newFormNode.onSubmit = dojo.hitch(this, this._onDialogSubmit);
 			this.newFormNode.onReset = dojo.hitch(this, this._onDialogReset);
+			this.annotationType.attr('store', new dojo.data.ItemFileReadStore({data:psy.annotationTypes}));
 		}
 		this._reportDialogError("");
 		this._openDialog.reset();
@@ -75,13 +78,14 @@ dojo.declare("psytitian.widget.Annotation",
 
 	_onDialogSubmit: function(event) {
         console.log("Saving");
-		console.log(event);
 		if (this.newFormNode.isValid()) {
 	        var values = this.newFormNode.attr('value');
 	        values.name = values.title; // foaf:name
-	        values.types= [ANNOTEA_ANNOTATION];
+	        values.types= [ANNOTEA_ANNOTATION, values.annotationType];
+	        delete values.annotationType;
 	        values.annotates = this.href;
-	        
+	        values.created = psy.formatDate(new Date()); // annotea:created
+	        values.date = values.created; // dc:date
 	        var args = dojo.toJson(values,true);
 	        console.log(args);
 		}
@@ -108,7 +112,6 @@ dojo.declare("psytitian.widget.Annotation",
 	},
 	
 	_onDialogReset: function(event) {
-		console.log("Reset");
 		this.hideDialog();
 		return true;
 	},

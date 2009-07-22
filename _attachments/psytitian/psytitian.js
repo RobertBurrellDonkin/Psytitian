@@ -39,12 +39,35 @@ const ANNOTEA_TYPE_COMMENT="http://www.w3.org/2000/10/annotationType#Comment";
 const ANNOTEA_TYPE_CHANGE="http://www.w3.org/2000/10/annotationType#Change";
 const ANNOTEA_TYPE_ADVICE="http://www.w3.org/2000/10/annotationType#Advice";
 
+dojo.require("dojo.date.stamp");
 dojo.provide("psytitian.psytitian");
 if (!psy) {
 	var psy = new function() {
 		this.version = '0.1-SNAPSHOT';
 	};
 }
+if (!psy.annotationTypes) {
+	psy.annotationTypes = {
+			identifier: "url",
+			label: "name",
+			items: [
+			        {name: "See Also", url: ANNOTEA_TYPE_SEE_ALSO},
+			        {name: "Question", url: ANNOTEA_TYPE_QUESTION},
+			        {name: "Explanation", url: ANNOTEA_TYPE_EXPLANATION},
+			        {name: "Example", url: ANNOTEA_TYPE_EXAMPLE},
+			        {name: "Comment", url: ANNOTEA_TYPE_COMMENT},
+			        {name: "Change", url: ANNOTEA_TYPE_CHANGE},
+			        {name: "Advice", url: ANNOTEA_TYPE_ADVICE}
+			]
+	};
+}
+
+if (!psy.formatDate) {
+	psy.formatDate = function(date) {
+		return dojo.date.stamp.toISOString(date, {selector:'date', zulu:true});
+	}
+}
+
 if (!psy.dbName) {
 	psy.dbName="/citation/";
 }
