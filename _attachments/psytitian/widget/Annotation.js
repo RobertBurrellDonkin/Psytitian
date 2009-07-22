@@ -159,9 +159,6 @@ dojo.declare("psytitian.widget.Annotation",
 	},
 	
 	onSave: function(data, ioargs) {
-		// summary: hook called after successful save
-		console.log(data);
-		console.log(ioargs);
-		console.log("This is the 'onSave' empty hook");
+		this._reloadReferences();
 	}
 });
