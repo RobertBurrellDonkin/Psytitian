@@ -31,6 +31,8 @@ dojo.declare("psytitian.widget.Annotation",
     templatePath: dojo.moduleUrl("psytitian", "widget/Annotation.html"),
     widgetsInTemplate:true,
     
+    _lastBodyText: null,
+    
     href:null,
     _setHrefAttr: function(href) {
 		this._reportError("");
@@ -110,8 +112,13 @@ dojo.declare("psytitian.widget.Annotation",
 	        values.name = values.title; // foaf:name
 	        values.types= [ANNOTEA_ANNOTATION, values.annotationType];
 	        delete values.annotationType;
-	        values._attachments={body: {content_type: "text/plain", data: values.body}};
-	        values.body = "body"; // Should be a relative URL but not sure can be done until the ID is known
+	        if (values.body) {
+	        	this._lastBodyText = values.body
+	        	values.body = "body"; // Should be a relative URL but not sure can be done until the ID is known
+	        } else {
+	        	delete values.body;
+	        	this._lastBodyText = null;
+	        }
 	        values.annotates = this.href;
 	        values.created = psy.formatDate(new Date()); // an:created
 	        values.modified = values.created; // an:modified
@@ -120,7 +127,7 @@ dojo.declare("psytitian.widget.Annotation",
 	        console.log(args);
 	        try {
 	        psy.post({
-	            load: dojo.hitch(this, this._onDialogSave),
+	            load: dojo.hitch(this, this._onNewAnnotation),
 	            errorDocumentExists: dojo.hitch(this, function(error, ioargs) {
 	            	this._onDialogError("That name is already used.", ioargs);
 	            }),
@@ -139,6 +146,29 @@ dojo.declare("psytitian.widget.Annotation",
 			this._openDialog.hide();
 		}
 	},
+	
+	_onNewAnnotation: function(data, ioargs) {
+		if (this._lastBodyText) {
+	        try {
+		        psy.put({
+		            id: data.id,
+		            rev: data.rev,
+		            attachment: "body",
+		            load: function(data, ioargs) {
+		        		console.log("Saved attachement");
+		        		console.log(data);
+		        		console.log(ioargs);
+		        	},
+		        	headers: {"Content-Type": "text/plain"}
+		        }, 
+		        this._lastBodyText);
+		        } catch (e) {
+		        	console.log(e);
+		        }
+		}
+		this._onDialogSave(data, ioargs);
+	},
+	
 	_onDialogSave: function(data, ioargs) {
 		this.hideDialog();
 		this.onSave(data, ioargs);

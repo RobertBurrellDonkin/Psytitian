@@ -104,6 +104,12 @@ if (!psy) {
 		put: function(args, json) {
 				if (args.id) {
 					args.url = psy.dbName + args.id;
+					if (args.attachment) {
+						args.url = args.url + '/' + args.attachment; 
+					}
+					if (args.rev) {
+						args.url = args.url + "?rev=" + args.rev;
+					}
 				};
 				this._addStandardErrorHandling(args);
 				this._addStandardJson(args, json);
