@@ -113,12 +113,7 @@ if (!psy) {
 		isType: function(data, typeToMatch) {
 				if (data && data.types) {
 					for (type in data.types) {
-						console.log("Trying to match ");
-						console.log(data.types[type]);
-						console.log("With");
-						console.log(typeToMatch);
 						if (data.types[type] == typeToMatch) {
-							console.log("Matched");
 							return true;
 						}
 					}

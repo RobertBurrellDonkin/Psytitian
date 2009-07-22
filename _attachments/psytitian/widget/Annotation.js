@@ -49,7 +49,6 @@ dojo.declare("psytitian.widget.Annotation",
     data:{},
     _setDataAttr: function(value) {
     	if (psy.isAnnotation(value)) {
-    		console.log("Found an annotation");
     		dojo.query(this.details).removeClass('psyHidden');
     	} else {
     		dojo.query(this.details).addClass('psyHidden');
