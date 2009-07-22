@@ -24,6 +24,7 @@ dojo.require("dijit.form.Textarea");
 dojo.require("dojo.data.ItemFileReadStore");
 dojo.require("psytitian.psytitian");
 
+
 dojo.declare("psytitian.widget.Annotation",
 [dijit._Widget, dijit._Templated], {
     templateString:null,
