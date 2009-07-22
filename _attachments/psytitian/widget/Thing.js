@@ -92,6 +92,7 @@ dojo.declare("psytitian.widget.Thing",
 				this.subjectEditor.attr('value', value.subject);
 			}
 			this.annotationEditor.attr('href', value._id);
+			this.annotea.attr('data', value);
 			this.data = value;
 		} else {
 			dojo.query(this.containerNode).removeClass('psyThing').addClass('psyHidden');

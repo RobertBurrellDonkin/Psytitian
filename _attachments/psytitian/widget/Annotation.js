@@ -34,7 +34,7 @@ dojo.declare("psytitian.widget.Annotation",
     _setHrefAttr: function(href) {
 		this._reportError("");
     	this.href = href;
-    	dojo.query(this.display).empty();
+    	dojo.query(this.references).empty();
     	if (this.href) {
 	    	dojo.xhrGet({
 	    		handleAs: 'json',
@@ -48,20 +48,23 @@ dojo.declare("psytitian.widget.Annotation",
     
     data:{},
     _setDataAttr: function(value) {
-    	if (value) {
-    		this.attr('href', value._id);
+    	if (psy.isAnnotation(value)) {
+    		console.log("Found an annotation");
+    		dojo.query(this.details).removeClass('psyHidden');
+    	} else {
+    		dojo.query(this.details).addClass('psyHidden');
     	}
     },
     
     _loadAnnotations: function(json) {
-    	dojo.query(this.display).empty();
+    	dojo.query(this.references).empty();
 		dojo.query(
 				dojo.create('img',
 						{src: dojo.moduleUrl('psytitian', 'resources/images/blank.png').toString()} , 
-						this.display))
+						this.references))
 					.addClass("psyEditAdd").onclick(dojo.hitch(this, this._addNewAnnotation));
     	for(row in json.rows) {
-    		dojo.query(dojo.create("a", {href: psy.home(json.rows[row].id), innerHTML: json.rows[row].value}, this.display))
+    		dojo.query(dojo.create("a", {href: psy.home(json.rows[row].id), innerHTML: json.rows[row].value}, this.references))
     			.addClass("psyTag");
     	}
     },

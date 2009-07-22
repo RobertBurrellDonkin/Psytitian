@@ -1,4 +1,10 @@
 <div class='psyAnnotation'>
+    <div dojoAttachPoint='details' class='psyHidden'>
+        <h2>Annotation Details</h2>
+        <h3>Author</h3><p dojoAttachPoint='author'></p>
+        <h3>Type</h3><p dojoAttachPoint='type'></p>
+        <h3>Notes</h3><p dojoAttachPoint='notes'></p>
+    </div>
     <div class='psyHidden'>
         <div dojoType='dijit.form.Form' dojoAttachPoint='newFormNode'>
             <div class='psyForm'>
@@ -47,5 +53,5 @@
         </div>
     </div>
     <span class='psyError' dojoAttachPoint='errorNode'></span>
-    <div dojoAttachPoint='display' class='psyReadOnly'></div>
+    <div dojoAttachPoint='references' class='psyReadOnly'></div>
 </div>
