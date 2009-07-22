@@ -22,7 +22,7 @@ function(doc, req) {
 	  var dojo = '<script type="text/javascript" src="/citation/_design/cite/dojo/dojo.js" djConfig="parseOnLoad:true, isDebug:true"></script>';
 	  var preamble = '<script type="text/javascript">dojo.require("dojo.parser");dojo.require("psytitian.widget.Thing");</script>';
 	  var head = '<head><title>' + doc._id + '</title>' + style + dojo + preamble + '</head>';
-	  var body = '<body class="tundra"><div dojoType="psytitian.widget.Thing" conceptUrl="../../_view/concept" baseHomeUrl="./" url="/citation/' + doc._id + '"></div><h1>' + doc._id + '</h1></body>';
+	  var body = '<body class="tundra"><div dojoType="psytitian.widget.Thing" conceptUrl="../../_view/concept" baseHomeUrl="./" url="/citation/' + doc._id + '"></div></body>';
 	  return {body: '<html>' + head + body + '</html>'};
   }
 }

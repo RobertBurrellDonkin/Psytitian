@@ -31,16 +31,26 @@ dojo.declare("psytitian.widget.Annotation",
     widgetsInTemplate:true,
     
     href:null,
-    _setHrefAttr: function(value) {
+    _setHrefAttr: function(href) {
 		this._reportError("");
-    	this.href = value._id;
-    	dojo.xhrGet({
-    		handleAs: 'json',
-    		url: psy.view('annotation'),
-    		content: {key: dojo.toJson(this.href)},
-    		load: dojo.hitch(this, this._loadAnnotations),
-    		error: dojo.hitch(this, this._reportError)
-    	});
+    	this.href = href;
+    	dojo.query(this.display).empty();
+    	if (this.href) {
+	    	dojo.xhrGet({
+	    		handleAs: 'json',
+	    		url: psy.view('annotation'),
+	    		content: {key: dojo.toJson(this.href)},
+	    		load: dojo.hitch(this, this._loadAnnotations),
+	    		error: dojo.hitch(this, this._reportError)
+	    	});
+    	}
+    },
+    
+    data:{},
+    _setDataAttr: function(value) {
+    	if (value) {
+    		this.attr('href', value._id);
+    	}
     },
     
     _loadAnnotations: function(json) {
