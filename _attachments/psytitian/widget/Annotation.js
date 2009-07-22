@@ -54,7 +54,7 @@ dojo.declare("psytitian.widget.Annotation",
     },
     
     _addNewAnnotation: function() {
-    	console.log("Clicked");
+    	this.showNewDialog();
     },
     
     _reportError: function(error) {
@@ -63,7 +63,7 @@ dojo.declare("psytitian.widget.Annotation",
     
     showNewDialog: function() {
 		if (!this._openDialog) {
-			this._openDialog = new dijit.Dialog({title: "Add New Concept"});
+			this._openDialog = new dijit.Dialog({title: "Add New Annotation"});
 			this._openDialog.attr('content', this.newFormNode);
 			this.newFormNode.onSubmit = dojo.hitch(this, this._onDialogSubmit);
 			this.newFormNode.onReset = dojo.hitch(this, this._onDialogReset);
@@ -74,13 +74,16 @@ dojo.declare("psytitian.widget.Annotation",
 	},
 
 	_onDialogSubmit: function(event) {
+        console.log("Saving");
+		console.log(event);
 		if (this.newFormNode.isValid()) {
 	        var values = this.newFormNode.attr('value');
 	        values.name = values.title; // foaf:name
 	        values.types= [ANNOTEA_ANNOTATION];
+	        values.annotates = this.href;
 	        
 	        var args = dojo.toJson(values,true);
-	        console.log("Saving " + args);
+	        console.log(args);
 		}
 		return false;
 	},
@@ -105,6 +108,7 @@ dojo.declare("psytitian.widget.Annotation",
 	},
 	
 	_onDialogReset: function(event) {
+		console.log("Reset");
 		this.hideDialog();
 		return true;
 	},
