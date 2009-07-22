@@ -42,10 +42,44 @@ const ANNOTEA_TYPE_ADVICE="http://www.w3.org/2000/10/annotationType#Advice";
 dojo.require("dojo.date.stamp");
 dojo.provide("psytitian.psytitian");
 if (!psy) {
-	var psy = new function() {
-		this.version = '0.1-SNAPSHOT';
+	var psy = {
+		version: '0.1-SNAPSHOT',
+		post: function(args, json) {
+				if (!args.handleAs) {
+					args.handleAs = "json";
+				};
+				if (!args.url) {
+					args.url = psy.dbName;
+				};
+				if (!args.errorDocumentExists) {
+					args.errorDocumentExists = function(error, ioargs) {
+						console.warn("Document already exists");
+						console.log(error);
+						console.log(ioargs);
+					};
+				};
+				if (!args.errorOther) {
+					args.errorOther = function(error, ioargs) {
+						console.warn(error);
+						console.log(ioargs);
+					}
+				};
+				
+				if (!args.error) {
+					args.error = function(error, ioargs) {
+						if (error.status == HTTP_CONFLICT) {
+							this.errorDocumentExists(error, ioargs);
+						} else {
+							this.errorOther(error, ioargs);
+						}
+					};
+				};
+				args.postData = json;
+				
+		        dojo.xhrPost(args);
+			}
 	};
-}
+};
 if (!psy.annotationTypes) {
 	psy.annotationTypes = {
 			identifier: "url",

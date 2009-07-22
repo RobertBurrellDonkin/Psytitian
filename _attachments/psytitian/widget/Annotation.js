@@ -91,6 +91,18 @@ dojo.declare("psytitian.widget.Annotation",
 	        values.author = psy.user; // an:author
 	        var args = dojo.toJson(values,true);
 	        console.log(args);
+	        try {
+	        psy.post({
+	            load: dojo.hitch(this, this._onDialogSave),
+	            errorDocumentExists: dojo.hitch(this, function(error, ioargs) {
+	            	this._onDialogError("That name is already used.", ioargs);
+	            }),
+	            errorOther: dojo.hitch(this, this._onDialogError)
+	        }, 
+	        args);
+	        } catch (e) {
+	        	console.log(e);
+	        }
 		}
 		return false;
 	},
