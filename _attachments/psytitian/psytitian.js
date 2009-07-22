@@ -58,6 +58,8 @@ if (!psy) {
 				]
 		},
 		user: "Anonymous",
+		dbName: "/citation/",
+		appName: "cite/",
 		
 		post: function(args, json) {
 				if (!args.handleAs) {
@@ -102,12 +104,7 @@ if (!psy.formatDate) {
 	}
 }
 
-if (!psy.dbName) {
-	psy.dbName="/citation/";
-}
-if (!psy.appName) {
-	psy.appName="cite/";
-}
+
 if (!psy.view) {
 	psy.view = function(name) {
 		return psy.dbName + "_design/" + psy.appName + "_view/" + name;
