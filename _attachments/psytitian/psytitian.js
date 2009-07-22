@@ -57,6 +57,7 @@ if (!psy) {
 				        {name: "Advice", url: ANNOTEA_TYPE_ADVICE}
 				]
 		},
+		user: "Anonymous",
 		
 		post: function(args, json) {
 				if (!args.handleAs) {
@@ -94,10 +95,6 @@ if (!psy) {
 			}
 	};
 };
-
-if (!psy.user) {
-	psy.user = "Anonymous"
-}
 
 if (!psy.formatDate) {
 	psy.formatDate = function(date) {
