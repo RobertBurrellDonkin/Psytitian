@@ -110,6 +110,20 @@ if (!psy) {
 		        dojo.xhrPut(args);
 			},
 			
+		isType: function(data, typeToMatch) {
+				if (data.types) {
+					for (type in data.types) {
+						if (data.types[type] == typeToMatch) {
+							return true;
+						}
+					}
+				}
+				return false;
+		},
+			
+		isAnnotation: function(data) {
+			return this.isType(ANNOTEA_ANNOTATION);	
+		},
 			
 		view: function(name) {
 				return psy.dbName + "_design/" + psy.appName + "_view/" + name;
