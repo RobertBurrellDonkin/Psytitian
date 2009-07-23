@@ -55,6 +55,30 @@ dojo.declare("psytitian.widget.Annotation",
     			}
     		}
     		
+    		// Use body value to search attachments
+    		// More generally should check for URL
+    		if (value.body) {
+    			dojo.query(this.notes).empty();
+    			for (key in value._attachments) {
+    				if (value.body == key) {
+    					if (value._attachments[key].content_type && value._attachments[key].content_type.slice(0, 10) == "text/plain") {
+    						dojo.xhrGet({
+    							url: psy.attachment(value._id, value.body),
+    							load: dojo.hitch(this, function(data, ioargs) {
+    								this.notes.innerHTML = data;
+    							}),
+    							handleAs: "text",
+    							error: function(error, ioargs) {
+    								console.warn(error);
+    							}
+    						});
+    					} else {
+    						dojo.create('a', {href: psy.attachment(value._id, value.body), innerHTML: value.body}, 
+    								this.notes);
+    					}
+    				}
+    			}
+    		};
     	} else {
     		dojo.query(this.details).addClass('psyHidden');
     	}
@@ -154,11 +178,6 @@ dojo.declare("psytitian.widget.Annotation",
 		            id: data.id,
 		            rev: data.rev,
 		            attachment: "body",
-		            load: function(data, ioargs) {
-		        		console.log("Saved attachement");
-		        		console.log(data);
-		        		console.log(ioargs);
-		        	},
 		        	headers: {"Content-Type": "text/plain"}
 		        }, 
 		        this._lastBodyText);

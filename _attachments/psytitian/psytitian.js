@@ -137,6 +137,9 @@ if (!psy) {
 		home: function(id) {
 				return psy.dbName + "_design/" + psy.appName + "_show/home/" + id;
 			},
+		attachment: function(id, name) {
+				return psy.dbName + encodeURI(id) + '/' + encodeURI(name);
+		},
 		formatDate: function(date) {
 				return dojo.date.stamp.toISOString(date, {selector:'date', zulu:true});
 			},
