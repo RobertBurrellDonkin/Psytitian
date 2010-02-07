@@ -32,6 +32,8 @@
     
     <script type="text/javascript" src="<%= app_root %>wmd/showdown.js"></script>
     
+    <script type="text/javascript" src="<%= app_root %>vendor/couchapp/date.js"></script>
+    
     <!-- Dojo-->
     <script type="text/javascript" src="<%= app_root %>dojo/dojo.js"
         djConfig="parseOnLoad:true, isDebug:true"></script>
@@ -42,6 +44,24 @@
     
     <script type="text/javascript">
         dojo.require("dijit.form.Button");
+        dojo.require("dijit.form.Form");
+        dojo.require("dijit.form.TextBox");
+        dojo.require("dijit.InlineEditBox");
+
+        function save(e) {
+            console.log(e);
+            console.info("SAVE");
+
+            
+            e.preventDefault();
+			dojo.byId("entryTitle").setAttribute('value', dijit.byId('entryTitleContainer').attr('value'));
+            var today = new Date().toJSON();
+			dojo.byId("entryPublished").setAttribute('value',today);
+			dojo.byId("entryUpdate").setAttribute('value',today);
+			dojo.byId("entryContent").setAttribute('value',dojo.byId("wmd-preview").innerHTML);
+            var json = dojo.formToJson("entryForm");
+            console.log(json);
+        }
 
         function previewHtml() {
             var output = dojo.byId("wmd-output");
@@ -57,6 +77,7 @@
         
         dojo.addOnLoad(function(){
         	 previewHtml();
+        	 dojo.connect( dojo.byId("entryForm"),"submit","save"); 
         });
     </script>
     
@@ -65,12 +86,38 @@
     <h1>Journal (<%= user %>)</h1>
     <p>Add <a href="<%= app_root %>_show/journal/">new</a> or search <a href="<%= app_root %>papers.html">papers</a></p>
 
+<form dojoType="dijit.form.Form" id='entryForm'>
+    <input type='hidden' value='[TODAY]' name='published' id='entryPublished' dojoType='dijit.form.TextBox'/>
+    <input type='hidden' value='[TODAY]' name='updated' id='entryUpdate' dojoType='dijit.form.TextBox'/>
+    <input type='hidden' value='[TITLE]' name='title' id='entryTitle' dojoType='dijit.form.TextBox'/>
+    <input type='hidden' value='[CONTENT]' name='content' id='entryContent' dojoType='dijit.form.TextBox'/>
+    <input type='hidden' value='<%= user %>' name='author' dojoType='dijit.form.TextBox'/>
+    <table class='entryDialog'>
+        <tr>
+            <td width='60'>
+                <label for='entryTitle'>Title</label>
+            </td>
+            <td>
+                <span dojoType="dijit.InlineEditBox" editor="dijit.form.TextBox"
+                    title="The title of the blog entry" name='title'
+                    trim="true" required="true"
+                    id='entryTitleContainer'></span>
+            </td>
+        </tr>
+    </table>
     <h2>Content</h2>
+    <p>
+            <button class='go' type="submit">Save</button>
+            <span class='error' id='entryFormError'></span>
+    </p>
     <div class='wmd-left' >
       <div id="wmd-button-bar" class="wmd-panel"></div>
       <br/>
       <textarea rows="15" id="wmd-input" class="wmd-panel"></textarea>
     </div>
+    
+</form>
+    
     <div class='wmd-left' >
         <button id='previewHTML' 
             dojoType="dijit.form.ToggleButton" unchecked iconClass="dijitCheckBoxIcon" onClick='previewHtml'>Preview HTML</button>
