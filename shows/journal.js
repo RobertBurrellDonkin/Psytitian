@@ -25,7 +25,11 @@ function(doc, req) {
 	if (doc) {
 		var content = template(templates.journal.entry, {});
 	} else {
-		var content = template(templates.journal.compose, {});
+		if (req && req.userCtx && req.userCtx.name) {
+			var content = template(templates.journal.compose, {user: req.userCtx.name});	
+		} else {
+			var content = template(templates.journal.auth, {});	
+		}
 	}
 	return {body: head + content + template(templates.journal.footer, {})};
 }
