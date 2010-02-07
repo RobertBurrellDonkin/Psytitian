@@ -27,20 +27,59 @@
         @import "<%= app_root %>dojo/resources/dojo.css";
         @import "<%= app_root %>psytitian/resources/psytitian.css";
         @import "<%= app_root %>style/main.css";
+        @import "<%= app_root %>wmd/wmd.css";
     </style>
     
+    <script type="text/javascript" src="<%= app_root %>wmd/showdown.js"></script>
+    
     <!-- Dojo-->
-    <script type="text/javascript" src="dojo/dojo.js"
+    <script type="text/javascript" src="<%= app_root %>dojo/dojo.js"
         djConfig="parseOnLoad:true, isDebug:true"></script>
     
     <!-- Application -->
-    <script type='text/javascript' src='js/cite.js'></script>
-    <script type='text/javascript' src='js/config.js'></script>
+    <script type='text/javascript' src='<%= app_root %>js/cite.js'></script>
+    <script type='text/javascript' src='<%= app_root %>js/config.js'></script>
+    
+    <script type="text/javascript">
+        dojo.require("dijit.form.Button");
+
+        function previewHtml() {
+            var output = dojo.byId("wmd-output");
+            var preview = dojo.byId("wmd-preview");
+            if (dijit.byId("previewHTML").attr("checked")) {
+                output.style.display = "block";
+                preview.style.display = "none";
+            } else {
+                output.style.display = "none";
+                preview.style.display = "block";
+            }
+        }
+        
+        dojo.addOnLoad(function(){
+        	 previewHtml();
+        });
+    </script>
     
     </head>
     <body class="tundra">
     <h1>Journal (<%= user %>)</h1>
     <p>Add <a href="<%= app_root %>_show/journal/">new</a> or search <a href="<%= app_root %>papers.html">papers</a></p>
 
+    <h2>Content</h2>
+    <div class='wmd-left' >
+      <div id="wmd-button-bar" class="wmd-panel"></div>
+      <br/>
+      <textarea rows="15" id="wmd-input" class="wmd-panel"></textarea>
+    </div>
+    <div class='wmd-left' >
+        <button id='previewHTML' 
+            dojoType="dijit.form.ToggleButton" unchecked iconClass="dijitCheckBoxIcon" onClick='previewHtml'>Preview HTML</button>
+        <div id="wmd-preview"></div>
+        <div id="wmd-output"</div>
+    </div>
+       
+    <div id='wmd-end'><hr/></div>
+      
+      <script type="text/javascript" src="<%= app_root %>wmd/wmd.js"></script>
 </body>
 </html>
