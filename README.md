@@ -5,7 +5,8 @@
  * experimentallly...
 
 ## Toy
-For playing with ideas about
+For playing with ideas about:
+
  * Faceted dynamic semantic typing
  * Javascript only applications
 
