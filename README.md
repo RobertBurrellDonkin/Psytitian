@@ -5,8 +5,9 @@
  * experimentallly...
 
 ## Toy
+For playing with ideas about
  * Faceted dynamic semantic typing
- * No middleware
+ * Javascript only applications
 
 ## Dojo
  * See http://www.dojotoolkit.org/
