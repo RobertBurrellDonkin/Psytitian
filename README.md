@@ -23,4 +23,6 @@
 	cd Psytitian
 	couchapp push . http://user:pass@127.0.0.1:5984/psytitian
 	
-and play.
+and play. If you enjoy then join github and take a fork.
+
+Journaling is inspired by Chris Anderson's [Sofa](http://github.com/jchris/sofa).
