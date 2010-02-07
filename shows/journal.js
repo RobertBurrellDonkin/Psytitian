@@ -20,15 +20,12 @@ function(doc, req) {
 	// !json templates.journal
 	// !code vendor/couchapp/template.js
 	
-	  var style = '<style type="text/css">@import "/citation/_design/cite/dijit/themes/tundra/tundra.css";@import "/citation/_design/cite/dojo/resources/dojo.css";@import "/citation/_design/cite/style/main.css";@import "/citation/_design/cite/psytitian/resources/psytitian.css";</style>';
-	  var dojo = '<script type="text/javascript" src="/citation/_design/cite/dojo/dojo.js" djConfig="parseOnLoad:true, isDebug:true"></script>';
-	  var preamble = '<script type="text/javascript">dojo.require("dojo.parser");dojo.require("psytitian.widget.Thing");</script>';
-	  var head = '<head><title>Jounal</title>' + style + dojo + preamble + '</head>';
-	  var body = '<body class="tundra"><p>Existing Doc</p></body>';
+	var head = template(templates.journal.header, {app_root: "../../"});
+	
 	if (doc) {
-		  
+		var content = template(templates.journal.entry, {});
 	} else {
-		  body = '<body class="tundra"><p>New Doc</p></body>';
+		var content = template(templates.journal.compose, {});
 	}
-	return {body: '<html>' + head + body + '</html>'};
+	return {body: head + content + template(templates.journal.footer, {})};
 }
