@@ -20,16 +20,24 @@ function(doc, req) {
 	// !json templates.journal
 	// !code vendor/couchapp/template.js
 	
-	var head = template(templates.journal.header, {app_root: "../../"});
-	
 	if (doc) {
-		var content = template(templates.journal.entry, {});
+		var content = template(templates.journal.header, {app_root: "../../"}) 
+			+ template(templates.journal.entry, {}) +  template(templates.journal.footer, {});
 	} else {
-		if (req && req.userCtx && req.userCtx.name) {
-			var content = template(templates.journal.compose, {user: req.userCtx.name});	
+		if (req.userCtx.name) {
+			var user = req.userCtx.name;
 		} else {
-			var content = template(templates.journal.auth, {});	
+			var user = "anon";
 		}
+		var content = template(templates.journal.compose, {user: user, app_root: "../../"});
+		
+		// CouchDB is hard to integrate with Apache authentication
+//
+//		if (req && req.userCtx && req.userCtx.name) {
+//			var content = template(templates.journal.compose, {user: req.userCtx.name, app_root: "../../"});	
+//		} else {
+//			var content = template(templates.journal.auth, {app_root: "../../"});	
+//		}
 	}
-	return {body: head + content + template(templates.journal.footer, {})};
+	return {body: content};
 }
