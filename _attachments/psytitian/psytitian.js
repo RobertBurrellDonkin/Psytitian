@@ -39,6 +39,8 @@ const ANNOTEA_TYPE_COMMENT="http://www.w3.org/2000/10/annotationType#Comment";
 const ANNOTEA_TYPE_CHANGE="http://www.w3.org/2000/10/annotationType#Change";
 const ANNOTEA_TYPE_ADVICE="http://www.w3.org/2000/10/annotationType#Advice";
 
+const ATOM = "http://www.w3.org/2005/Atom";
+
 dojo.require("dojo.date.stamp");
 dojo.provide("psytitian.psytitian");
 if (!psy) {
@@ -58,8 +60,8 @@ if (!psy) {
 				]
 		},
 		user: "Anonymous",
-		dbName: "/citation/",
-		appName: "cite/",
+		dbName: "/psytitian/",
+		appName: "Psytitian/",
 		
 		_addStandardJson: function(args, json) {
 			if (!args.handleAs) {

@@ -43,25 +43,57 @@
     <script type='text/javascript' src='<%= app_root %>js/config.js'></script>
     
     <script type="text/javascript">
+        dojo.require("dojo.parser");
         dojo.require("dijit.form.Button");
         dojo.require("dijit.form.Form");
         dojo.require("dijit.form.TextBox");
         dojo.require("dijit.InlineEditBox");
-
+        dojo.require("psytitian.atom");
+        
+        // TODO: Factor out
         function save(e) {
-            console.log(e);
             console.info("SAVE");
-
             
             e.preventDefault();
-			dojo.byId("entryTitle").setAttribute('value', dijit.byId('entryTitleContainer').attr('value'));
+
+            // Assemble
+			var values = dijit.byId("entryForm").attr('value');
+			values.types = psy.atom.type;
+            // Dates
             var today = new Date().toJSON();
-			dojo.byId("entryPublished").setAttribute('value',today);
-			dojo.byId("entryUpdate").setAttribute('value',today);
-			dojo.byId("entryContent").setAttribute('value',dojo.byId("wmd-preview").innerHTML);
-            var json = dojo.formToJson("entryForm");
-            console.log(json);
+            values.published = today;
+            values.updated = today;
+            // Content
+            values.content = dojo.byId("wmd-preview").innerHTML;
+            // Title
+            values.title = dijit.byId('entryTitleContainer').attr('value');
+            // Convert to JSON
+            var args = dojo.toJson(values,true);
+            console.log("Saving " + args);
+
+            psy.post({
+                load: function(data, ioargs) {
+                    console.log("Saved", data);
+                    // Redirect to display page
+                    var redirect = window.location.toString();
+                    if (redirect.charAt(redirect.length-1) != '/') {
+                        redirect = redirect + '/';
+                    }
+                    redirect = redirect + data.id;
+                    window.location = redirect;
+                },
+                errorDocumentExists: function(error, ioargs) {
+                    // TODO:
+                	console.log("Error", error);
+            	},
+                errorOther: function(error, ioargs) {
+                    // TODO:
+            		console.log("Error", error);
+            	}
+            }, 
+            args);
         }
+        
 
         function previewHtml() {
             var output = dojo.byId("wmd-output");
@@ -87,10 +119,6 @@
     <p>Add <a href="<%= app_root %>_show/journal/">new</a> or search <a href="<%= app_root %>papers.html">papers</a></p>
 
 <form dojoType="dijit.form.Form" id='entryForm'>
-    <input type='hidden' value='[TODAY]' name='published' id='entryPublished' dojoType='dijit.form.TextBox'/>
-    <input type='hidden' value='[TODAY]' name='updated' id='entryUpdate' dojoType='dijit.form.TextBox'/>
-    <input type='hidden' value='[TITLE]' name='title' id='entryTitle' dojoType='dijit.form.TextBox'/>
-    <input type='hidden' value='[CONTENT]' name='content' id='entryContent' dojoType='dijit.form.TextBox'/>
     <input type='hidden' value='<%= user %>' name='author' dojoType='dijit.form.TextBox'/>
     <table class='entryDialog'>
         <tr>
