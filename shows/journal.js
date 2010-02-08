@@ -21,8 +21,18 @@ function(doc, req) {
 	// !code vendor/couchapp/template.js
 	
 	if (doc) {
+		
 		var content = template(templates.journal.header, {app_root: "../../"}) 
-			+ template(templates.journal.entry, {}) +  template(templates.journal.footer, {});
+			+ template(templates.journal.entry, {
+				title: doc.title,
+				updated: doc.updated,
+				published: doc.published,
+				summary: doc.summary,
+				content: doc.content,
+				id: doc.id,
+				author: doc.author
+			}) 
+			+ template(templates.journal.footer, {});
 	} else {
 		if (req.userCtx.name) {
 			var user = req.userCtx.name;
