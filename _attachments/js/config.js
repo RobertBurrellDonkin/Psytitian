@@ -21,4 +21,4 @@
  * The name of the CouchDB data base instance.
  * To run against another database, change this value.
  */
-const DB_NAME="/citation/";
+const DB_NAME="/psytitian/";

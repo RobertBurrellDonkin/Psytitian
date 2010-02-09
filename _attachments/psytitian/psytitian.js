@@ -40,6 +40,7 @@ const ANNOTEA_TYPE_CHANGE="http://www.w3.org/2000/10/annotationType#Change";
 const ANNOTEA_TYPE_ADVICE="http://www.w3.org/2000/10/annotationType#Advice";
 
 const ATOM = "http://www.w3.org/2005/Atom";
+const ATOM_CATEGORY = ATOM + "#category";
 
 dojo.require("dojo.date.stamp");
 dojo.provide("psytitian.psytitian");
