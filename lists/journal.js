@@ -24,6 +24,7 @@ function(head, req) {
 		var root = '../../';
 		
 		send(template(templates.journal.header, {app_root: root}));
+		send("<h3>Contemporary</h3>");
 		
 		var row, summary;
 		while(row = getRow()) {
