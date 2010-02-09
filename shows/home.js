@@ -1,5 +1,5 @@
  /*   
-  * Copyright [2009] Robert Burrell Donkin http://robertburrelldonkin.name
+  * Copyright [2010] Robert Burrell Donkin http://robertburrelldonkin.name
   * 
   *  This file is part of Psytitian.
   *
@@ -17,12 +17,12 @@
   *  along with Psytitian.  If not, see <http://www.gnu.org/licenses/>.
   */
 function(doc, req) {
-  if(doc) {
-	  var style = '<style type="text/css">@import "/psytitian/_design/cite/dijit/themes/tundra/tundra.css";@import "/psytitian/_design/cite/dojo/resources/dojo.css";@import "/psytitian/_design/cite/style/main.css";@import "/psytitian/_design/cite/psytitian/resources/psytitian.css";</style>';
-	  var dojo = '<script type="text/javascript" src="/psytitian/_design/cite/dojo/dojo.js" djConfig="parseOnLoad:true, isDebug:true"></script>';
-	  var preamble = '<script type="text/javascript">dojo.require("dojo.parser");dojo.require("psytitian.widget.Thing");</script>';
-	  var head = '<head><title>' + doc._id + '</title>' + style + dojo + preamble + '</head>';
-	  var body = '<body class="tundra"><div dojoType="psytitian.widget.Thing" conceptUrl="../../_view/concept" baseHomeUrl="./" url="/psytitian/' + doc._id + '"></div></body>';
-	  return {body: '<html>' + head + body + '</html>'};
-  }
+	// !json templates
+	// !code vendor/couchapp/template.js
+	
+	if (doc) {
+		
+		var content = template(templates.home, {id: doc._id, app_root: "../../"});
+	}
+	return {body: content};
 }
