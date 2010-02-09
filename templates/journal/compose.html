@@ -36,7 +36,7 @@
     
     <!-- Dojo-->
     <script type="text/javascript" src="<%= app_root %>dojo/dojo.js"
-        djConfig="parseOnLoad:true, isDebug:true"></script>
+        djConfig="parseOnLoad:true, isDebug:false"></script>
     
     <!-- Application -->
     <script type='text/javascript' src='<%= app_root %>js/cite.js'></script>
@@ -116,7 +116,9 @@
     </head>
     <body class="tundra">
     <h1>Journal (<%= user %>)</h1>
-    <p>Add <a href="<%= app_root %>_show/journal/">new</a> or search <a href="<%= app_root %>papers.html">papers</a></p>
+    <p>Add <a href="<%= app_root %>_show/journal/">new</a>, 
+    view <a href='<%= app_root %>_list/journal/atom?descending=true&limit=10'>recent</a>  
+    or search <a href="<%= app_root %>papers.html">papers</a></p>
 
 <form dojoType="dijit.form.Form" id='entryForm'>
     <input type='hidden' value='<%= user %>' name='author' dojoType='dijit.form.TextBox'/>
