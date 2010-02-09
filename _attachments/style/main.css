@@ -86,3 +86,9 @@ hr.journal {
     margin-bottom: 2em;
 	colour: DarkSlateGray;
 }
+
+div.journal-summary {
+	margin-left: 2em;
+	margin-right: 2em;
+	font: smaller;
+}
