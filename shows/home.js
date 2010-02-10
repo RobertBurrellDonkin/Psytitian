@@ -22,7 +22,10 @@ function(doc, req) {
 	
 	if (doc) {
 		
-		var content = template(templates.home, {id: doc._id, app_root: "../../"});
+		var content = template(templates.home, {
+			id: doc._id, 
+			app_root: "../../",
+			db_root: "../../../../"});
 	}
 	return {body: content};
 }
