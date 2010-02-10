@@ -32,7 +32,7 @@
     
 	<!-- Dojo-->
 	<script type="text/javascript" src="dojo/dojo.js"
-	    djConfig="parseOnLoad:true, isDebug:false"></script>
+	    djConfig="parseOnLoad:true, isDebug:true"></script>
     
     <!-- Application -->
     <script type='text/javascript' src='js/config.js'></script>
@@ -100,6 +100,17 @@
             }       
         }
 
+        function paperByTagFormSubmit(e) {
+            e.preventDefault();
+            var paperName = dijit.byId("paperTag").attr('value');
+            if (!paperName) {
+            	dojo.byId('paperByTagFormError').innerHTML='Please enter a name';
+            } else {
+            	dojo.byId('paperByTagFormError').innerHTML='';
+				console.info("Finding papers tagged " + paperName);
+            }       
+        }
+
         function addPaperFormSubmit(e) {
             e.preventDefault();
             var addPaperForm = dijit.byId("addPaperForm");
@@ -134,8 +145,12 @@
         }
         
         dojo.addOnLoad(function(){
+            // Connect find by name
             var nameForm = dojo.byId("paperByNameForm");   
             dojo.connect(nameForm,"submit","paperByNameFormSubmit");    
+			// Connect find by tag
+            dojo.connect(dojo.byId("paperByTagForm"),"submit","paperByTagFormSubmit"); 
+            
             var addPaperForm = dojo.byId("addPaperForm");
             dojo.connect(addPaperForm,"submit", "addPaperFormSubmit");
             var displayPaperWidget = dijit.byId("displayPaper");
@@ -171,16 +186,28 @@
     </head>
     <body class="tundra">
     <h1>Paper</h1>
-    
         <form dojoType="dijit.form.Form" id='paperByNameForm'>
             <div dojoType="dijit.Tooltip" connectId="paperNameLabel">Find or create paper with given name</div>
-            <label for='paperName' id='paperNameLabel'>Name</label>
+            <p>
+            <label for='paperName' id='paperNameLabel'>Named </label>
             <input type="text" name="name" id='paperName' dojoType="dijit.form.TextBox" 
                     required="true" trim="true" propercase="true" class='long'/>
             <button class='go' type="submit">Go</button>
             <span class='error' id='paperByNameFormError'></span>
+            </p>
         </form>
         
+        <form dojoType="dijit.form.Form" id='paperByTagForm'>
+            <div dojoType="dijit.Tooltip" connectId="paperTagLabel">Find papers tagged with subject</div>
+            <p>
+            <label for='paperTag' id='paperTagLabel'>Tagged </label>
+            <input dojoType='psytitian.widget.TagEditor' id='paperTag' url="_view/concept"></input>
+            <button class='go' type="submit">Go</button>
+            <span class='error' id='paperByTagFormError'></span>
+            </p>
+        </form>
+        
+      
         <div id='displayPaper' dojoType='psytitian.widget.Thing' baseHomeUrl='_show/home/'></div>
 
         <div dojoType="dijit.Dialog" id="addPublisherDialog"
