@@ -24,6 +24,7 @@ dojo.require("dijit.Dialog");
 dojo.require("dijit.form.Form");
 dojo.require("dijit.form.ValidationTextBox");
 dojo.require("dijit.form.Button");
+dojo.require("dijit.form.CheckBox");
 dojo.require("psytitian.psytitian");
 
 dojo.declare("psytitian.widget.Concept",
@@ -49,7 +50,17 @@ dojo.declare("psytitian.widget.Concept",
 			        var values = this.newFormNode.attr('value');
 			        values._id = values.title;
 			        values.name = values.title; // foaf:name
-			        values.types= [SKOS_CONCEPT];
+			        
+			        console.log("Testing iscategory");
+			        console.log(values.iscategory);
+			        console.log("Done test");
+			        
+			        if (values.iscategory == 'checked') {
+			        	values.types = [SKOS_CONCEPT, ATOM_CATEGORY];
+			        } else {
+			        	values.types = [SKOS_CONCEPT];
+			        }
+			        delete values['iscategory'];
 			        
 			        var args = dojo.toJson(values,true);
 			        console.log("Saving " + args);
