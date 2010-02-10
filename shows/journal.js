@@ -20,9 +20,14 @@ function(doc, req) {
 	// !json templates.journal
 	// !code vendor/couchapp/template.js
 	
+	const APP_ROOT = '../../';
+	const DB_ROOT = '../../../../';
+	
+	var content = template(templates.journal.base, {app_root: APP_ROOT}) + 
+					template(templates.journal.dojo, {app_root: APP_ROOT});
 	if (doc) {
 		
-		var content = template(templates.journal.header, {app_root: "../../"}) 
+		content = content + template(templates.journal.header, {app_root: APP_ROOT}) 
 			+ template(templates.journal.entry, {
 				title: doc.title,
 				updated: doc.updated,
@@ -30,7 +35,9 @@ function(doc, req) {
 				summary: doc.summary,
 				content: doc.content,
 				id: doc.id,
-				author: doc.author
+				author: doc.author,
+				app_root: APP_ROOT,
+				db_root: DB_ROOT
 			}) 
 			+ template(templates.journal.footer, {});
 	} else {
@@ -39,7 +46,7 @@ function(doc, req) {
 		} else {
 			var user = "anon";
 		}
-		var content = template(templates.journal.compose, {user: user, app_root: "../../"});
+		content = content + template(templates.journal.compose, {user: user, app_root: APP_ROOT});
 		
 		// CouchDB is hard to integrate with Apache authentication
 //

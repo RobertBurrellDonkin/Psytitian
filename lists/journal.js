@@ -21,9 +21,11 @@ function(head, req) {
 	// !code vendor/couchapp/template.js
 	
 	provides("html", function() {
-		var root = '../../';
+		const APP_ROOT = '../../';
+		const DB_ROOT = '../../../../'
 		
-		send(template(templates.journal.header, {app_root: root}));
+		send(template(templates.journal.base, {app_root: APP_ROOT}));
+		send(template(templates.journal.header, {app_root: APP_ROOT}));
 		send("<h3>Contemporary</h3>");
 		
 		var row, summary;
@@ -44,7 +46,7 @@ function(head, req) {
 					summary: summary,
 					id: row.id,
 					author: row.value.author,
-					app_root: root
+					app_root: APP_ROOT
 				}) );
 			}
 		}

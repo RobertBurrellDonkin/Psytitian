@@ -4,3 +4,9 @@
 <p>Published on <%= published %>. Last updated <%= updated %>.</p>
 <hr class='journal'/>
 <%= content %>
+<hr class='journal'/>
+
+<div dojoType="psytitian.widget.Thing" 
+			conceptUrl="<%= app_root %>_view/concept" 
+			baseHomeUrl="./" 
+			url="<%= db_root %><%= id %>"></div>
