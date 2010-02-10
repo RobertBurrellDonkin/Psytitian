@@ -25,7 +25,7 @@ function(head, req) {
 		const DB_ROOT = '../../../../'
 		
 		send(template(templates.journal.base, {app_root: APP_ROOT}));
-		send(template(templates.journal.header, {app_root: APP_ROOT}));
+		send(template(templates.journal.header, {app_root: APP_ROOT, title_suffix: ''}));
 		send("<h3>Contemporary</h3>");
 		
 		var row, summary;

@@ -1,0 +1,75 @@
+    
+    <script type="text/javascript" src="<%= app_root %>wmd/showdown.js"></script>
+    
+    <script type="text/javascript" src="<%= app_root %>vendor/couchapp/date.js"></script>
+    
+    <script type="text/javascript">
+        dojo.require("dojo.parser");
+        dojo.require("dijit.form.Button");
+        dojo.require("dijit.form.Form");
+        dojo.require("dijit.form.TextBox");
+        dojo.require("dijit.InlineEditBox");
+        dojo.require("psytitian.atom");
+        
+        // TODO: Factor out
+        function save(e) {
+            console.info("SAVE");
+            
+            e.preventDefault();
+
+            // Assemble
+			var values = dijit.byId("entryForm").attr('value');
+			values.types = psy.atom.type;
+            // Dates
+            var today = new Date().toJSON();
+            values.published = today;
+            values.updated = today;
+            // Content
+            values.content = dojo.byId("wmd-preview").innerHTML;
+            // Title
+            values.title = dijit.byId('entryTitleContainer').attr('value');
+            // Convert to JSON
+            var args = dojo.toJson(values,true);
+            console.log("Saving " + args);
+
+            psy.post({
+                load: function(data, ioargs) {
+                    console.log("Saved", data);
+                    // Redirect to display page
+                    var redirect = window.location.toString();
+                    if (redirect.charAt(redirect.length-1) != '/') {
+                        redirect = redirect + '/';
+                    }
+                    redirect = redirect + data.id;
+                    window.location = redirect;
+                },
+                errorDocumentExists: function(error, ioargs) {
+                    // TODO:
+                	console.log("Error", error);
+            	},
+                errorOther: function(error, ioargs) {
+                    // TODO:
+            		console.log("Error", error);
+            	}
+            }, 
+            args);
+        }
+        
+
+        function previewHtml() {
+            var output = dojo.byId("wmd-output");
+            var preview = dojo.byId("wmd-preview");
+            if (dijit.byId("previewHTML").attr("checked")) {
+                output.style.display = "block";
+                preview.style.display = "none";
+            } else {
+                output.style.display = "none";
+                preview.style.display = "block";
+            }
+        }
+        
+        dojo.addOnLoad(function(){
+        	 previewHtml();
+        	 dojo.connect( dojo.byId("entryForm"),"submit","save"); 
+        });
+    </script>
