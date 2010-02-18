@@ -1,0 +1,2 @@
+This is DataJS, an open source date libary http://www.datejs.com/
+distributed under the MIT license.
